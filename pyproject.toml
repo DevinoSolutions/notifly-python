@@ -1,0 +1,56 @@
+[project]
+name = "notifly-py"
+version = "0.1.0"
+description = "Official Python SDK for the Notifly API — open-source, self-hostable notification infrastructure."
+authors = [{ name = "Devino Solutions Inc.", email = "support@notifly.io" }]
+requires-python = ">=3.11"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = [
+  "notifly",
+  "notifications",
+  "push",
+  "email",
+  "sms",
+  "in-app",
+  "inbox",
+  "novu",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Communications",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
+]
+dependencies = [
+    "httpx>=0.23.1,<0.29.0",
+    "attrs>=22.2.0",
+]
+
+[project.urls]
+Homepage = "https://notifly.io"
+Repository = "https://github.com/DevinoSolutions/notifly-python"
+Issues = "https://github.com/DevinoSolutions/notifly-python/issues"
+
+[tool.uv.build-backend]
+module-name = "notifly_py"
+module-root = ""
+
+[build-system]
+requires = ["uv_build>=0.11.0,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["F", "I", "UP"]
+# UP042 (StrEnum) is violated by openapi-python-client's generated enums; a fix
+# would be overwritten on every regeneration, so it stays ignored.
+ignore = ["UP042"]

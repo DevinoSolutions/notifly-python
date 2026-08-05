@@ -1,0 +1,265 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar, cast
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.subscriber_channel_dto import SubscriberChannelDto
+    from ..models.subscriber_payload_dto_data_type_0 import SubscriberPayloadDtoDataType0
+
+
+T = TypeVar("T", bound="SubscriberPayloadDto")
+
+
+@_attrs_define
+class SubscriberPayloadDto:
+    """
+    Attributes:
+        subscriber_id (str): The internal identifier you used to create this subscriber, usually correlates to the id
+            the user in your systems
+        first_name (None | str | Unset): First name of the subscriber Example: John.
+        last_name (None | str | Unset): Last name of the subscriber Example: Doe.
+        email (None | str | Unset): Email address of the subscriber Example: john.doe@example.com.
+        phone (None | str | Unset): Phone number of the subscriber Example: +1234567890.
+        avatar (None | str | Unset): Avatar URL or identifier Example: https://example.com/avatar.jpg.
+        locale (None | str | Unset): Locale of the subscriber Example: en-US.
+        timezone (None | str | Unset): Timezone of the subscriber Example: America/New_York.
+        data (None | SubscriberPayloadDtoDataType0 | Unset): Additional custom data associated with the subscriber
+        channels (list[SubscriberChannelDto] | Unset): An optional array of subscriber channels.
+    """
+
+    subscriber_id: str
+    first_name: None | str | Unset = UNSET
+    last_name: None | str | Unset = UNSET
+    email: None | str | Unset = UNSET
+    phone: None | str | Unset = UNSET
+    avatar: None | str | Unset = UNSET
+    locale: None | str | Unset = UNSET
+    timezone: None | str | Unset = UNSET
+    data: None | SubscriberPayloadDtoDataType0 | Unset = UNSET
+    channels: list[SubscriberChannelDto] | Unset = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        from ..models.subscriber_payload_dto_data_type_0 import SubscriberPayloadDtoDataType0
+
+        subscriber_id = self.subscriber_id
+
+        first_name: None | str | Unset
+        if isinstance(self.first_name, Unset):
+            first_name = UNSET
+        else:
+            first_name = self.first_name
+
+        last_name: None | str | Unset
+        if isinstance(self.last_name, Unset):
+            last_name = UNSET
+        else:
+            last_name = self.last_name
+
+        email: None | str | Unset
+        if isinstance(self.email, Unset):
+            email = UNSET
+        else:
+            email = self.email
+
+        phone: None | str | Unset
+        if isinstance(self.phone, Unset):
+            phone = UNSET
+        else:
+            phone = self.phone
+
+        avatar: None | str | Unset
+        if isinstance(self.avatar, Unset):
+            avatar = UNSET
+        else:
+            avatar = self.avatar
+
+        locale: None | str | Unset
+        if isinstance(self.locale, Unset):
+            locale = UNSET
+        else:
+            locale = self.locale
+
+        timezone: None | str | Unset
+        if isinstance(self.timezone, Unset):
+            timezone = UNSET
+        else:
+            timezone = self.timezone
+
+        data: dict[str, Any] | None | Unset
+        if isinstance(self.data, Unset):
+            data = UNSET
+        elif isinstance(self.data, SubscriberPayloadDtoDataType0):
+            data = self.data.to_dict()
+        else:
+            data = self.data
+
+        channels: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.channels, Unset):
+            channels = []
+            for channels_item_data in self.channels:
+                channels_item = channels_item_data.to_dict()
+                channels.append(channels_item)
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update(
+            {
+                "subscriberId": subscriber_id,
+            }
+        )
+        if first_name is not UNSET:
+            field_dict["firstName"] = first_name
+        if last_name is not UNSET:
+            field_dict["lastName"] = last_name
+        if email is not UNSET:
+            field_dict["email"] = email
+        if phone is not UNSET:
+            field_dict["phone"] = phone
+        if avatar is not UNSET:
+            field_dict["avatar"] = avatar
+        if locale is not UNSET:
+            field_dict["locale"] = locale
+        if timezone is not UNSET:
+            field_dict["timezone"] = timezone
+        if data is not UNSET:
+            field_dict["data"] = data
+        if channels is not UNSET:
+            field_dict["channels"] = channels
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.subscriber_channel_dto import SubscriberChannelDto
+        from ..models.subscriber_payload_dto_data_type_0 import SubscriberPayloadDtoDataType0
+
+        d = dict(src_dict)
+        subscriber_id = d.pop("subscriberId")
+
+        def _parse_first_name(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        first_name = _parse_first_name(d.pop("firstName", UNSET))
+
+        def _parse_last_name(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        last_name = _parse_last_name(d.pop("lastName", UNSET))
+
+        def _parse_email(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        email = _parse_email(d.pop("email", UNSET))
+
+        def _parse_phone(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        phone = _parse_phone(d.pop("phone", UNSET))
+
+        def _parse_avatar(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        avatar = _parse_avatar(d.pop("avatar", UNSET))
+
+        def _parse_locale(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        locale = _parse_locale(d.pop("locale", UNSET))
+
+        def _parse_timezone(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        timezone = _parse_timezone(d.pop("timezone", UNSET))
+
+        def _parse_data(data: object) -> None | SubscriberPayloadDtoDataType0 | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                data_type_0 = SubscriberPayloadDtoDataType0.from_dict(data)
+
+                return data_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | SubscriberPayloadDtoDataType0 | Unset, data)
+
+        data = _parse_data(d.pop("data", UNSET))
+
+        _channels = d.pop("channels", UNSET)
+        channels: list[SubscriberChannelDto] | Unset = UNSET
+        if _channels is not UNSET:
+            channels = []
+            for channels_item_data in _channels:
+                channels_item = SubscriberChannelDto.from_dict(channels_item_data)
+
+                channels.append(channels_item)
+
+        subscriber_payload_dto = cls(
+            subscriber_id=subscriber_id,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            phone=phone,
+            avatar=avatar,
+            locale=locale,
+            timezone=timezone,
+            data=data,
+            channels=channels,
+        )
+
+        subscriber_payload_dto.additional_properties = d
+        return subscriber_payload_dto
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties
