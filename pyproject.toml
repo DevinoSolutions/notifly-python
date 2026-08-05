@@ -38,6 +38,15 @@ Homepage = "https://notifly.io"
 Repository = "https://github.com/DevinoSolutions/notifly-python"
 Issues = "https://github.com/DevinoSolutions/notifly-python/issues"
 
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=1.0",
+    "respx>=0.22",
+    "ruff==0.16.0",
+    "mypy>=1.14",
+]
+
 [tool.uv.build-backend]
 module-name = "notifly_py"
 module-root = ""
@@ -54,3 +63,37 @@ select = ["F", "I", "UP"]
 # UP042 (StrEnum) is violated by openapi-python-client's generated enums; a fix
 # would be overwritten on every regeneration, so it stays ignored.
 ignore = ["UP042"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+asyncio_mode = "auto"
+markers = [
+    "e2e: live tests against the real API; require NOTIFLY_SECRET_KEY and are skipped otherwise",
+]
+
+# Type checking covers the hand-written layer only. The generated packages
+# (notifly_py/api/**, notifly_py/models/**, notifly_py/client.py) are excluded: they are
+# overwritten by scripts/regenerate.sh and are not ours to fix.
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = [
+    "notifly_py/__init__.py",
+    "notifly_py/_envelope.py",
+    "notifly_py/_transport.py",
+    "notifly_py/_version.py",
+    "notifly_py/exceptions.py",
+    "notifly_py/facade.py",
+    "notifly_py/internal_ops.py",
+    "notifly_py/notifly_client.py",
+    "notifly_py/pagination.py",
+    "scripts/check_drift.py",
+]
+follow_imports = "silent"
+disallow_any_explicit = false
+warn_return_any = false
+
+[[tool.mypy.overrides]]
+module = ["notifly_py.api.*", "notifly_py.models.*", "notifly_py.client", "notifly_py.types"]
+ignore_errors = true

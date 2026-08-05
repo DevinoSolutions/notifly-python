@@ -1,0 +1,7348 @@
+{
+ "openapi": "3.0.0",
+ "info": {
+  "title": "Notifly API",
+  "version": "3.17.1",
+  "description": "Trimmed fixture of the public Notifly OpenAPI document (operationIds, security and response envelope shape only). Regenerate with scripts/refresh_public_fixture.py."
+ },
+ "servers": [
+  {
+   "url": "https://api.notifly.io"
+  }
+ ],
+ "security": [
+  {
+   "secretKey": []
+  }
+ ],
+ "components": {
+  "securitySchemes": {
+   "secretKey": {
+    "type": "apiKey",
+    "name": "Authorization",
+    "in": "header",
+    "description": "API key authentication. Allowed headers-- \"Authorization: ApiKey <secret_key>\".",
+    "x-speakeasy-example": "YOUR_SECRET_KEY_HERE"
+   }
+  },
+  "schemas": {}
+ },
+ "paths": {
+  "/v1/environments": {
+   "post": {
+    "operationId": "EnvironmentsControllerV1_createEnvironment",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "402": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "get": {
+    "operationId": "EnvironmentsControllerV1_listMyEnvironments",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/environments/{environmentId}": {
+   "put": {
+    "operationId": "EnvironmentsControllerV1_updateMyEnvironment",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "EnvironmentsControllerV1_deleteEnvironment",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/events/trigger": {
+   "post": {
+    "operationId": "EventsController_trigger",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/events/trigger/bulk": {
+   "post": {
+    "operationId": "EventsController_triggerBulk",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/events/trigger/broadcast": {
+   "post": {
+    "operationId": "EventsController_broadcastEventToAll",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "201": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/events/trigger/{transactionId}": {
+   "delete": {
+    "operationId": "EventsController_cancel",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/notifications": {
+   "get": {
+    "operationId": "NotificationsController_listNotifications",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/notifications/{notificationId}": {
+   "get": {
+    "operationId": "NotificationsController_getNotification",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/integrations": {
+   "get": {
+    "operationId": "IntegrationsController_listIntegrations",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "post": {
+    "operationId": "IntegrationsController_createIntegration",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/integrations/active": {
+   "get": {
+    "operationId": "IntegrationsController_getActiveIntegrations",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/integrations/{integrationId}": {
+   "put": {
+    "operationId": "IntegrationsController_updateIntegrationById",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "IntegrationsController_removeIntegration",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/integrations/{integrationId}/auto-configure": {
+   "post": {
+    "operationId": "IntegrationsController_autoConfigureIntegration",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/integrations/{integrationId}/set-primary": {
+   "post": {
+    "operationId": "IntegrationsController_setIntegrationAsPrimary",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/integrations/chat/oauth": {
+   "post": {
+    "operationId": "IntegrationsController_getChatOAuthUrl",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/integrations/channel-connections/oauth": {
+   "post": {
+    "operationId": "IntegrationsController_generateConnectOAuthUrl",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/integrations/channel-endpoints/oauth": {
+   "post": {
+    "operationId": "IntegrationsController_generateLinkUserOAuthUrl",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/integrations/channel-endpoints/link": {
+   "post": {
+    "operationId": "IntegrationsController_linkChannelEndpoint",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/integrations/{integrationIdentifier}/webhook/configure": {
+   "post": {
+    "operationId": "IntegrationsController_configureIntegrationWebhook",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/integrations/{integrationIdentifier}/mobile-link": {
+   "post": {
+    "operationId": "IntegrationsController_createIntegrationMobileLink",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/contexts": {
+   "post": {
+    "operationId": "ContextsController_createContext",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "get": {
+    "operationId": "ContextsController_listContexts",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/contexts/{type}/{id}": {
+   "patch": {
+    "operationId": "ContextsController_updateContext",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "get": {
+    "operationId": "ContextsController_getContext",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "ContextsController_deleteContext",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/subscribers/bulk": {
+   "post": {
+    "operationId": "SubscribersV1Controller_bulkCreateSubscribers",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/subscribers/{subscriberId}/credentials": {
+   "put": {
+    "operationId": "SubscribersV1Controller_updateSubscriberChannel",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "patch": {
+    "operationId": "SubscribersV1Controller_modifySubscriberChannel",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/subscribers/{subscriberId}/credentials/{providerId}": {
+   "delete": {
+    "operationId": "SubscribersV1Controller_deleteSubscriberCredentials",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/subscribers/{subscriberId}/credentials/{providerId}/token": {
+   "post": {
+    "operationId": "SubscribersV1Controller_registerSubscriberDeviceToken",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "SubscribersV1Controller_removeSubscriberDeviceToken",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/subscribers/{subscriberId}/online-status": {
+   "patch": {
+    "operationId": "SubscribersV1Controller_updateSubscriberOnlineFlag",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/subscribers/{subscriberId}/notifications/feed": {
+   "get": {
+    "operationId": "SubscribersV1Controller_getNotificationsFeed",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/subscribers/{subscriberId}/notifications/unseen": {
+   "get": {
+    "operationId": "SubscribersV1Controller_getUnseenCount",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/subscribers/{subscriberId}/messages/mark-as": {
+   "post": {
+    "operationId": "SubscribersV1Controller_markMessagesAs",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/subscribers/{subscriberId}/messages/mark-all": {
+   "post": {
+    "operationId": "SubscribersV1Controller_markAllUnreadAsRead",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}": {
+   "post": {
+    "operationId": "SubscribersV1Controller_markActionAsSeen",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers": {
+   "get": {
+    "operationId": "SubscribersController_searchSubscribers",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "post": {
+    "operationId": "SubscribersController_createSubscriber",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}": {
+   "get": {
+    "operationId": "SubscribersController_getSubscriber",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "patch": {
+    "operationId": "SubscribersController_patchSubscriber",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "SubscribersController_removeSubscriber",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/preferences": {
+   "get": {
+    "operationId": "SubscribersController_getSubscriberPreferences",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "patch": {
+    "operationId": "SubscribersController_updateSubscriberPreferences",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/preferences/bulk": {
+   "patch": {
+    "operationId": "SubscribersController_bulkUpdateSubscriberPreferences",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/subscriptions": {
+   "get": {
+    "operationId": "SubscribersController_listSubscriberTopics",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications": {
+   "get": {
+    "operationId": "SubscribersController_getSubscriberNotifications",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/count": {
+   "get": {
+    "operationId": "SubscribersController_getSubscriberNotificationsCount",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/{notificationId}/read": {
+   "patch": {
+    "operationId": "SubscribersController_markNotificationAsRead",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/{notificationId}/unread": {
+   "patch": {
+    "operationId": "SubscribersController_markNotificationAsUnread",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/{notificationId}/archive": {
+   "patch": {
+    "operationId": "SubscribersController_archiveNotification",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/{notificationId}/unarchive": {
+   "patch": {
+    "operationId": "SubscribersController_unarchiveNotification",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/{notificationId}/snooze": {
+   "patch": {
+    "operationId": "SubscribersController_snoozeNotification",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/{notificationId}/unsnooze": {
+   "patch": {
+    "operationId": "SubscribersController_unsnoozeNotification",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/{notificationId}": {
+   "delete": {
+    "operationId": "SubscribersController_deleteNotification",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/complete": {
+   "patch": {
+    "operationId": "SubscribersController_completeNotificationAction",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/{notificationId}/actions/{actionType}/revert": {
+   "patch": {
+    "operationId": "SubscribersController_revertNotificationAction",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/seen": {
+   "post": {
+    "operationId": "SubscribersController_markNotificationsAsSeen",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/read": {
+   "post": {
+    "operationId": "SubscribersController_markAllNotificationsAsRead",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/archive": {
+   "post": {
+    "operationId": "SubscribersController_archiveAllNotifications",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/read-archive": {
+   "post": {
+    "operationId": "SubscribersController_archiveAllReadNotifications",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/subscribers/{subscriberId}/notifications/delete": {
+   "post": {
+    "operationId": "SubscribersController_deleteAllNotifications",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/layouts": {
+   "post": {
+    "operationId": "LayoutsController_create",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "get": {
+    "operationId": "LayoutsController_list",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/layouts/{layoutId}": {
+   "put": {
+    "operationId": "LayoutsController_update",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "get": {
+    "operationId": "LayoutsController_get",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "LayoutsController__delete",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/layouts/{layoutId}/duplicate": {
+   "post": {
+    "operationId": "LayoutsController_duplicate",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/layouts/{layoutId}/preview": {
+   "post": {
+    "operationId": "LayoutsController_generatePreview",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/layouts/{layoutId}/usage": {
+   "get": {
+    "operationId": "LayoutsController_getUsage",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/messages": {
+   "get": {
+    "operationId": "MessagesController_getMessages",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/messages/{messageId}": {
+   "delete": {
+    "operationId": "MessagesController_deleteMessage",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/messages/transaction/{transactionId}": {
+   "delete": {
+    "operationId": "MessagesController_deleteMessagesByTransactionId",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/topics/{topicKey}/subscribers/{externalSubscriberId}": {
+   "get": {
+    "operationId": "TopicsV1Controller_getTopicSubscriber",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/topics": {
+   "get": {
+    "operationId": "TopicsController_listTopics",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "post": {
+    "operationId": "TopicsController_upsertTopic",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/topics/{topicKey}": {
+   "get": {
+    "operationId": "TopicsController_getTopic",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "patch": {
+    "operationId": "TopicsController_updateTopic",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "TopicsController_deleteTopic",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/topics/{topicKey}/subscriptions": {
+   "get": {
+    "operationId": "TopicsController_listTopicSubscriptions",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "post": {
+    "operationId": "TopicsController_createTopicSubscriptions",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "TopicsController_deleteTopicSubscriptions",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/topics/{topicKey}/subscriptions/{identifier}": {
+   "get": {
+    "operationId": "TopicsController_getTopicSubscription",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "patch": {
+    "operationId": "TopicsController_updateTopicSubscription",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/environment-variables": {
+   "get": {
+    "operationId": "EnvironmentVariablesController_listEnvironmentVariables",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "post": {
+    "operationId": "EnvironmentVariablesController_createEnvironmentVariable",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/environment-variables/{variableKey}/usage": {
+   "get": {
+    "operationId": "EnvironmentVariablesController_getEnvironmentVariableUsage",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/environment-variables/{variableKey}": {
+   "get": {
+    "operationId": "EnvironmentVariablesController_getEnvironmentVariable",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "patch": {
+    "operationId": "EnvironmentVariablesController_updateEnvironmentVariable",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "EnvironmentVariablesController_deleteEnvironmentVariable",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/workflows": {
+   "post": {
+    "operationId": "WorkflowController_create",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "get": {
+    "operationId": "WorkflowController_searchWorkflows",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/workflows/{workflowId}/sync": {
+   "put": {
+    "operationId": "WorkflowController_sync",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/workflows/{workflowId}": {
+   "put": {
+    "operationId": "WorkflowController_update",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "get": {
+    "operationId": "WorkflowController_getWorkflow",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "WorkflowController_removeWorkflow",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "patch": {
+    "operationId": "WorkflowController_patchWorkflow",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/workflows/{workflowId}/step/{stepId}/preview": {
+   "post": {
+    "operationId": "WorkflowController_generatePreview",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/workflows/{workflowId}/steps/{stepId}": {
+   "get": {
+    "operationId": "WorkflowController_getWorkflowStepData",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/environments/{environmentId}/tags": {
+   "get": {
+    "operationId": "EnvironmentsController_getEnvironmentTags",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/environments/{targetEnvironmentId}/publish": {
+   "post": {
+    "operationId": "EnvironmentsController_publishEnvironment",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v2/environments/{targetEnvironmentId}/diff": {
+   "post": {
+    "operationId": "EnvironmentsController_diffEnvironment",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/channel-connections": {
+   "get": {
+    "operationId": "ChannelConnectionsController_listChannelConnections",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "post": {
+    "operationId": "ChannelConnectionsController_createChannelConnection",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/channel-connections/{identifier}": {
+   "get": {
+    "operationId": "ChannelConnectionsController_getChannelConnectionByIdentifier",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "patch": {
+    "operationId": "ChannelConnectionsController_updateChannelConnection",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "ChannelConnectionsController_deleteChannelConnection",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/channel-endpoints": {
+   "get": {
+    "operationId": "ChannelEndpointsController_listChannelEndpoints",
+    "security": [
+     {
+      "secretKey": []
+     },
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "post": {
+    "operationId": "ChannelEndpointsController_createChannelEndpoint",
+    "security": [
+     {
+      "secretKey": []
+     },
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/channel-endpoints/{identifier}": {
+   "get": {
+    "operationId": "ChannelEndpointsController_getChannelEndpoint",
+    "security": [
+     {
+      "secretKey": []
+     },
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "patch": {
+    "operationId": "ChannelEndpointsController_updateChannelEndpoint",
+    "security": [
+     {
+      "secretKey": []
+     },
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "ChannelEndpointsController_deleteChannelEndpoint",
+    "security": [
+     {
+      "secretKey": []
+     },
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  }
+ }
+}
