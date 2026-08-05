@@ -1,0 +1,60 @@
+name: Spec drift
+
+# Watches the live Notifly OpenAPI document for changes that would make this SDK wrong.
+# The loudest of the three checks is the ENVELOPE CONTRACT: notifly_py._envelope unwraps
+# single-key `{"data": ...}` bodies at runtime, so if the API ever stops wrapping, that fix
+# inverts into a bug. See scripts/check_drift.py.
+on:
+  schedule:
+    - cron: "17 6 * * 1" # Mondays, 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Compare the committed spec against the live public document
+        id: drift
+        run: python scripts/check_drift.py --format markdown --output drift-report.md
+        continue-on-error: true
+      - name: Open an issue on drift
+        if: steps.drift.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('drift-report.md', 'utf8');
+            const title = 'Notifly API spec drift detected';
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'spec-drift',
+            });
+            if (existing.data.length > 0) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.data[0].number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['spec-drift'],
+              });
+            }
+      - name: Fail the run when drift was detected
+        if: steps.drift.outcome == 'failure'
+        run: exit 1

@@ -1,16 +1,76 @@
-# This workflow uses PyPI Trusted Publishing (OIDC) — no API token/password. It will
-# FAIL until a trusted publisher for the `notifly-py` project is registered on PyPI:
-#   PyPI -> project `notifly-py` -> Publishing -> add GitHub publisher:
-#   owner: DevinoSolutions, repo: notifly-python, workflow: publish.yml,
-#   environment: pypi
-# Do NOT dispatch this workflow before that is done.
+# Publishes `notifly-py` to PyPI with Trusted Publishing (OIDC) — no API token, no password.
+#
+# BEFORE THE FIRST RELEASE (one-time, manual, cannot be automated):
+#   1. Register a PENDING publisher at https://pypi.org/manage/account/publishing/
+#      (not under an existing project — `notifly-py` does not exist on PyPI yet) with exactly:
+#        PyPI Project Name: notifly-py
+#        Owner:             DevinoSolutions
+#        Repository name:   notifly-python
+#        Workflow name:     publish.yml
+#        Environment name:  pypi
+#      Any mismatch fails the OIDC exchange with `invalid-publisher`.
+#   2. Create the `pypi` environment in Settings -> Environments (required reviewers
+#      recommended, so a release stays a deliberate human act).
+#
+# HOW TO RELEASE
+#   Push a tag: `git tag v0.1.0 && git push origin v0.1.0`. The tag must match the version in
+#   pyproject.toml — the assert-version job fails the release otherwise. `workflow_dispatch`
+#   is kept for re-runs and dry runs; it publishes whatever version the checked-out tree
+#   declares, and PyPI rejects a version that already exists.
 name: Publish
 
 on:
+  push:
+    tags: ["v*"]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
+  assert-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Read the package version and check it against the tag
+        id: version
+        run: |
+          version="$(python -c "import tomllib,pathlib;print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "pyproject version: ${version}"
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            tag_version="${GITHUB_REF_NAME#v}"
+            echo "tag version:       ${tag_version}"
+            if [ "${tag_version}" != "${version}" ]; then
+              echo "::error::tag ${GITHUB_REF_NAME} does not match pyproject version ${version}"
+              exit 1
+            fi
+          fi
+
+  verify:
+    needs: assert-version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v5
+      - name: Install project and dev dependencies
+        run: uv sync --group dev
+      - name: Ruff, mypy and the full test suite must pass before publishing
+        run: |
+          uv run --no-sync ruff check .
+          uv run --no-sync mypy
+          uv run --no-sync pytest -q
+
   build-and-publish:
+    needs: [assert-version, verify]
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
@@ -22,7 +82,11 @@ jobs:
           python-version: "3.13"
       - name: Build sdist and wheel
         run: |
-          python -m pip install --upgrade pip build
+          python -m pip install --upgrade pip build twine
           python -m build
+          python -m twine check dist/*
       - name: Publish to PyPI (trusted publishing)
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          attestations: true
+          print-hash: true
