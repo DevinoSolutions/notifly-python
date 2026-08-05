@@ -166,6 +166,30 @@ def test_the_exception_keeps_the_full_response_for_escape_hatch_access(notifly_f
     assert excinfo.value.headers["x-request-id"] == "req_9"
 
 
+def test_the_real_production_401_body_maps_to_authentication_error(notifly_factory: Any) -> None:
+    """Verbatim body captured from https://api.notifly.io on 2026-08-05 with a bad key.
+
+    It is multi-key, so the envelope unwrapper correctly leaves error bodies alone — if it
+    ever started stripping them, this test would fail before anyone shipped it.
+    """
+    live_body = {
+        "error": "Unauthorized",
+        "statusCode": 401,
+        "timestamp": "2026-08-05T12:25:34.638Z",
+        "path": "/v2/subscribers?limit=1",
+        "message": "API Key not found",
+        "ctx": {"error": "Unauthorized", "statusCode": 401},
+    }
+    notifly, _ = notifly_factory(json_response(401, live_body))
+
+    with pytest.raises(AuthenticationError) as excinfo:
+        notifly.subscribers.list(limit=1)
+
+    assert excinfo.value.message == "API Key not found"
+    assert excinfo.value.ctx == {"error": "Unauthorized", "statusCode": 401}
+    assert excinfo.value.body == live_body
+
+
 def test_raw_generated_functions_still_return_unions_instead_of_raising(client_factory: Any) -> None:
     """The escape hatch is unchanged: only the facade raises."""
     from notifly_py.api.subscribers import subscribers_controller_get_subscriber

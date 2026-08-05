@@ -26,7 +26,7 @@ First release. Generated from the Notifly OpenAPI document (v3.17.1, 131 operati
   methods are retried only when an `idempotency-key` is supplied.
 - Auto-pagination helpers for the cursor, offset and page-number styles (`iter_all()`, `iter_*`).
 - `__version__` and an identifying `User-Agent`.
-- Test suite (166 tests) covering the envelope contract, auth headers, errors, retries,
+- Test suite (167 tests) covering the envelope contract, auth headers, errors, retries,
   pagination, the facade, the spec contract and the drift gate; opt-in live E2E tests.
 - Scheduled spec-drift workflow that re-checks the envelope contract, route coverage and the
   bearer-only operation registry against the live public OpenAPI document.
