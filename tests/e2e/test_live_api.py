@@ -17,7 +17,7 @@ import uuid
 import pytest
 
 from notifly_py import Notifly
-from notifly_py.exceptions import NotFoundError
+from notifly_py.exceptions import NotFoundError, ValidationError
 
 pytestmark = [
     pytest.mark.e2e,
@@ -50,6 +50,24 @@ def test_create_read_delete_round_trip_returns_populated_models(notifly: Notifly
     notifly.subscribers.delete(subscriber_id)
     with pytest.raises(NotFoundError):
         notifly.subscribers.get(subscriber_id)
+
+
+def test_triggering_an_unknown_workflow_raises_a_typed_validation_error(notifly: Notifly) -> None:
+    """The live error body proves what mocks assumed: required spec fields are often absent.
+
+    The real 422 here carries no ``errors`` key, and the real 400 on this route carries no
+    ``type`` — both are popped unguarded by the generated DTOs, so this used to escape as
+    ``KeyError`` instead of a typed error. Kept live because only the API can tell us its
+    error bodies changed shape.
+    """
+    with pytest.raises(ValidationError) as excinfo:
+        notifly.events.trigger(
+            workflow=f"notifly-py-e2e-missing-{uuid.uuid4().hex[:12]}",
+            to=f"notifly-py-e2e-{uuid.uuid4().hex[:12]}",
+        )
+
+    assert excinfo.value.status_code in (400, 422)
+    assert excinfo.value.message
 
 
 @pytest.mark.skipif(not os.getenv("NOTIFLY_E2E_WORKFLOW"), reason="NOTIFLY_E2E_WORKFLOW is not set")

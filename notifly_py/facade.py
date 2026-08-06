@@ -26,7 +26,10 @@ Design rules:
 from __future__ import annotations
 
 from collections.abc import AsyncIterator, Iterator, Mapping, Sequence
+from http import HTTPStatus
 from typing import Any
+
+import httpx
 
 from .api.events import events_controller_broadcast_event_to_all as _events_broadcast
 from .api.events import events_controller_cancel as _events_cancel
@@ -90,6 +93,12 @@ from .pagination import (
     iterate_offset,
     iterate_pages,
 )
+from .types import Response
+
+#: Exceptions a generated ``Model.from_dict`` raises when the body does not match the spec.
+#: ``KeyError`` is the one production actually produces (an unguarded ``d.pop("...")``); the
+#: others cover a value of the wrong type reaching a nested parser.
+_BODY_PARSE_FAILURES = (AttributeError, KeyError, TypeError, ValueError)
 
 
 def _drop_none(values: Mapping[str, Any]) -> dict[str, Any]:
@@ -150,14 +159,52 @@ class _Resource:
         self._client = client
 
 
+def _build_response(module: Any, client: NotiflyClient, raw: httpx.Response) -> Response[Any]:
+    """Build the generated :class:`~notifly_py.types.Response`, tolerating unparsable errors.
+
+    The generated ``_parse_response`` feeds an error body to a generated error DTO whose
+    ``from_dict`` pops its required keys **unguarded**: ``ErrorDto`` pops ``statusCode`` /
+    ``timestamp`` / ``path``, ``ValidationErrorDto`` also pops ``errors``, and
+    ``PayloadValidationExceptionDto`` also pops ``type``. Production does not always send them
+    — a real 400 from ``POST /v1/events/trigger`` carries no ``type`` and no ``errors`` — so
+    the parse raised ``KeyError('type')`` and the caller got that instead of the typed
+    :class:`~notifly_py.exceptions.ValidationError` this SDK exists to give them.
+
+    Those models live under ``notifly_py/models/`` and are overwritten by
+    ``scripts/regenerate.sh``, so the tolerance lives here instead: on a failing status an
+    unparsable body simply yields ``parsed=None`` and
+    :func:`~notifly_py.exceptions.raise_for_response` rebuilds the exception from the raw JSON,
+    which it already reads for ``message`` / ``errors`` / ``ctx`` / ``errorId``. The exception
+    class is chosen from the status code, so it is correct regardless of body shape.
+
+    Success bodies are **not** tolerated: a 2xx this SDK cannot parse is a real bug, and the
+    envelope regression suite depends on it still raising.
+    """
+    parsed: Any
+    try:
+        parsed = module._parse_response(client=client, response=raw)
+    except _BODY_PARSE_FAILURES:
+        if raw.status_code < 400:
+            raise
+        parsed = None
+    return Response(
+        status_code=HTTPStatus(raw.status_code),
+        content=raw.content,
+        headers=raw.headers,
+        parsed=parsed,
+    )
+
+
 class _SyncResource(_Resource):
     def _call(self, module: Any, **kwargs: Any) -> Any:
-        return raise_for_response(module.sync_detailed(client=self._client, **_drop_none(kwargs)))
+        raw = self._client.get_httpx_client().request(**module._get_kwargs(**_drop_none(kwargs)))
+        return raise_for_response(_build_response(module, self._client, raw))
 
 
 class _AsyncResource(_Resource):
     async def _call(self, module: Any, **kwargs: Any) -> Any:
-        return raise_for_response(await module.asyncio_detailed(client=self._client, **_drop_none(kwargs)))
+        raw = await self._client.get_async_httpx_client().request(**module._get_kwargs(**_drop_none(kwargs)))
+        return raise_for_response(_build_response(module, self._client, raw))
 
 
 # --------------------------------------------------------------------------------------

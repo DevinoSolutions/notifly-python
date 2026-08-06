@@ -5,6 +5,17 @@ All notable changes to `notifly-py` are documented here. This project follows
 
 ## [Unreleased]
 
+### Fixed
+
+- Error responses whose body omits a field the OpenAPI document marks required no longer escape
+  as `KeyError`. The generated error DTOs pop their required keys unguarded (`ErrorDto` pops
+  `statusCode`/`timestamp`/`path`, `ValidationErrorDto` also pops `errors`,
+  `PayloadValidationExceptionDto` also pops `type`), and production omits some of them — a live
+  400 from `POST /v1/events/trigger` carries no `type`, and the everyday "unknown workflow" 422
+  carries no `errors`. The facade now drops an unparsable error model and rebuilds the typed
+  exception from the raw body, so those surface as `ValidationError` as documented. Success
+  bodies are unaffected and still raise when unparsable.
+
 ## [0.1.0] — unreleased (first PyPI publish)
 
 First release. Generated from the Notifly OpenAPI document (v3.17.1, 131 operations) with

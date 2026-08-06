@@ -190,6 +190,154 @@ def test_the_real_production_401_body_maps_to_authentication_error(notifly_facto
     assert excinfo.value.body == live_body
 
 
+LIVE_400_TRIGGER_BODY: dict[str, Any] = {
+    "error": "Bad Request",
+    "statusCode": 400,
+    "timestamp": "2026-08-06T01:20:02.503Z",
+    "path": "/v1/events/trigger",
+    "message": "Expected property name or '}' in JSON at position 1 (line 1 column 2)",
+    "ctx": {"error": "Bad Request", "statusCode": 400},
+}
+"""Verbatim 400 captured from https://api.notifly.io ``POST /v1/events/trigger`` on 2026-08-06.
+
+The spec says a 400 there is a ``PayloadValidationExceptionDto``, whose generated ``from_dict``
+pops ``type`` and ``errors`` unguarded. Production sends neither, so parsing the real body used
+to raise ``KeyError('type')`` out of the facade instead of :class:`ValidationError`.
+"""
+
+
+def test_the_real_production_400_without_a_type_field_maps_to_validation_error(notifly_factory: Any) -> None:
+    notifly, _ = notifly_factory(json_response(400, LIVE_400_TRIGGER_BODY))
+
+    with pytest.raises(ValidationError) as excinfo:
+        notifly.events.trigger(workflow="welcome", to="subscriber_123")
+
+    assert excinfo.value.status_code == 400
+    assert excinfo.value.message == "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+    assert excinfo.value.ctx == {"error": "Bad Request", "statusCode": 400}
+    assert excinfo.value.errors is None
+    assert excinfo.value.body == LIVE_400_TRIGGER_BODY
+
+
+async def test_the_real_production_400_maps_to_validation_error_on_the_async_facade(
+    async_notifly_factory: Any,
+) -> None:
+    notifly, _ = async_notifly_factory(json_response(400, LIVE_400_TRIGGER_BODY))
+
+    with pytest.raises(ValidationError) as excinfo:
+        await notifly.events.trigger(workflow="welcome", to="subscriber_123")
+
+    assert excinfo.value.message == "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+    assert excinfo.value.body == LIVE_400_TRIGGER_BODY
+
+
+def test_a_spec_shaped_400_still_parses_into_the_payload_validation_model(notifly_factory: Any) -> None:
+    """The tolerance is a fallback, not a replacement: a complete body keeps its typed model."""
+    body = {
+        "statusCode": 400,
+        "timestamp": "2026-08-06T01:20:02.503Z",
+        "path": "/v1/events/trigger",
+        "type": "PAYLOAD_VALIDATION_ERROR",
+        "message": "Payload validation failed",
+        "errors": [
+            {
+                "field": "payload.name",
+                "message": "must have required property 'name'",
+                "value": {"age": 25},
+                "schemaPath": "#/required",
+            }
+        ],
+    }
+    notifly, _ = notifly_factory(json_response(400, body))
+
+    with pytest.raises(ValidationError) as excinfo:
+        notifly.events.trigger(workflow="welcome", to="subscriber_123")
+
+    assert excinfo.value.error is not None
+    assert excinfo.value.error.type_ == "PAYLOAD_VALIDATION_ERROR"
+    assert excinfo.value.errors[0].field == "payload.name"
+
+
+@pytest.mark.parametrize(
+    ("missing_key", "body"),
+    [
+        ("statusCode", {"timestamp": "2026-08-06T01:20:02.503Z", "path": "/v2/subscribers/s_1", "message": "nope"}),
+        ("timestamp", {"statusCode": 404, "path": "/v2/subscribers/s_1", "message": "nope"}),
+        ("path", {"statusCode": 404, "timestamp": "2026-08-06T01:20:02.503Z", "message": "nope"}),
+        ("everything", {"message": "nope"}),
+    ],
+)
+def test_error_dto_bodies_missing_a_required_key_still_raise_the_typed_error(
+    notifly_factory: Any, missing_key: str, body: dict[str, Any]
+) -> None:
+    """``ErrorDto.from_dict`` pops ``statusCode``/``timestamp``/``path`` unguarded too."""
+    notifly, _ = notifly_factory(json_response(404, body))
+
+    with pytest.raises(NotFoundError) as excinfo:
+        notifly.subscribers.get("s_1")
+
+    assert excinfo.value.status_code == 404
+    assert excinfo.value.message == "nope"
+    assert excinfo.value.body == body
+
+
+def test_a_422_without_the_errors_key_still_raises_validation_error(notifly_factory: Any) -> None:
+    """``ValidationErrorDto.from_dict`` pops ``errors`` unguarded."""
+    body = {"statusCode": 422, "timestamp": "2026-08-06T01:20:02.503Z", "path": "/v1/subscribers", "message": "boom"}
+    notifly, _ = notifly_factory(json_response(422, body))
+
+    with pytest.raises(ValidationError) as excinfo:
+        notifly.subscribers.create(subscriber_id="s_1")
+
+    assert excinfo.value.message == "boom"
+    assert excinfo.value.errors is None
+
+
+LIVE_422_UNKNOWN_WORKFLOW_BODY: dict[str, Any] = {
+    "error": "Unprocessable Entity",
+    "statusCode": 422,
+    "timestamp": "2026-08-06T01:20:01.357Z",
+    "path": "/v1/events/trigger",
+    "message": "workflow_not_found",
+    "ctx": {"error": "Unprocessable Entity", "statusCode": 422},
+}
+"""Verbatim 422 captured from https://api.notifly.io on 2026-08-06 by triggering an unknown workflow.
+
+This is the everyday shape of the bug: the spec types a 422 there as ``ValidationErrorDto``,
+whose ``from_dict`` pops ``errors`` unguarded, and this body has no ``errors``. Mistyping a
+workflow name — the single most ordinary caller mistake — used to surface as ``KeyError('errors')``.
+"""
+
+
+def test_the_real_production_unknown_workflow_422_maps_to_validation_error(notifly_factory: Any) -> None:
+    notifly, _ = notifly_factory(json_response(422, LIVE_422_UNKNOWN_WORKFLOW_BODY))
+
+    with pytest.raises(ValidationError) as excinfo:
+        notifly.events.trigger(workflow="no-such-workflow", to="subscriber_123")
+
+    assert excinfo.value.message == "workflow_not_found"
+    assert excinfo.value.ctx == {"error": "Unprocessable Entity", "statusCode": 422}
+    assert excinfo.value.body == LIVE_422_UNKNOWN_WORKFLOW_BODY
+
+
+def test_an_unparsable_success_body_still_raises_rather_than_being_swallowed(notifly_factory: Any) -> None:
+    """Tolerance is scoped to failing statuses — a 2xx the SDK cannot parse is a real bug."""
+    notifly, _ = notifly_factory(json_response(201, {"status": "processed"}))
+
+    with pytest.raises(KeyError, match="acknowledged"):
+        notifly.events.trigger(workflow="welcome", to="subscriber_123")
+
+
+def test_the_generated_operation_modules_expose_the_helpers_the_facade_calls() -> None:
+    """Drift gate: the facade builds responses from the generated private helpers."""
+    from notifly_py.api.events import events_controller_trigger
+    from notifly_py.api.subscribers import subscribers_controller_get_subscriber
+
+    for module in (events_controller_trigger, subscribers_controller_get_subscriber):
+        assert callable(module._get_kwargs)
+        assert callable(module._parse_response)
+
+
 def test_raw_generated_functions_still_return_unions_instead_of_raising(client_factory: Any) -> None:
     """The escape hatch is unchanged: only the facade raises."""
     from notifly_py.api.subscribers import subscribers_controller_get_subscriber
