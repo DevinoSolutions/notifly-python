@@ -195,14 +195,16 @@ LIVE_400_TRIGGER_BODY: dict[str, Any] = {
     "statusCode": 400,
     "timestamp": "2026-08-06T01:20:02.503Z",
     "path": "/v1/events/trigger",
-    "message": "Expected property name or '}' in JSON at position 1 (line 1 column 2)",
+    "message": "payload is missing required key(s) and type(s): body (Value), body (Value)",
     "ctx": {"error": "Bad Request", "statusCode": 400},
 }
-"""Verbatim 400 captured from https://api.notifly.io ``POST /v1/events/trigger`` on 2026-08-06.
+"""Verbatim payload-validation 400 from https://api.notifly.io ``POST /v1/events/trigger``.
 
-The spec says a 400 there is a ``PayloadValidationExceptionDto``, whose generated ``from_dict``
-pops ``type`` and ``errors`` unguarded. Production sends neither, so parsing the real body used
-to raise ``KeyError('type')`` out of the facade instead of :class:`ValidationError`.
+Captured by the live E2E run that found this bug; the same shape (no ``type``, no ``errors``)
+came back from an independent probe on 2026-08-06. The spec types a 400 there as
+``PayloadValidationExceptionDto``, whose generated ``from_dict`` pops both ``type`` and
+``errors`` unguarded — so parsing the real body raised ``KeyError('type')`` out of the facade
+instead of the :class:`ValidationError` the SDK promises.
 """
 
 
@@ -213,7 +215,7 @@ def test_the_real_production_400_without_a_type_field_maps_to_validation_error(n
         notifly.events.trigger(workflow="welcome", to="subscriber_123")
 
     assert excinfo.value.status_code == 400
-    assert excinfo.value.message == "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+    assert excinfo.value.message == "payload is missing required key(s) and type(s): body (Value), body (Value)"
     assert excinfo.value.ctx == {"error": "Bad Request", "statusCode": 400}
     assert excinfo.value.errors is None
     assert excinfo.value.body == LIVE_400_TRIGGER_BODY
@@ -227,7 +229,7 @@ async def test_the_real_production_400_maps_to_validation_error_on_the_async_fac
     with pytest.raises(ValidationError) as excinfo:
         await notifly.events.trigger(workflow="welcome", to="subscriber_123")
 
-    assert excinfo.value.message == "Expected property name or '}' in JSON at position 1 (line 1 column 2)"
+    assert excinfo.value.message == "payload is missing required key(s) and type(s): body (Value), body (Value)"
     assert excinfo.value.body == LIVE_400_TRIGGER_BODY
 
 
