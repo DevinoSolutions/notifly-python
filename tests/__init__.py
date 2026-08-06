@@ -1,1 +1,1 @@
-"""Test suite for notifly-py."""
+"""Test suite for notifly-sdk."""

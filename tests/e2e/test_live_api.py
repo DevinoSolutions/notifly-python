@@ -40,7 +40,7 @@ def test_listing_subscribers_returns_a_populated_page(notifly: Notifly) -> None:
 
 
 def test_create_read_delete_round_trip_returns_populated_models(notifly: Notifly) -> None:
-    subscriber_id = f"notifly-py-e2e-{uuid.uuid4().hex[:12]}"
+    subscriber_id = f"notifly-sdk-e2e-{uuid.uuid4().hex[:12]}"
     created = notifly.subscribers.create(subscriber_id=subscriber_id, first_name="SDK", last_name="Smoke")
     assert created.subscriber_id == subscriber_id, "envelope unwrapping failed against the live API"
 
@@ -62,8 +62,8 @@ def test_triggering_an_unknown_workflow_raises_a_typed_validation_error(notifly:
     """
     with pytest.raises(ValidationError) as excinfo:
         notifly.events.trigger(
-            workflow=f"notifly-py-e2e-missing-{uuid.uuid4().hex[:12]}",
-            to=f"notifly-py-e2e-{uuid.uuid4().hex[:12]}",
+            workflow=f"notifly-sdk-e2e-missing-{uuid.uuid4().hex[:12]}",
+            to=f"notifly-sdk-e2e-{uuid.uuid4().hex[:12]}",
         )
 
     assert excinfo.value.status_code in (400, 422)
@@ -72,13 +72,13 @@ def test_triggering_an_unknown_workflow_raises_a_typed_validation_error(notifly:
 
 @pytest.mark.skipif(not os.getenv("NOTIFLY_E2E_WORKFLOW"), reason="NOTIFLY_E2E_WORKFLOW is not set")
 def test_trigger_returns_a_populated_acknowledgement(notifly: Notifly) -> None:
-    subscriber_id = f"notifly-py-e2e-{uuid.uuid4().hex[:12]}"
+    subscriber_id = f"notifly-sdk-e2e-{uuid.uuid4().hex[:12]}"
     notifly.subscribers.create(subscriber_id=subscriber_id)
     try:
         result = notifly.events.trigger(
             workflow=os.environ["NOTIFLY_E2E_WORKFLOW"],
             to=subscriber_id,
-            payload={"source": "notifly-py e2e"},
+            payload={"source": "notifly-sdk e2e"},
         )
         assert result.acknowledged is True
         assert result.transaction_id

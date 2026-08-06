@@ -13,8 +13,8 @@ set -euo pipefail
 
 GENERATOR_VERSION="0.29.0"
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-TMP_OUT="$(mktemp -d)/notifly-py-gen"
-BACKUP="$(mktemp -d)/notifly-py-handwritten"
+TMP_OUT="$(mktemp -d)/notifly-sdk-gen"
+BACKUP="$(mktemp -d)/notifly-sdk-handwritten"
 
 # Hand-written modules layered on top of the generated client. Keep in sync with the
 # "HAND-WRITTEN" banner in each file.

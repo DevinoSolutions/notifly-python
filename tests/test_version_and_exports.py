@@ -17,7 +17,7 @@ def test_version_is_exported_and_looks_like_a_version() -> None:
 
 def test_user_agent_identifies_the_sdk_python_and_httpx() -> None:
     agent = user_agent()
-    assert agent.startswith(f"notifly-py/{__version__} ")
+    assert agent.startswith(f"notifly-sdk/{__version__} ")
     assert " python/" in agent
     assert " httpx/" in agent
 

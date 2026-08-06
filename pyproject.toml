@@ -1,5 +1,5 @@
 [project]
-name = "notifly-py"
+name = "notifly-sdk"
 version = "0.1.0"
 description = "Official Python SDK for the Notifly API — open-source, self-hostable notification infrastructure."
 authors = [{ name = "Devino Solutions Inc.", email = "support@notifly.io" }]

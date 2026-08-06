@@ -1,4 +1,4 @@
-# Notifly Python SDK (`notifly-py`)
+# Notifly Python SDK (`notifly-sdk`)
 
 Official Python SDK for the [Notifly](https://notifly.io) API — open-source, self-hostable notification infrastructure (in-app inbox, push, email, SMS, chat).
 
@@ -7,8 +7,19 @@ Covers the Notifly REST surface (131 operations): events/triggers, subscribers, 
 ## Install
 
 ```bash
-pip install notifly-py
+pip install notifly-sdk
 ```
+
+> **The distribution name and the import name differ.** Install `notifly-sdk`, then
+> `import notifly_py`:
+>
+> ```python
+> # pip install notifly-sdk
+> from notifly_py import Notifly
+> ```
+>
+> The PyPI project is **`notifly-sdk`**; the importable Python package stays **`notifly_py`**
+> throughout this README and in every code sample below.
 
 Requires Python 3.11+.
 
@@ -47,7 +58,7 @@ The client is configured for the hosted API by default. For a self-hosted deploy
 | **Retries** | `429`, `408`, `502`, `503`, `504` and connection errors are retried with exponential backoff + jitter, honouring `Retry-After`. `GET`/`PUT`/`DELETE` always; `POST`/`PATCH` only when you pass an `idempotency_key`. |
 | **Typed errors** | The facade raises `NotFoundError`, `ValidationError`, `RateLimitError`, … instead of returning a fourteen-member union. |
 | **Pagination** | `iter_all()` / `iter_*()` walk every page — cursor, offset and page-number styles all handled. |
-| **User-Agent** | `notifly-py/<version> python/<x.y.z> httpx/<x.y.z>`. |
+| **User-Agent** | `notifly-sdk/<version> python/<x.y.z> httpx/<x.y.z>`. |
 
 ## Resources
 

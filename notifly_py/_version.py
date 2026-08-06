@@ -9,7 +9,7 @@ import platform
 from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version as _package_version
 
-PACKAGE_NAME = "notifly-py"
+PACKAGE_NAME = "notifly-sdk"
 
 try:
     __version__ = _package_version(PACKAGE_NAME)
@@ -20,7 +20,7 @@ except PackageNotFoundError:  # running from a source checkout that was never in
 def user_agent() -> str:
     """Return the default ``User-Agent`` sent with every request.
 
-    Format: ``notifly-py/<version> python/<x.y.z> httpx/<x.y.z>`` — stable enough for
+    Format: ``notifly-sdk/<version> python/<x.y.z> httpx/<x.y.z>`` — stable enough for
     server-side attribution and version-adoption dashboards.
     """
     import httpx  # imported lazily so importing the version never pulls in httpx

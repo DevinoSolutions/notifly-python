@@ -47,7 +47,7 @@ class NotiflyClient(AuthenticatedClient):
         retry_config: Retry policy; pass ``RetryConfig(max_retries=0)`` to disable retries.
         unwrap_data_envelope: Set to ``False`` only if the API ever stops wrapping single
             entities in ``{"data": ...}`` — see :mod:`notifly_py._envelope`.
-        user_agent: Overrides the default ``notifly-py/<version> ...`` User-Agent.
+        user_agent: Overrides the default ``notifly-sdk/<version> ...`` User-Agent.
     """
 
     retry_config: RetryConfig = field(factory=RetryConfig, kw_only=True)

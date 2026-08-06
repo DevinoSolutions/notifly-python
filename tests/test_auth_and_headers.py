@@ -54,8 +54,8 @@ def test_requests_carry_an_identifying_user_agent(client_factory: Any) -> None:
     subscribers_controller_get_subscriber.sync(client=client, subscriber_id="s_1")
 
     user_agent = recorder.request.headers["user-agent"]
-    assert user_agent.startswith("notifly-py/")
-    assert f"notifly-py/{__version__}" in user_agent
+    assert user_agent.startswith("notifly-sdk/")
+    assert f"notifly-sdk/{__version__}" in user_agent
     assert "python/" in user_agent
 
 

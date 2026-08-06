@@ -1,16 +1,15 @@
-# Publishes `notifly-py` to PyPI with Trusted Publishing (OIDC) — no API token, no password.
+# Publishes `notifly-sdk` to PyPI with Trusted Publishing (OIDC) — no API token, no password.
 #
-# BEFORE THE FIRST RELEASE (one-time, manual, cannot be automated):
-#   1. Register a PENDING publisher at https://pypi.org/manage/account/publishing/
-#      (not under an existing project — `notifly-py` does not exist on PyPI yet) with exactly:
-#        PyPI Project Name: notifly-py
-#        Owner:             DevinoSolutions
-#        Repository name:   notifly-python
-#        Workflow name:     publish.yml
-#        Environment name:  pypi
-#      Any mismatch fails the OIDC exchange with `invalid-publisher`.
-#   2. Create the `pypi` environment in Settings -> Environments (required reviewers
-#      recommended, so a release stays a deliberate human act).
+# The trusted publisher registered on PyPI is:
+#   PyPI Project Name: notifly-sdk      <- the DISTRIBUTION name; the import package
+#                                          stays `notifly_py`
+#   Owner:             DevinoSolutions
+#   Repository name:   notifly-python
+#   Workflow name:     publish.yml
+#   Environment name:  (any)
+# Any mismatch between those claims and this file fails the OIDC exchange with
+# `invalid-publisher`. The `pypi` environment used below is allowed because the publisher
+# was registered without an environment restriction.
 #
 # HOW TO RELEASE
 #   Push a tag: `git tag v0.1.0 && git push origin v0.1.0`. The tag must match the version in

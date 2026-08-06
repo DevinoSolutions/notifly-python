@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `notifly-py` are documented here. This project follows
+All notable changes to `notifly-sdk` are documented here. This project follows
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]

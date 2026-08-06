@@ -1,4 +1,4 @@
-"""notifly-py — the official Python SDK for the Notifly API.
+"""notifly-sdk — the official Python SDK for the Notifly API.
 
 HAND-WRITTEN — this file replaces the generated ``__init__.py``. See ``scripts/regenerate.sh``.
 
