@@ -29,6 +29,7 @@ permissions:
 jobs:
   assert-version:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
@@ -54,6 +55,7 @@ jobs:
   verify:
     needs: assert-version
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -71,6 +73,7 @@ jobs:
   build-and-publish:
     needs: [assert-version, verify]
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     environment: pypi
     permissions:
       id-token: write # required for PyPI trusted publishing
