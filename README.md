@@ -1,6 +1,6 @@
 # Notifly Python SDK (`notifly-sdk`)
 
-Official Python SDK for the [Notifly](https://notifly.io) API — open-source, self-hostable notification infrastructure (in-app inbox, push, email, SMS, chat).
+Official Python client SDK for the [Notifly](https://notifly.io) notification API (in-app inbox, push, email, SMS, chat).
 
 Covers the Notifly REST surface (131 operations): events/triggers, subscribers, topics, workflows, messages, notifications, integrations, layouts, environments, and more. Fully typed (`py.typed`), sync **and** async on `httpx`, with a hand-written ergonomic layer on top of a generated core.
 
@@ -47,7 +47,7 @@ async with AsyncNotifly("<NOTIFLY_SECRET_KEY>") as notifly:
     result = await notifly.events.trigger(workflow="welcome", to="subscriber_123")
 ```
 
-The client is configured for the hosted API by default. For a self-hosted deployment pass `base_url="https://notifly.internal"`.
+The client targets `https://api.notifly.io` by default. To point it at a different API host, pass `base_url="https://api.example.com"`.
 
 ## What the client does for you
 
@@ -192,4 +192,4 @@ Releases publish to PyPI via GitHub Actions [Trusted Publishing](https://docs.py
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+This client SDK is MIT-licensed — see [LICENSE](LICENSE). The license covers this SDK only; the Notifly platform and API it talks to are proprietary.

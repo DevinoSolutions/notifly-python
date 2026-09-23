@@ -5,6 +5,10 @@ on:
     branches: [main]
   pull_request:
 
+# runs-on stays GitHub-hosted (ubuntu-latest) on purpose: this repo is PUBLIC and the org's
+# self-hosted ubuntu-devino fleet sits in the Default runner group, which does not allow public
+# repositories (allows_public_repositories=false, checked 2026-09-23) — jobs would queue forever.
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -98,11 +102,13 @@ jobs:
       - name: Install wheel and smoke-test the public surface
         run: |
           pip install dist/*.whl
-          python - <<'PY'
+          python -P - <<'PY'
+          import pathlib, tomllib
           import notifly_py
           from notifly_py import Notifly, NotiflyClient, __version__
 
-          assert __version__ == "0.1.0", __version__
+          expected = tomllib.loads(pathlib.Path("pyproject.toml").read_text())["project"]["version"]
+          assert __version__ == expected, (__version__, expected)
           client = NotiflyClient(token="sk_ci_smoke")
           assert client.prefix == "ApiKey", client.prefix
           notifly = Notifly(client=client)

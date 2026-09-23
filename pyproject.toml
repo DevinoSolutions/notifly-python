@@ -1,7 +1,7 @@
 [project]
 name = "notifly-sdk"
-version = "0.1.0"
-description = "Official Python SDK for the Notifly API — open-source, self-hostable notification infrastructure."
+version = "0.1.1"
+description = "Official Python client SDK for the Notifly notification API — in-app inbox, push, email, SMS and chat."
 authors = [{ name = "Devino Solutions Inc.", email = "support@notifly.io" }]
 requires-python = ">=3.11"
 readme = "README.md"
@@ -15,7 +15,6 @@ keywords = [
   "sms",
   "in-app",
   "inbox",
-  "novu",
 ]
 classifiers = [
   "Development Status :: 4 - Beta",

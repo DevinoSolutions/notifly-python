@@ -5,18 +5,17 @@ All notable changes to `notifly-sdk` are documented here. This project follows
 
 ## [Unreleased]
 
-### Fixed
+## [0.1.1] — 2026-09-23
 
-- Error responses whose body omits a field the OpenAPI document marks required no longer escape
-  as `KeyError`. The generated error DTOs pop their required keys unguarded (`ErrorDto` pops
-  `statusCode`/`timestamp`/`path`, `ValidationErrorDto` also pops `errors`,
-  `PayloadValidationExceptionDto` also pops `type`), and production omits some of them — a live
-  400 from `POST /v1/events/trigger` carries no `type`, and the everyday "unknown workflow" 422
-  carries no `errors`. The facade now drops an unparsable error model and rebuilds the typed
-  exception from the raw body, so those surface as `ValidationError` as documented. Success
-  bodies are unaffected and still raise when unparsable.
+### Changed
 
-## [0.1.0] — unreleased (first PyPI publish)
+- Package metadata and documentation only, no behaviour changes: the PyPI summary and README now
+  describe this as the client SDK for the Notifly API. The earlier wording described the Notifly
+  platform as open-source and self-hostable, which it is not — only this client SDK is open
+  source (MIT). Also dropped the `novu` keyword and internal platform source paths from the
+  `notifly_py._envelope` docstring.
+
+## [0.1.0] — 2026-08-06 (first PyPI publish)
 
 First release. Generated from the Notifly OpenAPI document (v3.17.1, 131 operations) with
 `openapi-python-client` 0.29.0, plus a hand-written layer on top.
@@ -42,6 +41,17 @@ First release. Generated from the Notifly OpenAPI document (v3.17.1, 131 operati
 - Scheduled spec-drift workflow that re-checks the envelope contract, route coverage and the
   bearer-only operation registry against the live public OpenAPI document.
 
+### Fixed
+
+- Error responses whose body omits a field the OpenAPI document marks required no longer escape
+  as `KeyError`. The generated error DTOs pop their required keys unguarded (`ErrorDto` pops
+  `statusCode`/`timestamp`/`path`, `ValidationErrorDto` also pops `errors`,
+  `PayloadValidationExceptionDto` also pops `type`), and production omits some of them — a live
+  400 from `POST /v1/events/trigger` carries no `type`, and the everyday "unknown workflow" 422
+  carries no `errors`. The facade now drops an unparsable error model and rebuilds the typed
+  exception from the raw body, so those surface as `ValidationError` as documented. Success
+  bodies are unaffected and still raise when unparsable.
+
 ### Notes
 
 - Sixteen shipped operations require a dashboard JWT rather than a secret key. They are recorded
@@ -49,5 +59,6 @@ First release. Generated from the Notifly OpenAPI document (v3.17.1, 131 operati
 - The Notifly API does not emit RFC 9457 `application/problem+json`; the exception hierarchy maps
   its `ErrorDto` shape instead.
 
-[unreleased]: https://github.com/DevinoSolutions/notifly-python/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/DevinoSolutions/notifly-python/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/DevinoSolutions/notifly-python/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/DevinoSolutions/notifly-python/releases/tag/v0.1.0
