@@ -102,7 +102,7 @@ jobs:
       - name: Install wheel and smoke-test the public surface
         run: |
           pip install dist/*.whl
-          python - <<'PY'
+          python -P - <<'PY'
           import pathlib, tomllib
           import notifly_py
           from notifly_py import Notifly, NotiflyClient, __version__

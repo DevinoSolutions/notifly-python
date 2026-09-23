@@ -4,8 +4,7 @@ HAND-WRITTEN — not produced by ``openapi-python-client``. See ``scripts/regene
 
 Why this module exists
 ----------------------
-The Notifly API wraps every response body at runtime
-(``apps/api/src/app/shared/framework/response.interceptor.ts``)::
+The Notifly API wraps every response body at runtime::
 
     single entity  -> {"data": {...}}                       # exactly one key
     paginated      -> {"data": [...], "totalCount": 1, ...}  # several keys
@@ -17,8 +16,7 @@ Because generated attrs models tolerate unknown keys through ``additional_proper
 that does not raise — it silently returns a model whose documented fields are all ``UNSET``
 and whose real payload is buried in ``additional_properties["data"]``.
 
-The official TypeScript SDK compensates with a runtime hook
-(``libs/internal-sdk/src/hooks/novu-custom-hook.ts``)::
+The official TypeScript SDK (``@notiflyio/api``) compensates with a runtime response hook::
 
     if (jsonResponse && Object.keys(jsonResponse).length === 1 && 'data' in jsonResponse) {
         return new Response(JSON.stringify(jsonResponse.data), { ... });

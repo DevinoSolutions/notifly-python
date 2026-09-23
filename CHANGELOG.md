@@ -9,9 +9,11 @@ All notable changes to `notifly-sdk` are documented here. This project follows
 
 ### Changed
 
-- Package metadata only, no code changes: the PyPI summary and README now describe this as the
-  client SDK for the Notifly API. The earlier wording described the Notifly platform as
-  open-source and self-hostable, which it is not — only this client SDK is open source (MIT).
+- Package metadata and documentation only, no behaviour changes: the PyPI summary and README now
+  describe this as the client SDK for the Notifly API. The earlier wording described the Notifly
+  platform as open-source and self-hostable, which it is not — only this client SDK is open
+  source (MIT). Also dropped the `novu` keyword and internal platform source paths from the
+  `notifly_py._envelope` docstring.
 
 ## [0.1.0] — 2026-08-06 (first PyPI publish)
 

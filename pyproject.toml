@@ -15,7 +15,6 @@ keywords = [
   "sms",
   "in-app",
   "inbox",
-  "novu",
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
