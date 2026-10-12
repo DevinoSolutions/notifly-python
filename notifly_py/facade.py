@@ -991,7 +991,47 @@ def _update_agent_body(body: Any, fields: Mapping[str, Any]) -> Any:
 
 def _delete_from_provider(value: bool | str) -> str:
     """The API takes ``deleteFromProvider`` as a string query value (``"true"`` / ``"false"``)."""
-    return value if isinstance(value, str) else str(value).lower()
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, str) and value.lower() in ("true", "false"):
+        return value.lower()
+    raise ValueError(f"delete_from_provider must be a bool or 'true' / 'false', got {value!r}")
+
+
+#: ``AgentReplyPayloadDto`` fields holding nested DTOs (or lists of them), keyed by attribute -> wire name.
+_REPLY_NESTED_FIELDS = {
+    "reply": "reply",
+    "tool_approval_request": "toolApprovalRequest",
+    "edit": "edit",
+    "resolve": "resolve",
+    "signals": "signals",
+    "tool_results": "toolResults",
+    "add_reactions": "addReactions",
+    "delete_messages": "deleteMessages",
+    "typing": "typing",
+}
+
+
+def _reply_fields(fields: Mapping[str, Any]) -> dict[str, Any]:
+    """Turn plain mappings given for the reply's nested fields into the DTOs the generated ``to_dict`` needs.
+
+    ``reply`` and ``signals`` are unions, so they are parsed by ``AgentReplyPayloadDto.from_dict`` itself rather
+    than guessed here; values that are already models are kept as they are. Mappings use the API's wire keys.
+    """
+    coerced = dict(fields)
+    wire: dict[str, Any] = {}
+    for name, wire_name in _REPLY_NESTED_FIELDS.items():
+        value = coerced.get(name)
+        if isinstance(value, Mapping):
+            wire[wire_name] = dict(value)
+        elif isinstance(value, list) and any(isinstance(item, Mapping) for item in value):
+            wire[wire_name] = [item.to_dict() if hasattr(item, "to_dict") else dict(item) for item in value]
+    if wire:
+        parsed = AgentReplyPayloadDto.from_dict({"conversationId": "", "integrationIdentifier": "", **wire})
+        for name, wire_name in _REPLY_NESTED_FIELDS.items():
+            if wire_name in wire:
+                coerced[name] = getattr(parsed, name)
+    return coerced
 
 
 class AgentsResource(_SyncResource):
@@ -1001,18 +1041,19 @@ class AgentsResource(_SyncResource):
         self,
         body: CreateAgentRequestDto | Mapping[str, Any] | None = None,
         *,
-        analytics_source: str = AGENTS_ANALYTICS_SOURCE,
+        analytics_source: str | None = AGENTS_ANALYTICS_SOURCE,
         idempotency_key: str | None = None,
         **fields: Any,
     ) -> Any:
         """Create an agent, e.g. ``create(name="Support bot", identifier="support-bot")``.
 
-        ``analytics_source`` fills the ``Novu-Analytics-Source`` header the API requires on this call.
+        ``analytics_source`` fills the ``Novu-Analytics-Source`` header the API requires on this call;
+        ``None`` keeps the default.
         """
         return self._call(
             _agents_create,
             body=_create_agent_body(body, fields),
-            novu_analytics_source=analytics_source,
+            novu_analytics_source=analytics_source or AGENTS_ANALYTICS_SOURCE,
             idempotency_key=idempotency_key,
         )
 
@@ -1152,7 +1193,7 @@ class AgentsResource(_SyncResource):
         return self._call(
             _agents_reply,
             agent_id=agent_id,
-            body=_model(AgentReplyPayloadDto, body, fields),
+            body=_model(AgentReplyPayloadDto, body, _reply_fields(fields)),
             idempotency_key=idempotency_key,
         )
 
@@ -1164,14 +1205,14 @@ class AsyncAgentsResource(_AsyncResource):
         self,
         body: CreateAgentRequestDto | Mapping[str, Any] | None = None,
         *,
-        analytics_source: str = AGENTS_ANALYTICS_SOURCE,
+        analytics_source: str | None = AGENTS_ANALYTICS_SOURCE,
         idempotency_key: str | None = None,
         **fields: Any,
     ) -> Any:
         return await self._call(
             _agents_create,
             body=_create_agent_body(body, fields),
-            novu_analytics_source=analytics_source,
+            novu_analytics_source=analytics_source or AGENTS_ANALYTICS_SOURCE,
             idempotency_key=idempotency_key,
         )
 
@@ -1299,7 +1340,7 @@ class AsyncAgentsResource(_AsyncResource):
         return await self._call(
             _agents_reply,
             agent_id=agent_id,
-            body=_model(AgentReplyPayloadDto, body, fields),
+            body=_model(AgentReplyPayloadDto, body, _reply_fields(fields)),
             idempotency_key=idempotency_key,
         )
 

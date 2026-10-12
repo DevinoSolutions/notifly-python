@@ -79,8 +79,11 @@ Regenerated from the Notifly OpenAPI document v3.19.1 (142 operations, 11 new) w
   `UpdateWorkflowDto.active` / `.is_translation_enabled`, `AgentBehaviorDto.acknowledge_on_received` /
   `.reaction_on_resolved` and the shared nested step controls `InAppControlDto.disable_output_sanitization`,
   `EmailControlDto.editor_type` / `.disable_output_sanitization` and `ThrottleControlDto.threshold`
-  (which `CreateWorkflowDto` steps share, so they are no longer resent on create either; the API applies
-  the same defaults). Required properties keep their constructor default. If you relied on the old
+  (which `CreateWorkflowDto` steps share, so they are no longer resent on create either). Those four now
+  read `UNSET` when not set (previously `1.0` / `"block"` / `False`). The server treats an absent value
+  identically: the worker defaults `threshold` to 1, the email and in-app renderers treat an absent
+  sanitization flag as false, and the dashboard treats a missing `editorType` as `block` (it only stops
+  storing the explicit value on SDK-created steps). Required properties keep their constructor default. If you relied on the old
   defaults, pass the value explicitly. A guard test fails if a regeneration brings a default back.
 - `notifly.workflows.update(id, body)` and `.patch(id, body=None, **fields)` now build the body like the
   other facade update methods: `body` may be the DTO or a plain mapping, `patch` also takes keyword

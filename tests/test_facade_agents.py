@@ -30,6 +30,10 @@ from notifly_py.models import (
     CreateAgentRequestDto,
     CreateAgentRequestDtoRuntime,
     ListAgentsResponseDto,
+    MarkdownReplyContentDto,
+    MetadataSetSignalDto,
+    MetadataSetSignalDtoType,
+    MetadataSetSignalDtoValue,
     SentMessageInfoDto,
     UpdateAgentRequestDto,
 )
@@ -495,3 +499,138 @@ def test_iter_integrations_follows_the_next_cursor_and_keeps_the_filters() -> No
         {"limit": "1", "integrationIdentifier": "slack-prod"},
         {"limit": "1", "integrationIdentifier": "slack-prod", "after": "cursor_2"},
     ]
+
+
+# --------------------------------------------------------------------------------------
+# reply: nested mappings, models, delete_from_provider and analytics_source validation
+# --------------------------------------------------------------------------------------
+REPLY_URL = f"{BASE_URL}/v1/agents/{AGENT['_id']}/reply"
+REPLY_RESPONSE = {"data": {"messageId": "msg_1", "platformThreadId": "t_1"}}
+
+
+@respx.mock
+def test_reply_accepts_a_plain_mapping_for_reply_and_signals() -> None:
+    route = respx.post(REPLY_URL).mock(return_value=httpx.Response(200, json=REPLY_RESPONSE))
+
+    _notifly().agents.reply(
+        AGENT["_id"],
+        conversation_id="conv_1",
+        integration_identifier="slack-prod",
+        reply={"markdown": "hi"},
+        signals=[{"type": "metadata", "action": "set", "key": "crm:ticketId", "value": {"id": "TCK-1001"}}],
+        resolve={"summary": "done"},
+    )
+
+    body = json.loads(route.calls.last.request.content)
+    assert body["reply"] == {"markdown": "hi"}
+    assert body["signals"] == [{"type": "metadata", "action": "set", "key": "crm:ticketId", "value": {"id": "TCK-1001"}}]
+    assert body["resolve"] == {"summary": "done"}
+
+
+@respx.mock
+def test_reply_parses_the_card_variant_of_the_reply_union() -> None:
+    route = respx.post(REPLY_URL).mock(return_value=httpx.Response(200, json=REPLY_RESPONSE))
+    card = {"type": "card", "title": "Order #123", "children": []}
+
+    _notifly().agents.reply(
+        AGENT["_id"], conversation_id="conv_1", integration_identifier="slack-prod", reply={"card": card}
+    )
+
+    assert json.loads(route.calls.last.request.content)["reply"] == {"card": card}
+
+
+@respx.mock
+def test_reply_still_accepts_models_and_mixed_signal_lists() -> None:
+    route = respx.post(REPLY_URL).mock(return_value=httpx.Response(200, json=REPLY_RESPONSE))
+    markdown = MarkdownReplyContentDto(markdown="hi")
+    signal = MetadataSetSignalDto(
+        type_=MetadataSetSignalDtoType.METADATA, key="k", value=MetadataSetSignalDtoValue.from_dict({})
+    )
+
+    notifly = _notifly()
+    notifly.agents.reply(
+        AGENT["_id"], conversation_id="c", integration_identifier="i", reply=markdown, signals=[signal]
+    )
+    notifly.agents.reply(
+        AGENT["_id"],
+        conversation_id="c",
+        integration_identifier="i",
+        signals=[signal, {"type": "metadata", "key": "k2", "value": {"v": 1}}],
+    )
+
+    first, second = (json.loads(call.request.content) for call in route.calls)
+    assert first["reply"] == {"markdown": "hi"}
+    assert [item["key"] for item in first["signals"]] == ["k"]
+    assert [item["key"] for item in second["signals"]] == ["k", "k2"]
+
+
+@respx.mock
+async def test_async_reply_accepts_a_plain_mapping_for_reply() -> None:
+    route = respx.post(REPLY_URL).mock(return_value=httpx.Response(200, json=REPLY_RESPONSE))
+
+    await _async_notifly().agents.reply(
+        AGENT["_id"], conversation_id="conv_1", integration_identifier="slack-prod", reply={"markdown": "hi"}
+    )
+
+    assert json.loads(route.calls.last.request.content)["reply"] == {"markdown": "hi"}
+
+
+@pytest.mark.parametrize(
+    ("value", "expected"),
+    [(True, "true"), (False, "false"), ("true", "true"), ("FALSE", "false"), ("True", "true")],
+)
+@respx.mock
+def test_delete_from_provider_normalizes_to_lowercase(value: bool | str, expected: str) -> None:
+    route = respx.delete(f"{BASE_URL}/v1/agents/support-bot").mock(return_value=httpx.Response(204))
+
+    _notifly().agents.delete("support-bot", delete_from_provider=value)
+
+    assert route.calls.last.request.url.params["deleteFromProvider"] == expected
+
+
+@pytest.mark.parametrize("value", [None, 0, 1, "yes", "", "1"])
+@respx.mock
+def test_delete_from_provider_rejects_anything_but_a_bool_or_true_false(value: Any) -> None:
+    route = respx.delete(f"{BASE_URL}/v1/agents/support-bot").mock(return_value=httpx.Response(204))
+
+    with pytest.raises(ValueError, match="delete_from_provider"):
+        _notifly().agents.delete("support-bot", delete_from_provider=value)
+
+    assert not route.called
+
+
+@respx.mock
+async def test_async_delete_from_provider_rejects_a_bad_value() -> None:
+    with pytest.raises(ValueError, match="delete_from_provider"):
+        await _async_notifly().agents.delete("support-bot", delete_from_provider="yes")
+
+
+@respx.mock
+def test_create_with_analytics_source_none_keeps_the_default_header() -> None:
+    route = respx.post(f"{BASE_URL}/v1/agents").mock(return_value=httpx.Response(201, json={"data": AGENT}))
+
+    _notifly().agents.create(name="A", identifier="a", analytics_source=None)
+
+    assert route.calls.last.request.headers["novu-analytics-source"] == AGENTS_ANALYTICS_SOURCE
+
+
+@respx.mock
+async def test_async_create_with_analytics_source_none_keeps_the_default_header() -> None:
+    route = respx.post(f"{BASE_URL}/v1/agents").mock(return_value=httpx.Response(201, json={"data": AGENT}))
+
+    await _async_notifly().agents.create(name="A", identifier="a", analytics_source=None)
+
+    assert route.calls.last.request.headers["novu-analytics-source"] == AGENTS_ANALYTICS_SOURCE
+
+
+def test_the_readme_reply_example_is_valid() -> None:
+    readme = (Path(__file__).parent.parent / "README.md").read_text(encoding="utf-8")
+    line = next(line for line in readme.splitlines() if line.startswith("notifly.agents.reply("))
+    assert 'reply={"markdown": "Done."}' in line
+
+    with respx.mock:
+        route = respx.post(REPLY_URL).mock(return_value=httpx.Response(200, json=REPLY_RESPONSE))
+        _notifly().agents.reply(
+            AGENT["_id"], conversation_id="...", integration_identifier="slack-prod", reply={"markdown": "Done."}
+        )
+    assert json.loads(route.calls.last.request.content)["reply"] == {"markdown": "Done."}

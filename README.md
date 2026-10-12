@@ -98,12 +98,12 @@ notifly.agents.add_integration("support-bot", "slack-prod")
 notifly.agents.list_integrations("support-bot") / .iter_integrations("support-bot")
 notifly.agents.update_integration("support-bot", agent_integration_id, "slack-staging")
 notifly.agents.remove_integration("support-bot", agent_integration_id)
-notifly.agents.reply(agent_id, conversation_id="...", integration_identifier="slack-prod", reply=...)
+notifly.agents.reply(agent_id, conversation_id="...", integration_identifier="slack-prod", reply={"markdown": "Done."})
 ```
 
 Any parameter documented for an operation can be passed through as a keyword argument — for example `notifly.subscribers.list(limit=100, order_direction="DESC")`. Every method also accepts `idempotency_key=...`.
 
-Update calls (`PUT` / `PATCH`) send only the fields you set: an omitted field is left out of the request body, so the server keeps its stored value. Pass a value explicitly (including `False`) to change it. A `None` keyword argument is dropped like any other omitted one; to send a JSON `null`, build the DTO (for example `AgentBehaviorDto(reaction_on_resolved=None)`).
+Update calls (`PUT` / `PATCH`) send only the fields you set: an omitted field is left out of the request body, so the server keeps its stored value. Nested mappings you pass (for example `behavior={...}` or `reply={...}`) use the API's wire keys, i.e. camelCase (`subscriberAccess`), while top-level keyword arguments are snake_case. Pass a value explicitly (including `False`) to change it. A `None` keyword argument is dropped like any other omitted one; to send a JSON `null`, build the DTO (for example `AgentBehaviorDto(reaction_on_resolved=None)`).
 
 ## Errors
 
