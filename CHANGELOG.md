@@ -67,6 +67,10 @@ Regenerated from the Notifly OpenAPI document v3.19.1 (142 operations, 11 new) w
   also sent both and reset them. The API applies those defaults itself on read and `$set`s only the
   behavior fields present in the body, so the generator now sees them without a default: an unset
   field is omitted and `reaction_on_resolved=None` still sends `null` to turn the reaction off.
+  The flip side is on reads: a parsed agent whose behavior fields were never set now has `Unset` for
+  `acknowledge_on_received` and `reaction_on_resolved` instead of the documented defaults `True` /
+  `"check"` (the agent models are new in 0.2.0, so no 0.1.x caller is affected). The server's effective values are still acknowledge `true` and reaction `"check"` when
+  the fields are absent, so treat `Unset` as those.
 
 ### Notes
 
