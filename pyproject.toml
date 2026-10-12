@@ -1,6 +1,6 @@
 [project]
 name = "notifly-sdk"
-version = "0.1.1"
+version = "0.2.0"
 description = "Official Python client SDK for the Notifly notification API — in-app inbox, push, email, SMS and chat."
 authors = [{ name = "Devino Solutions Inc.", email = "support@notifly.io" }]
 requires-python = ">=3.11"

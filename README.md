@@ -2,7 +2,7 @@
 
 Official Python client SDK for the [Notifly](https://notifly.io) notification API (in-app inbox, push, email, SMS, chat).
 
-Covers the Notifly REST surface (131 operations): events/triggers, subscribers, topics, workflows, messages, notifications, integrations, layouts, environments, and more. Fully typed (`py.typed`), sync **and** async on `httpx`, with a hand-written ergonomic layer on top of a generated core.
+Covers the Notifly REST surface (142 operations): events/triggers, subscribers, topics, workflows, messages, notifications, integrations, layouts, environments, and more. Fully typed (`py.typed`), sync **and** async on `httpx`, with a hand-written ergonomic layer on top of a generated core.
 
 ## Install
 
@@ -145,7 +145,7 @@ Endpoints live under `notifly_py.api.<tag>`, one module per operation, each expo
 | `asyncio` | async, returns the parsed body |
 | `asyncio_detailed` | async, returns `Response` |
 
-Tags: `audit_logs`, `channel_connections`, `channel_endpoints`, `contexts`, `default`, `environment_variables`, `environments`, `events`, `integrations`, `layouts`, `messages`, `notifications`, `subscribers`, `topics`, `workflows`. All models live in `notifly_py.models`.
+Tags: `agents`, `audit_logs`, `channel_connections`, `channel_endpoints`, `contexts`, `default`, `environment_variables`, `environments`, `events`, `integrations`, `layouts`, `messages`, `notifications`, `subscribers`, `topics`, `workflows`. All models live in `notifly_py.models`.
 
 These functions return unions and never raise on HTTP errors — that is by design; only the facade raises.
 
@@ -173,7 +173,8 @@ def test_welcome_email():
 
 The core of this SDK is **generated** from the Notifly OpenAPI document. Never hand-edit `notifly_py/api/**` or `notifly_py/models/**`.
 
-- Spec snapshot: `openapi.json` — the internal-SDK flavor produced by the [DevinoSolutions/notifly](https://github.com/DevinoSolutions/notifly) monorepo (`apps/api/exportOpenAPIJSON.ts`).
+- Spec snapshot: `openapi.json` — the internal-SDK flavor produced by the [DevinoSolutions/notifly](https://github.com/DevinoSolutions/notifly) monorepo (`apps/api/exportOpenAPIJSON.ts`, `internalSdkGeneration: true`). Do not replace it with the live `https://api.notifly.io/openapi.json`: that public document drops the sixteen dashboard-only operations and keeps the `{"data": ...}` wrappers the SDK unwraps at runtime.
+- Spec fixes: the generator reads a patched copy of `openapi.json` (`scripts/prepare_spec.py`), so the committed file stays a verbatim export. Each fix names the defect it works around and fails loudly once the API has fixed it, at which point it gets deleted.
 - Generator: [openapi-python-client](https://github.com/openapi-generators/openapi-python-client), pinned in `scripts/regenerate.sh`.
 - Hand-written modules layered on top (preserved across regeneration): `__init__.py`, `_envelope.py`, `_transport.py`, `_version.py`, `exceptions.py`, `facade.py`, `internal_ops.py`, `notifly_client.py`, `pagination.py`.
 
@@ -186,7 +187,7 @@ uv run python scripts/check_drift.py        # committed spec vs the live public 
 NOTIFLY_SECRET_KEY=... uv run pytest tests/e2e   # opt-in live smoke
 ```
 
-To regenerate after a spec update: replace `openapi.json`, run `scripts/regenerate.sh`, run the test suite (the envelope regression tests are the gate), review the diff, bump `version` in `pyproject.toml`.
+To regenerate after a spec update: replace `openapi.json` with a fresh monorepo export, run `scripts/regenerate.sh` (the generator must report no warnings: it exits 0 even when it drops a model or an operation, and `tests/test_generated_coverage.py` is the gate that catches that), run the test suite (the envelope regression tests are the gate), review the diff, bump `version` in `pyproject.toml`.
 
 Releases publish to PyPI via GitHub Actions [Trusted Publishing](https://docs.pypi.org/trusted-publishers/) (`.github/workflows/publish.yml`) — no tokens.
 

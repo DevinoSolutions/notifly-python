@@ -5,6 +5,47 @@ All notable changes to `notifly-sdk` are documented here. This project follows
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-10-12
+
+Regenerated from the Notifly OpenAPI document v3.19.1 (142 operations, 11 new) with
+`openapi-python-client` 0.29.0.
+
+### Added
+
+- The Agents API, available as `notifly_py.api.agents` (generated modules, `sync` / `sync_detailed` /
+  `asyncio` / `asyncio_detailed` each): `AgentsController_createAgent`, `_listAgents`, `_getAgent`,
+  `_updateAgent`, `_deleteAgent`, `_updateAgentBridge`, `AgentIntegrationsController_addAgentIntegration`,
+  `_listAgentIntegrations`, `_updateAgentIntegration`, `_removeAgentIntegration` and
+  `AgentReplyController_handleAgentReplyHandler`. These are not on the `Notifly` facade yet.
+- New models for agents, reply payloads and signals, the Grafana OnCall / Line / Opsgenie / PagerDuty /
+  tool-webhook / Webex endpoint types, and tool workflow steps.
+- `connection_mode` filter on `ChannelConnectionsController_listChannelConnections`; `tool` channel
+  and step type; `rules` on integrations; `data` on topics; `bridge_url` on contexts; `agent_id`
+  and `bridge_url` on event triggers; `provider_overrides` on every workflow step response;
+  `create_subscriber_if_missing` on the channel endpoint create DTOs; new provider ids
+  (`sendly`, `anypost`, `ruach-sms`, `webex-messaging`, `line`, `sendblue`, `novu-web-chat`,
+  `pagerduty`, `opsgenie`, `grafana`, `tool-webhook`).
+- `scripts/prepare_spec.py`: named fixes applied to a copy of `openapi.json` before generation. The
+  first one types `AgentBehaviorDto.reactionOnResolved` as a nullable string; the API declares it
+  `type: object` with the default `"check"`, and the generator answers that by silently dropping
+  `AgentBehaviorDto`, `AgentResponseDto`, `ListAgentsResponseDto`, `UpdateAgentRequestDto` and
+  `PATCH /v1/agents/{identifier}`.
+- Tests for all eleven Agents operations (request shape, parsing through the `data` envelope, model
+  round trips), for the spec fixes, and a generated-coverage gate that fails when the generator
+  drops any operation or schema.
+
+### Changed
+
+- `LayoutsController_list` and `WorkflowController_searchWorkflows` now document bounds on their
+  paging parameters: `limit` 1-100, `offset` 0 or more.
+
+### Notes
+
+- `AgentsController_createAgent` takes a required `novu_analytics_source` header argument and
+  `AgentsController_deleteAgent` a required `delete_from_provider` query argument, because the API
+  declares them required.
+
+
 ## [0.1.1] — 2026-09-23
 
 ### Changed
@@ -59,6 +100,7 @@ First release. Generated from the Notifly OpenAPI document (v3.17.1, 131 operati
 - The Notifly API does not emit RFC 9457 `application/problem+json`; the exception hierarchy maps
   its `ErrorDto` shape instead.
 
-[unreleased]: https://github.com/DevinoSolutions/notifly-python/compare/v0.1.1...HEAD
+[unreleased]: https://github.com/DevinoSolutions/notifly-python/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/DevinoSolutions/notifly-python/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/DevinoSolutions/notifly-python/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/DevinoSolutions/notifly-python/releases/tag/v0.1.0
