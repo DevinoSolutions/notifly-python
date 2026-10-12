@@ -12,7 +12,16 @@ from notifly_py.internal_ops import INTERNAL_ONLY_OPERATIONS
 
 from .conftest import SECRET_KEY, json_response, subscriber_entity, topic_entity
 
-RESOURCE_GROUPS = ("events", "subscribers", "topics", "workflows", "messages", "notifications", "integrations")
+RESOURCE_GROUPS = (
+    "events",
+    "subscribers",
+    "topics",
+    "workflows",
+    "messages",
+    "notifications",
+    "integrations",
+    "agents",
+)
 
 
 def test_notifly_exposes_every_resource_group(notifly_factory: Any) -> None:

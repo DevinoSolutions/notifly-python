@@ -31,6 +31,7 @@ from pathlib import Path
 from typing import Any
 
 UNION_KEYS = ("oneOf", "anyOf")
+SPARSE_UPDATE_METHODS = ("put", "patch")
 PATH_SEPARATOR = " > "
 
 
@@ -61,32 +62,66 @@ def fix_agent_reaction_on_resolved_type(spec: dict[str, Any]) -> None:
     reaction["type"] = "string"
 
 
-def fix_agent_behavior_defaults_are_server_side(spec: dict[str, Any]) -> None:
-    """Drop ``default`` from ``AgentBehaviorDto.acknowledgeOnReceived`` and ``.reactionOnResolved``.
+def fix_update_bodies_omit_unset_fields(spec: dict[str, Any]) -> None:
+    """Drop ``default`` from every optional property reachable from a ``PUT`` / ``PATCH`` request body.
 
-    The API documents these defaults but applies them itself on read (``acknowledgeOnReceived !== false``,
-    ``reactionOnResolved === undefined`` -> ``"check"``), and ``PATCH /v1/agents/{identifier}`` ``$set``s
-    only the behavior fields present in the body. A generated model that carries the default sends it on
-    every request, so ``UpdateAgentRequestDto(behavior=AgentBehaviorDto(subscriber_access=...))`` would
-    also overwrite the stored ``acknowledgeOnReceived`` / ``reactionOnResolved`` with the defaults.
-    Without the default an unset field is omitted, and ``None`` still sends ``null`` to disable the
-    reaction. Must run after :func:`fix_agent_reaction_on_resolved_type`.
+    The API documents defaults that it applies itself when a field is absent (``UpdateWorkflowDto.active``
+    ``false``, ``isTranslationEnabled`` ``false``, ``AgentBehaviorDto.acknowledgeOnReceived`` ``true``, ...).
+    openapi-python-client turns each into a non-``Unset`` Python default, so
+    ``UpdateLayoutDto(name="x")`` serializes ``{"name": "x", "isTranslationEnabled": false}`` and an update
+    that names one field silently resets the others to their defaults on the server. Without the default an
+    unset field is ``UNSET`` and stays out of the request body, while an explicit value (``None`` included
+    where the property is nullable) is still sent.
+
+    Required properties keep their default: they are sent regardless, and removing it would turn a
+    defaulted constructor argument into a mandatory one. Response parsing is unaffected, because every
+    generated ``from_dict`` reads an absent optional field as ``UNSET`` whatever the constructor default is.
+    Nested schemas are shared with the create operations (``EmailControlDto`` ...), so the same fields also
+    stop being sent by default there; the server applies the same defaults on create.
     """
-    properties = spec["components"]["schemas"]["AgentBehaviorDto"]["properties"]
-    expected = {"acknowledgeOnReceived": True, "reactionOnResolved": "check"}
-    for name, default in expected.items():
-        if properties[name].get("default") != default:
-            raise SpecFixError(
-                f"AgentBehaviorDto.{name} no longer has default {default!r} (got {properties[name].get('default')!r}); "
-                "delete fix_agent_behavior_defaults_are_server_side from scripts/prepare_spec.py."
-            )
-    for name in expected:
-        del properties[name]["default"]
+    schemas = spec["components"]["schemas"]
+    stripped: list[str] = []
+    visited: set[str] = set()
+
+    def walk(node: Any, location: str) -> None:
+        if not isinstance(node, dict):
+            return
+        reference = node.get("$ref")
+        if isinstance(reference, str):
+            name = reference.rsplit("/", 1)[-1]
+            if name not in visited:
+                visited.add(name)
+                walk(schemas[name], name)
+            return
+        required = set(node.get("required", ()))
+        for property_name, property_schema in (node.get("properties") or {}).items():
+            if isinstance(property_schema, dict) and "default" in property_schema and property_name not in required:
+                del property_schema["default"]
+                stripped.append(f"{location}.{property_name}")
+            walk(property_schema, f"{location}.{property_name}")
+        for key in (*UNION_KEYS, "allOf"):
+            for variant in node.get(key, ()):
+                walk(variant, location)
+        walk(node.get("items"), location)
+        walk(node.get("additionalProperties"), location)
+
+    for path, path_item in spec["paths"].items():
+        for method in SPARSE_UPDATE_METHODS:
+            operation = path_item.get(method)
+            if operation is None:
+                continue
+            body = (operation.get("requestBody") or {}).get("content", {}).get("application/json", {})
+            walk(body.get("schema"), f"{method.upper()} {path}")
+    if not stripped:
+        raise SpecFixError(
+            "No PUT / PATCH request body declares an optional property with a default any more; "
+            "the API stopped doing that, so delete fix_update_bodies_omit_unset_fields from scripts/prepare_spec.py."
+        )
 
 
 FIXES: tuple[Callable[[dict[str, Any]], None], ...] = (
     fix_agent_reaction_on_resolved_type,
-    fix_agent_behavior_defaults_are_server_side,
+    fix_update_bodies_omit_unset_fields,
 )
 
 

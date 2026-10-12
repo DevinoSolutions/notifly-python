@@ -16,7 +16,14 @@ Regenerated from the Notifly OpenAPI document v3.19.1 (142 operations, 11 new) w
   `asyncio` / `asyncio_detailed` each): `AgentsController_createAgent`, `_listAgents`, `_getAgent`,
   `_updateAgent`, `_deleteAgent`, `_updateAgentBridge`, `AgentIntegrationsController_addAgentIntegration`,
   `_listAgentIntegrations`, `_updateAgentIntegration`, `_removeAgentIntegration` and
-  `AgentReplyController_handleAgentReplyHandler`. These are not on the `Notifly` facade yet.
+  `AgentReplyController_handleAgentReplyHandler`.
+- `notifly.agents` on `Notifly` / `AsyncNotifly` (`AgentsResource` / `AsyncAgentsResource`), covering all
+  eleven Agents operations with the same conventions as the other resources (typed errors, `data`
+  envelope, `idempotency_key=`, keyword fields or `body=`): `create`, `get`, `update`, `delete`, `list`,
+  `iter_all`, `update_bridge`, `add_integration`, `list_integrations`, `iter_integrations`,
+  `update_integration`, `remove_integration` and `reply`. `create` fills the required
+  `Novu-Analytics-Source` header (override with `analytics_source=`) and `delete` sends the required
+  `deleteFromProvider` query as `"false"` unless you pass `delete_from_provider=True`.
 - New models for agents, reply payloads and signals, the Grafana OnCall / Line / Opsgenie / PagerDuty /
   tool-webhook / Webex endpoint types, and tool workflow steps.
 - `connection_mode` filter on `ChannelConnectionsController_listChannelConnections`; `tool` channel
@@ -30,7 +37,7 @@ Regenerated from the Notifly OpenAPI document v3.19.1 (142 operations, 11 new) w
   `AgentBehaviorDto.reactionOnResolved` as a nullable string; the API declares it `type: object` with
   the default `"check"`, and the generator answers that by silently dropping `AgentBehaviorDto`,
   `AgentResponseDto`, `ListAgentsResponseDto`, `UpdateAgentRequestDto` and
-  `PATCH /v1/agents/{identifier}`. The second drops the server-side behavior defaults (see Changed).
+  `PATCH /v1/agents/{identifier}`. The second drops the defaults the API applies itself from every `PUT` / `PATCH` request body (see Changed).
 - Tests for all eleven Agents operations (request shape, parsing through the `data` envelope, model
   round trips), for the spec fixes, and a generated-coverage gate that fails when the generator
   drops any operation or schema.
@@ -61,11 +68,29 @@ Regenerated from the Notifly OpenAPI document v3.19.1 (142 operations, 11 new) w
   order of every union and new variants go last, so `...ResultType7` stays delay, `...ResultType8` stays
   digest and the tool preview is `...ResultType9`. No class or enum member of 0.1.1 was removed or
   renamed.
+- **Behavior change: update calls send only the fields you set.** The generated update DTOs turned
+  documented server-side defaults into Python defaults and resent them on every call, so an update
+  that named one field could silently flip others. Before this release, `UpdateLayoutDto(name="x")`
+  also sent `isTranslationEnabled: false` and `UpdateWorkflowDto(...)` also sent `active: false` and
+  `isTranslationEnabled: false`, switching a live workflow off and translations off. Those fields are
+  now `Unset` unless you pass them (an explicit `False` is still sent). `scripts/prepare_spec.py`
+  (`fix_update_bodies_omit_unset_fields`) strips the `default` of every optional property reachable from a
+  `PUT` / `PATCH` body before generation, so regenerating keeps it: `UpdateLayoutDto.is_translation_enabled`,
+  `UpdateWorkflowDto.active` / `.is_translation_enabled`, `AgentBehaviorDto.acknowledge_on_received` /
+  `.reaction_on_resolved` and the shared nested step controls `InAppControlDto.disable_output_sanitization`,
+  `EmailControlDto.editor_type` / `.disable_output_sanitization` and `ThrottleControlDto.threshold`
+  (which `CreateWorkflowDto` steps share, so they are no longer resent on create either; the API applies
+  the same defaults). Required properties keep their constructor default. If you relied on the old
+  defaults, pass the value explicitly. A guard test fails if a regeneration brings a default back.
+- `notifly.workflows.update(id, body)` and `.patch(id, body=None, **fields)` now build the body like the
+  other facade update methods: `body` may be the DTO or a plain mapping, `patch` also takes keyword
+  fields (`patch("welcome", active=False)`), and only what you pass is sent. They no longer forward
+  arbitrary `**kwargs` to the generated operation, only `idempotency_key=`.
 - A partial `PATCH /v1/agents/{identifier}` no longer overwrites stored values with defaults.
   `AgentBehaviorDto.acknowledgeOnReceived` and `.reactionOnResolved` carried the documented defaults
   (`true`, `"check"`), so `UpdateAgentRequestDto(behavior=AgentBehaviorDto(subscriber_access=...))`
   also sent both and reset them. The API applies those defaults itself on read and `$set`s only the
-  behavior fields present in the body, so the generator now sees them without a default: an unset
+  behavior fields present in the body, so the generator sees them without a default (the update-body fix above): an unset
   field is omitted and `reaction_on_resolved=None` still sends `null` to turn the reaction off.
   The flip side is on reads: a parsed agent whose behavior fields were never set now has `Unset` for
   `acknowledge_on_received` and `reaction_on_resolved` instead of the documented defaults `True` /

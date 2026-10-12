@@ -30,8 +30,7 @@ class ThrottleControlDto:
         unit (ThrottleControlDtoUnit | Unset): The unit of time for the throttle window (required for fixed type).
         dynamic_key (str | Unset): Key path to retrieve dynamic window value (required for dynamic type). Example:
             payload.timestamp.
-        threshold (float | Unset): The maximum number of executions allowed within the window. Defaults to 1. Default:
-            1.0.
+        threshold (float | Unset): The maximum number of executions allowed within the window. Defaults to 1.
         throttle_key (str | Unset): Optional key for grouping throttle rules. If not provided, defaults to workflow and
             subscriber combination.
     """
@@ -41,7 +40,7 @@ class ThrottleControlDto:
     amount: float | Unset = UNSET
     unit: ThrottleControlDtoUnit | Unset = UNSET
     dynamic_key: str | Unset = UNSET
-    threshold: float | Unset = 1.0
+    threshold: float | Unset = UNSET
     throttle_key: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
