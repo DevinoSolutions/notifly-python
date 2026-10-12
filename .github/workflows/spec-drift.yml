@@ -22,9 +22,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      # check_drift.py imports notifly_py (the internal-ops registry), which needs the package's
+      # runtime deps (httpx). Same install as ci.yml; without it the check crashed on import.
+      - name: Install project and dev dependencies
+        run: uv sync --group dev
       - name: Compare the committed spec against the live public document
         id: drift
-        run: python scripts/check_drift.py --format markdown --output drift-report.md
+        run: uv run --no-sync python scripts/check_drift.py --format markdown --output drift-report.md
         continue-on-error: true
       - name: Open an issue on drift
         if: steps.drift.outcome == 'failure'
