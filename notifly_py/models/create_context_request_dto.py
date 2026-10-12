@@ -25,11 +25,15 @@ class CreateContextRequestDto:
             org-acme.
         data (CreateContextRequestDtoData | Unset): Optional custom data to associate with this context. Example:
             {'tenantName': 'Acme Corp', 'region': 'us-east-1', 'settings': {'theme': 'dark'}}.
+        bridge_url (str | Unset): Optional bridge URL override for agent connect. When an inbound agent turn resolves
+            this context, its bridge call is routed here instead of the agent default bridge URL. Must be a publicly
+            reachable URL. Example: https://tenant-acme.example.com/api/novu.
     """
 
     type_: str
     id: str
     data: CreateContextRequestDtoData | Unset = UNSET
+    bridge_url: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -41,6 +45,8 @@ class CreateContextRequestDto:
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
+        bridge_url = self.bridge_url
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -51,6 +57,8 @@ class CreateContextRequestDto:
         )
         if data is not UNSET:
             field_dict["data"] = data
+        if bridge_url is not UNSET:
+            field_dict["bridgeUrl"] = bridge_url
 
         return field_dict
 
@@ -70,10 +78,13 @@ class CreateContextRequestDto:
         else:
             data = CreateContextRequestDtoData.from_dict(_data)
 
+        bridge_url = d.pop("bridgeUrl", UNSET)
+
         create_context_request_dto = cls(
             type_=type_,
             id=id,
             data=data,
+            bridge_url=bridge_url,
         )
 
         create_context_request_dto.additional_properties = d

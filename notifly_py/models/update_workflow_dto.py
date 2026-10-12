@@ -22,7 +22,9 @@ if TYPE_CHECKING:
     from ..models.push_step_upsert_dto import PushStepUpsertDto
     from ..models.sms_step_upsert_dto import SmsStepUpsertDto
     from ..models.throttle_step_upsert_dto import ThrottleStepUpsertDto
+    from ..models.tool_step_upsert_dto import ToolStepUpsertDto
     from ..models.update_workflow_dto_payload_schema_type_0 import UpdateWorkflowDtoPayloadSchemaType0
+    from ..models.workflow_agent_config_dto import WorkflowAgentConfigDto
 
 
 T = TypeVar("T", bound="UpdateWorkflowDto")
@@ -35,16 +37,18 @@ class UpdateWorkflowDto:
         name (str): Name of the workflow
         steps (list[ChatStepUpsertDto | CustomStepUpsertDto | DelayStepUpsertDto | DigestStepUpsertDto |
             EmailStepUpsertDto | HttpRequestStepUpsertDto | InAppStepUpsertDto | PushStepUpsertDto | SmsStepUpsertDto |
-            ThrottleStepUpsertDto]): Steps of the workflow
+            ThrottleStepUpsertDto | ToolStepUpsertDto]): Steps of the workflow
         preferences (PreferencesRequestDto):
-        origin (ResourceOriginEnum): Origin of the layout
         description (str | Unset): Description of the workflow
         tags (list[str] | Unset): Tags associated with the workflow
         active (bool | Unset): Whether the workflow is active Default: False.
         validate_payload (bool | Unset): Enable or disable payload schema validation
         payload_schema (None | Unset | UpdateWorkflowDtoPayloadSchemaType0): The payload JSON Schema for the workflow
         is_translation_enabled (bool | Unset): Enable or disable translations for this workflow Default: False.
+        agent (None | Unset | WorkflowAgentConfigDto): Optional agent assignment used to route this workflow through an
+            agent's connected channels. Pass null to clear.
         workflow_id (str | Unset): Workflow ID (allowed only for code-first workflows)
+        origin (ResourceOriginEnum | Unset): Origin of the layout
         severity (SeverityLevelEnum | Unset): Severity of the workflow
     """
 
@@ -60,16 +64,18 @@ class UpdateWorkflowDto:
         | PushStepUpsertDto
         | SmsStepUpsertDto
         | ThrottleStepUpsertDto
+        | ToolStepUpsertDto
     ]
     preferences: PreferencesRequestDto
-    origin: ResourceOriginEnum
     description: str | Unset = UNSET
     tags: list[str] | Unset = UNSET
     active: bool | Unset = False
     validate_payload: bool | Unset = UNSET
     payload_schema: None | Unset | UpdateWorkflowDtoPayloadSchemaType0 = UNSET
     is_translation_enabled: bool | Unset = False
+    agent: None | Unset | WorkflowAgentConfigDto = UNSET
     workflow_id: str | Unset = UNSET
+    origin: ResourceOriginEnum | Unset = UNSET
     severity: SeverityLevelEnum | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -79,11 +85,13 @@ class UpdateWorkflowDto:
         from ..models.delay_step_upsert_dto import DelayStepUpsertDto
         from ..models.digest_step_upsert_dto import DigestStepUpsertDto
         from ..models.email_step_upsert_dto import EmailStepUpsertDto
+        from ..models.http_request_step_upsert_dto import HttpRequestStepUpsertDto
         from ..models.in_app_step_upsert_dto import InAppStepUpsertDto
         from ..models.push_step_upsert_dto import PushStepUpsertDto
         from ..models.sms_step_upsert_dto import SmsStepUpsertDto
         from ..models.throttle_step_upsert_dto import ThrottleStepUpsertDto
         from ..models.update_workflow_dto_payload_schema_type_0 import UpdateWorkflowDtoPayloadSchemaType0
+        from ..models.workflow_agent_config_dto import WorkflowAgentConfigDto
 
         name = self.name
 
@@ -108,14 +116,14 @@ class UpdateWorkflowDto:
                 steps_item = steps_item_data.to_dict()
             elif isinstance(steps_item_data, CustomStepUpsertDto):
                 steps_item = steps_item_data.to_dict()
+            elif isinstance(steps_item_data, HttpRequestStepUpsertDto):
+                steps_item = steps_item_data.to_dict()
             else:
                 steps_item = steps_item_data.to_dict()
 
             steps.append(steps_item)
 
         preferences = self.preferences.to_dict()
-
-        origin = self.origin.value
 
         description = self.description
 
@@ -137,7 +145,19 @@ class UpdateWorkflowDto:
 
         is_translation_enabled = self.is_translation_enabled
 
+        agent: dict[str, Any] | None | Unset
+        if isinstance(self.agent, Unset):
+            agent = UNSET
+        elif isinstance(self.agent, WorkflowAgentConfigDto):
+            agent = self.agent.to_dict()
+        else:
+            agent = self.agent
+
         workflow_id = self.workflow_id
+
+        origin: str | Unset = UNSET
+        if not isinstance(self.origin, Unset):
+            origin = self.origin.value
 
         severity: str | Unset = UNSET
         if not isinstance(self.severity, Unset):
@@ -150,7 +170,6 @@ class UpdateWorkflowDto:
                 "name": name,
                 "steps": steps,
                 "preferences": preferences,
-                "origin": origin,
             }
         )
         if description is not UNSET:
@@ -165,8 +184,12 @@ class UpdateWorkflowDto:
             field_dict["payloadSchema"] = payload_schema
         if is_translation_enabled is not UNSET:
             field_dict["isTranslationEnabled"] = is_translation_enabled
+        if agent is not UNSET:
+            field_dict["agent"] = agent
         if workflow_id is not UNSET:
             field_dict["workflowId"] = workflow_id
+        if origin is not UNSET:
+            field_dict["origin"] = origin
         if severity is not UNSET:
             field_dict["severity"] = severity
 
@@ -185,7 +208,9 @@ class UpdateWorkflowDto:
         from ..models.push_step_upsert_dto import PushStepUpsertDto
         from ..models.sms_step_upsert_dto import SmsStepUpsertDto
         from ..models.throttle_step_upsert_dto import ThrottleStepUpsertDto
+        from ..models.tool_step_upsert_dto import ToolStepUpsertDto
         from ..models.update_workflow_dto_payload_schema_type_0 import UpdateWorkflowDtoPayloadSchemaType0
+        from ..models.workflow_agent_config_dto import WorkflowAgentConfigDto
 
         d = dict(src_dict)
         name = d.pop("name")
@@ -207,6 +232,7 @@ class UpdateWorkflowDto:
                 | PushStepUpsertDto
                 | SmsStepUpsertDto
                 | ThrottleStepUpsertDto
+                | ToolStepUpsertDto
             ):
                 try:
                     if not isinstance(data, dict):
@@ -280,19 +306,25 @@ class UpdateWorkflowDto:
                     return steps_item_type_8
                 except (TypeError, ValueError, AttributeError, KeyError):
                     pass
+                try:
+                    if not isinstance(data, dict):
+                        raise TypeError()
+                    steps_item_type_9 = HttpRequestStepUpsertDto.from_dict(data)
+
+                    return steps_item_type_9
+                except (TypeError, ValueError, AttributeError, KeyError):
+                    pass
                 if not isinstance(data, dict):
                     raise TypeError()
-                steps_item_type_9 = HttpRequestStepUpsertDto.from_dict(data)
+                steps_item_type_10 = ToolStepUpsertDto.from_dict(data)
 
-                return steps_item_type_9
+                return steps_item_type_10
 
             steps_item = _parse_steps_item(steps_item_data)
 
             steps.append(steps_item)
 
         preferences = PreferencesRequestDto.from_dict(d.pop("preferences"))
-
-        origin = ResourceOriginEnum(d.pop("origin"))
 
         description = d.pop("description", UNSET)
 
@@ -321,7 +353,31 @@ class UpdateWorkflowDto:
 
         is_translation_enabled = d.pop("isTranslationEnabled", UNSET)
 
+        def _parse_agent(data: object) -> None | Unset | WorkflowAgentConfigDto:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                agent_type_1 = WorkflowAgentConfigDto.from_dict(data)
+
+                return agent_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | Unset | WorkflowAgentConfigDto, data)
+
+        agent = _parse_agent(d.pop("agent", UNSET))
+
         workflow_id = d.pop("workflowId", UNSET)
+
+        _origin = d.pop("origin", UNSET)
+        origin: ResourceOriginEnum | Unset
+        if isinstance(_origin, Unset):
+            origin = UNSET
+        else:
+            origin = ResourceOriginEnum(_origin)
 
         _severity = d.pop("severity", UNSET)
         severity: SeverityLevelEnum | Unset
@@ -334,14 +390,15 @@ class UpdateWorkflowDto:
             name=name,
             steps=steps,
             preferences=preferences,
-            origin=origin,
             description=description,
             tags=tags,
             active=active,
             validate_payload=validate_payload,
             payload_schema=payload_schema,
             is_translation_enabled=is_translation_enabled,
+            agent=agent,
             workflow_id=workflow_id,
+            origin=origin,
             severity=severity,
         )
 

@@ -37,11 +37,11 @@ DEFAULT_SPEC = REPO_ROOT / "openapi.json"
 LIVE_SPEC_URL = "https://api.notifly.io/openapi.json"
 HTTP_METHODS = ("get", "post", "put", "patch", "delete", "head", "options")
 
-# Measured on 2026-08-05 against notifly 3.17.1: 63 operations whose live (public) success
+# Measured on 2026-10-12 against notifly 3.19.1: 67 operations (63 on 3.17.1) whose live (public) success
 # schema wraps its payload in `data` while the SDK spec declares the payload directly. The
 # floor sits well below that baseline — this gate is here to catch the contract *collapsing*,
 # not to churn on a handful of endpoints changing shape.
-MEASURED_WRAPPED_OPERATIONS = 63
+MEASURED_WRAPPED_OPERATIONS = 67
 MIN_WRAPPED_OPERATIONS = 40
 
 

@@ -15,7 +15,7 @@ T = TypeVar("T", bound="ApiKeyDto")
 class ApiKeyDto:
     """
     Attributes:
-        key (str): API key Example: sk_test_1234567890abcdef.
+        key (str): API key Example: api-key-1234567890abcdef.
         field_user_id (str): User ID associated with the API key Example: 60d5ecb8b3b3a30015f3e1a4.
         hash_ (str | Unset): Hashed representation of the API key Example: hash_value_here.
     """

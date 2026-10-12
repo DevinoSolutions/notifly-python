@@ -11,6 +11,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.email_control_dto_skip import EmailControlDtoSkip
+    from ..models.email_from_control_dto import EmailFromControlDto
 
 
 T = TypeVar("T", bound="EmailControlDto")
@@ -31,6 +32,11 @@ class EmailControlDto:
         disable_output_sanitization (bool | Unset): Disable sanitization of the output. Default: False.
         layout_id (None | str | Unset): Layout ID to use for the email. Null means no layout, undefined means default
             layout.
+        from_ (EmailFromControlDto | Unset):
+        use_provider_defaults (bool | Unset): When true, sender name/email use the primary email integration defaults
+            and skip workflow agent defaults.
+        reply_to (str | Unset): Step-level Reply-To override. When unset, inherits the workflow agent reply-to.
+        preheader (str | Unset): One-line inbox preview text shown next to the subject.
     """
 
     subject: str
@@ -39,6 +45,10 @@ class EmailControlDto:
     editor_type: EmailControlDtoEditorType | Unset = EmailControlDtoEditorType.BLOCK
     disable_output_sanitization: bool | Unset = False
     layout_id: None | str | Unset = UNSET
+    from_: EmailFromControlDto | Unset = UNSET
+    use_provider_defaults: bool | Unset = UNSET
+    reply_to: str | Unset = UNSET
+    preheader: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -62,6 +72,16 @@ class EmailControlDto:
         else:
             layout_id = self.layout_id
 
+        from_: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.from_, Unset):
+            from_ = self.from_.to_dict()
+
+        use_provider_defaults = self.use_provider_defaults
+
+        reply_to = self.reply_to
+
+        preheader = self.preheader
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -78,12 +98,21 @@ class EmailControlDto:
             field_dict["disableOutputSanitization"] = disable_output_sanitization
         if layout_id is not UNSET:
             field_dict["layoutId"] = layout_id
+        if from_ is not UNSET:
+            field_dict["from"] = from_
+        if use_provider_defaults is not UNSET:
+            field_dict["useProviderDefaults"] = use_provider_defaults
+        if reply_to is not UNSET:
+            field_dict["replyTo"] = reply_to
+        if preheader is not UNSET:
+            field_dict["preheader"] = preheader
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.email_control_dto_skip import EmailControlDtoSkip
+        from ..models.email_from_control_dto import EmailFromControlDto
 
         d = dict(src_dict)
         subject = d.pop("subject")
@@ -115,6 +144,19 @@ class EmailControlDto:
 
         layout_id = _parse_layout_id(d.pop("layoutId", UNSET))
 
+        _from_ = d.pop("from", UNSET)
+        from_: EmailFromControlDto | Unset
+        if isinstance(_from_, Unset):
+            from_ = UNSET
+        else:
+            from_ = EmailFromControlDto.from_dict(_from_)
+
+        use_provider_defaults = d.pop("useProviderDefaults", UNSET)
+
+        reply_to = d.pop("replyTo", UNSET)
+
+        preheader = d.pop("preheader", UNSET)
+
         email_control_dto = cls(
             subject=subject,
             body=body,
@@ -122,6 +164,10 @@ class EmailControlDto:
             editor_type=editor_type,
             disable_output_sanitization=disable_output_sanitization,
             layout_id=layout_id,
+            from_=from_,
+            use_provider_defaults=use_provider_defaults,
+            reply_to=reply_to,
+            preheader=preheader,
         )
 
         email_control_dto.additional_properties = d

@@ -131,7 +131,8 @@ def sync_detailed(
 ) -> Response[ErrorDto | PayloadValidationExceptionDto | TriggerEventResponseDto | ValidationErrorDto | str]:
     """Trigger event
 
-         Trigger event is the main (and only) way to send notifications to subscribers. The trigger
+
+        Trigger event is the main (and only) way to send notifications to subscribers. The trigger
     identifier is used to match the particular workflow associated with it. Maximum number of recipients
     can be 100. Additional information can be passed according the body interface below.
         To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body.
@@ -170,7 +171,8 @@ def sync(
 ) -> ErrorDto | PayloadValidationExceptionDto | TriggerEventResponseDto | ValidationErrorDto | str | None:
     """Trigger event
 
-         Trigger event is the main (and only) way to send notifications to subscribers. The trigger
+
+        Trigger event is the main (and only) way to send notifications to subscribers. The trigger
     identifier is used to match the particular workflow associated with it. Maximum number of recipients
     can be 100. Additional information can be passed according the body interface below.
         To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body.
@@ -204,7 +206,8 @@ async def asyncio_detailed(
 ) -> Response[ErrorDto | PayloadValidationExceptionDto | TriggerEventResponseDto | ValidationErrorDto | str]:
     """Trigger event
 
-         Trigger event is the main (and only) way to send notifications to subscribers. The trigger
+
+        Trigger event is the main (and only) way to send notifications to subscribers. The trigger
     identifier is used to match the particular workflow associated with it. Maximum number of recipients
     can be 100. Additional information can be passed according the body interface below.
         To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body.
@@ -241,7 +244,8 @@ async def asyncio(
 ) -> ErrorDto | PayloadValidationExceptionDto | TriggerEventResponseDto | ValidationErrorDto | str | None:
     """Trigger event
 
-         Trigger event is the main (and only) way to send notifications to subscribers. The trigger
+
+        Trigger event is the main (and only) way to send notifications to subscribers. The trigger
     identifier is used to match the particular workflow associated with it. Maximum number of recipients
     can be 100. Additional information can be passed according the body interface below.
         To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body.

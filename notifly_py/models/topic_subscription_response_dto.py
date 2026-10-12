@@ -10,6 +10,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.subscriber_dto import SubscriberDto
+    from ..models.subscription_preference_dto import SubscriptionPreferenceDto
     from ..models.topic_response_dto import TopicResponseDto
 
 
@@ -27,6 +28,7 @@ class TopicSubscriptionResponseDto:
         subscriber (SubscriberDto):
         context_keys (list[str] | Unset): Context keys that scope this subscription (e.g., tenant:org-a,
             project:proj-123) Example: ['tenant:org-a', 'project:proj-123'].
+        preferences (list[SubscriptionPreferenceDto] | Unset): The preferences for workflows in this subscription
     """
 
     field_id: str
@@ -35,6 +37,7 @@ class TopicSubscriptionResponseDto:
     topic: TopicResponseDto
     subscriber: SubscriberDto
     context_keys: list[str] | Unset = UNSET
+    preferences: list[SubscriptionPreferenceDto] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -52,6 +55,13 @@ class TopicSubscriptionResponseDto:
         if not isinstance(self.context_keys, Unset):
             context_keys = self.context_keys
 
+        preferences: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.preferences, Unset):
+            preferences = []
+            for preferences_item_data in self.preferences:
+                preferences_item = preferences_item_data.to_dict()
+                preferences.append(preferences_item)
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -65,12 +75,15 @@ class TopicSubscriptionResponseDto:
         )
         if context_keys is not UNSET:
             field_dict["contextKeys"] = context_keys
+        if preferences is not UNSET:
+            field_dict["preferences"] = preferences
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.subscriber_dto import SubscriberDto
+        from ..models.subscription_preference_dto import SubscriptionPreferenceDto
         from ..models.topic_response_dto import TopicResponseDto
 
         d = dict(src_dict)
@@ -86,6 +99,15 @@ class TopicSubscriptionResponseDto:
 
         context_keys = cast(list[str], d.pop("contextKeys", UNSET))
 
+        _preferences = d.pop("preferences", UNSET)
+        preferences: list[SubscriptionPreferenceDto] | Unset = UNSET
+        if _preferences is not UNSET:
+            preferences = []
+            for preferences_item_data in _preferences:
+                preferences_item = SubscriptionPreferenceDto.from_dict(preferences_item_data)
+
+                preferences.append(preferences_item)
+
         topic_subscription_response_dto = cls(
             field_id=field_id,
             identifier=identifier,
@@ -93,6 +115,7 @@ class TopicSubscriptionResponseDto:
             topic=topic,
             subscriber=subscriber,
             context_keys=context_keys,
+            preferences=preferences,
         )
 
         topic_subscription_response_dto.additional_properties = d

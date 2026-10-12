@@ -10,6 +10,9 @@ if TYPE_CHECKING:
     from ..models.phone_endpoint_dto import PhoneEndpointDto
     from ..models.slack_channel_endpoint_dto import SlackChannelEndpointDto
     from ..models.slack_user_endpoint_dto import SlackUserEndpointDto
+    from ..models.tool_webhook_endpoint_dto import ToolWebhookEndpointDto
+    from ..models.webex_person_endpoint_dto import WebexPersonEndpointDto
+    from ..models.webex_room_endpoint_dto import WebexRoomEndpointDto
     from ..models.webhook_endpoint_dto import WebhookEndpointDto
 
 
@@ -20,16 +23,28 @@ T = TypeVar("T", bound="UpdateChannelEndpointRequestDto")
 class UpdateChannelEndpointRequestDto:
     """
     Attributes:
-        endpoint (PhoneEndpointDto | SlackChannelEndpointDto | SlackUserEndpointDto | WebhookEndpointDto): Updated
-            endpoint data. The structure must match the existing channel endpoint type.
+        endpoint (PhoneEndpointDto | SlackChannelEndpointDto | SlackUserEndpointDto | ToolWebhookEndpointDto |
+            WebexPersonEndpointDto | WebexRoomEndpointDto | WebhookEndpointDto): Updated endpoint data. The structure must
+            match the existing channel endpoint type.
     """
 
-    endpoint: PhoneEndpointDto | SlackChannelEndpointDto | SlackUserEndpointDto | WebhookEndpointDto
+    endpoint: (
+        PhoneEndpointDto
+        | SlackChannelEndpointDto
+        | SlackUserEndpointDto
+        | ToolWebhookEndpointDto
+        | WebexPersonEndpointDto
+        | WebexRoomEndpointDto
+        | WebhookEndpointDto
+    )
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.phone_endpoint_dto import PhoneEndpointDto
         from ..models.slack_channel_endpoint_dto import SlackChannelEndpointDto
         from ..models.slack_user_endpoint_dto import SlackUserEndpointDto
+        from ..models.webex_person_endpoint_dto import WebexPersonEndpointDto
+        from ..models.webex_room_endpoint_dto import WebexRoomEndpointDto
         from ..models.webhook_endpoint_dto import WebhookEndpointDto
 
         endpoint: dict[str, Any]
@@ -38,6 +53,12 @@ class UpdateChannelEndpointRequestDto:
         elif isinstance(self.endpoint, SlackUserEndpointDto):
             endpoint = self.endpoint.to_dict()
         elif isinstance(self.endpoint, WebhookEndpointDto):
+            endpoint = self.endpoint.to_dict()
+        elif isinstance(self.endpoint, PhoneEndpointDto):
+            endpoint = self.endpoint.to_dict()
+        elif isinstance(self.endpoint, WebexRoomEndpointDto):
+            endpoint = self.endpoint.to_dict()
+        elif isinstance(self.endpoint, WebexPersonEndpointDto):
             endpoint = self.endpoint.to_dict()
         else:
             endpoint = self.endpoint.to_dict()
@@ -57,13 +78,24 @@ class UpdateChannelEndpointRequestDto:
         from ..models.phone_endpoint_dto import PhoneEndpointDto
         from ..models.slack_channel_endpoint_dto import SlackChannelEndpointDto
         from ..models.slack_user_endpoint_dto import SlackUserEndpointDto
+        from ..models.tool_webhook_endpoint_dto import ToolWebhookEndpointDto
+        from ..models.webex_person_endpoint_dto import WebexPersonEndpointDto
+        from ..models.webex_room_endpoint_dto import WebexRoomEndpointDto
         from ..models.webhook_endpoint_dto import WebhookEndpointDto
 
         d = dict(src_dict)
 
         def _parse_endpoint(
             data: object,
-        ) -> PhoneEndpointDto | SlackChannelEndpointDto | SlackUserEndpointDto | WebhookEndpointDto:
+        ) -> (
+            PhoneEndpointDto
+            | SlackChannelEndpointDto
+            | SlackUserEndpointDto
+            | ToolWebhookEndpointDto
+            | WebexPersonEndpointDto
+            | WebexRoomEndpointDto
+            | WebhookEndpointDto
+        ):
             try:
                 if not isinstance(data, dict):
                     raise TypeError()
@@ -88,11 +120,35 @@ class UpdateChannelEndpointRequestDto:
                 return endpoint_type_2
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                endpoint_type_3 = PhoneEndpointDto.from_dict(data)
+
+                return endpoint_type_3
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                endpoint_type_4 = WebexRoomEndpointDto.from_dict(data)
+
+                return endpoint_type_4
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                endpoint_type_5 = WebexPersonEndpointDto.from_dict(data)
+
+                return endpoint_type_5
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
             if not isinstance(data, dict):
                 raise TypeError()
-            endpoint_type_3 = PhoneEndpointDto.from_dict(data)
+            endpoint_type_6 = ToolWebhookEndpointDto.from_dict(data)
 
-            return endpoint_type_3
+            return endpoint_type_6
 
         endpoint = _parse_endpoint(d.pop("endpoint"))
 

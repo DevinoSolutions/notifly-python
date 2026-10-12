@@ -28,6 +28,9 @@ class CreateWebhookEndpointDto:
         endpoint (WebhookEndpointDto):
         identifier (str | Unset): The unique identifier for the channel endpoint. If not provided, one will be generated
             automatically. Example: slack-channel-user123-abc4.
+        create_subscriber_if_missing (bool | Unset): When true, the subscriber is created if it does not exist yet
+            (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404. Default:
+            False.
         context (CreateWebhookEndpointDtoContext | Unset):
         connection_identifier (str | Unset): The identifier of the channel connection to use for this channel endpoint.
             Example: slack-connection-abc123.
@@ -38,6 +41,7 @@ class CreateWebhookEndpointDto:
     type_: CreateWebhookEndpointDtoType
     endpoint: WebhookEndpointDto
     identifier: str | Unset = UNSET
+    create_subscriber_if_missing: bool | Unset = False
     context: CreateWebhookEndpointDtoContext | Unset = UNSET
     connection_identifier: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -52,6 +56,8 @@ class CreateWebhookEndpointDto:
         endpoint = self.endpoint.to_dict()
 
         identifier = self.identifier
+
+        create_subscriber_if_missing = self.create_subscriber_if_missing
 
         context: dict[str, Any] | Unset = UNSET
         if not isinstance(self.context, Unset):
@@ -71,6 +77,8 @@ class CreateWebhookEndpointDto:
         )
         if identifier is not UNSET:
             field_dict["identifier"] = identifier
+        if create_subscriber_if_missing is not UNSET:
+            field_dict["createSubscriberIfMissing"] = create_subscriber_if_missing
         if context is not UNSET:
             field_dict["context"] = context
         if connection_identifier is not UNSET:
@@ -94,6 +102,8 @@ class CreateWebhookEndpointDto:
 
         identifier = d.pop("identifier", UNSET)
 
+        create_subscriber_if_missing = d.pop("createSubscriberIfMissing", UNSET)
+
         _context = d.pop("context", UNSET)
         context: CreateWebhookEndpointDtoContext | Unset
         if isinstance(_context, Unset):
@@ -109,6 +119,7 @@ class CreateWebhookEndpointDto:
             type_=type_,
             endpoint=endpoint,
             identifier=identifier,
+            create_subscriber_if_missing=create_subscriber_if_missing,
             context=context,
             connection_identifier=connection_identifier,
         )

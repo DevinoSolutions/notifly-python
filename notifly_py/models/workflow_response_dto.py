@@ -22,7 +22,9 @@ if TYPE_CHECKING:
     from ..models.push_step_response_dto import PushStepResponseDto
     from ..models.sms_step_response_dto import SmsStepResponseDto
     from ..models.throttle_step_response_dto import ThrottleStepResponseDto
+    from ..models.tool_step_response_dto import ToolStepResponseDto
     from ..models.user_response_dto import UserResponseDto
+    from ..models.workflow_agent_config_dto import WorkflowAgentConfigDto
     from ..models.workflow_preferences_response_dto import WorkflowPreferencesResponseDto
     from ..models.workflow_response_dto_issues import WorkflowResponseDtoIssues
     from ..models.workflow_response_dto_payload_example_type_0 import WorkflowResponseDtoPayloadExampleType0
@@ -44,7 +46,7 @@ class WorkflowResponseDto:
         created_at (str): Creation timestamp
         steps (list[ChatStepResponseDto | CustomStepResponseDto | DelayStepResponseDto | DigestStepResponseDto |
             EmailStepResponseDto | HttpRequestStepResponseDto | InAppStepResponseDto | PushStepResponseDto |
-            SmsStepResponseDto | ThrottleStepResponseDto]): Steps of the workflow
+            SmsStepResponseDto | ThrottleStepResponseDto | ToolStepResponseDto]): Steps of the workflow
         origin (ResourceOriginEnum): Origin of the layout
         preferences (WorkflowPreferencesResponseDto):
         status (WorkflowStatusEnum): Status of the workflow
@@ -55,6 +57,8 @@ class WorkflowResponseDto:
         validate_payload (bool | Unset): Enable or disable payload schema validation
         payload_schema (None | Unset | WorkflowResponseDtoPayloadSchemaType0): The payload JSON Schema for the workflow
         is_translation_enabled (bool | Unset): Enable or disable translations for this workflow Default: False.
+        agent (None | Unset | WorkflowAgentConfigDto): Optional agent assignment used to route this workflow through an
+            agent's connected channels. Null when unassigned.
         updated_by (None | Unset | UserResponseDto): User who last updated the workflow
         last_published_at (None | str | Unset): Timestamp of the last workflow publication
         last_published_by (None | Unset | UserResponseDto): User who last published the workflow
@@ -81,6 +85,7 @@ class WorkflowResponseDto:
         | PushStepResponseDto
         | SmsStepResponseDto
         | ThrottleStepResponseDto
+        | ToolStepResponseDto
     ]
     origin: ResourceOriginEnum
     preferences: WorkflowPreferencesResponseDto
@@ -92,6 +97,7 @@ class WorkflowResponseDto:
     validate_payload: bool | Unset = UNSET
     payload_schema: None | Unset | WorkflowResponseDtoPayloadSchemaType0 = UNSET
     is_translation_enabled: bool | Unset = False
+    agent: None | Unset | WorkflowAgentConfigDto = UNSET
     updated_by: None | Unset | UserResponseDto = UNSET
     last_published_at: None | str | Unset = UNSET
     last_published_by: None | Unset | UserResponseDto = UNSET
@@ -106,11 +112,13 @@ class WorkflowResponseDto:
         from ..models.delay_step_response_dto import DelayStepResponseDto
         from ..models.digest_step_response_dto import DigestStepResponseDto
         from ..models.email_step_response_dto import EmailStepResponseDto
+        from ..models.http_request_step_response_dto import HttpRequestStepResponseDto
         from ..models.in_app_step_response_dto import InAppStepResponseDto
         from ..models.push_step_response_dto import PushStepResponseDto
         from ..models.sms_step_response_dto import SmsStepResponseDto
         from ..models.throttle_step_response_dto import ThrottleStepResponseDto
         from ..models.user_response_dto import UserResponseDto
+        from ..models.workflow_agent_config_dto import WorkflowAgentConfigDto
         from ..models.workflow_response_dto_payload_example_type_0 import WorkflowResponseDtoPayloadExampleType0
         from ..models.workflow_response_dto_payload_schema_type_0 import WorkflowResponseDtoPayloadSchemaType0
 
@@ -147,6 +155,8 @@ class WorkflowResponseDto:
                 steps_item = steps_item_data.to_dict()
             elif isinstance(steps_item_data, ThrottleStepResponseDto):
                 steps_item = steps_item_data.to_dict()
+            elif isinstance(steps_item_data, HttpRequestStepResponseDto):
+                steps_item = steps_item_data.to_dict()
             else:
                 steps_item = steps_item_data.to_dict()
 
@@ -179,6 +189,14 @@ class WorkflowResponseDto:
             payload_schema = self.payload_schema
 
         is_translation_enabled = self.is_translation_enabled
+
+        agent: dict[str, Any] | None | Unset
+        if isinstance(self.agent, Unset):
+            agent = UNSET
+        elif isinstance(self.agent, WorkflowAgentConfigDto):
+            agent = self.agent.to_dict()
+        else:
+            agent = self.agent
 
         updated_by: dict[str, Any] | None | Unset
         if isinstance(self.updated_by, Unset):
@@ -249,6 +267,8 @@ class WorkflowResponseDto:
             field_dict["payloadSchema"] = payload_schema
         if is_translation_enabled is not UNSET:
             field_dict["isTranslationEnabled"] = is_translation_enabled
+        if agent is not UNSET:
+            field_dict["agent"] = agent
         if updated_by is not UNSET:
             field_dict["updatedBy"] = updated_by
         if last_published_at is not UNSET:
@@ -276,7 +296,9 @@ class WorkflowResponseDto:
         from ..models.push_step_response_dto import PushStepResponseDto
         from ..models.sms_step_response_dto import SmsStepResponseDto
         from ..models.throttle_step_response_dto import ThrottleStepResponseDto
+        from ..models.tool_step_response_dto import ToolStepResponseDto
         from ..models.user_response_dto import UserResponseDto
+        from ..models.workflow_agent_config_dto import WorkflowAgentConfigDto
         from ..models.workflow_preferences_response_dto import WorkflowPreferencesResponseDto
         from ..models.workflow_response_dto_issues import WorkflowResponseDtoIssues
         from ..models.workflow_response_dto_payload_example_type_0 import WorkflowResponseDtoPayloadExampleType0
@@ -312,6 +334,7 @@ class WorkflowResponseDto:
                 | PushStepResponseDto
                 | SmsStepResponseDto
                 | ThrottleStepResponseDto
+                | ToolStepResponseDto
             ):
                 try:
                     if not isinstance(data, dict):
@@ -385,11 +408,19 @@ class WorkflowResponseDto:
                     return steps_item_type_8
                 except (TypeError, ValueError, AttributeError, KeyError):
                     pass
+                try:
+                    if not isinstance(data, dict):
+                        raise TypeError()
+                    steps_item_type_9 = HttpRequestStepResponseDto.from_dict(data)
+
+                    return steps_item_type_9
+                except (TypeError, ValueError, AttributeError, KeyError):
+                    pass
                 if not isinstance(data, dict):
                     raise TypeError()
-                steps_item_type_9 = HttpRequestStepResponseDto.from_dict(data)
+                steps_item_type_10 = ToolStepResponseDto.from_dict(data)
 
-                return steps_item_type_9
+                return steps_item_type_10
 
             steps_item = _parse_steps_item(steps_item_data)
 
@@ -429,6 +460,23 @@ class WorkflowResponseDto:
         payload_schema = _parse_payload_schema(d.pop("payloadSchema", UNSET))
 
         is_translation_enabled = d.pop("isTranslationEnabled", UNSET)
+
+        def _parse_agent(data: object) -> None | Unset | WorkflowAgentConfigDto:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                agent_type_1 = WorkflowAgentConfigDto.from_dict(data)
+
+                return agent_type_1
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | Unset | WorkflowAgentConfigDto, data)
+
+        agent = _parse_agent(d.pop("agent", UNSET))
 
         def _parse_updated_by(data: object) -> None | Unset | UserResponseDto:
             if data is None:
@@ -524,6 +572,7 @@ class WorkflowResponseDto:
             validate_payload=validate_payload,
             payload_schema=payload_schema,
             is_translation_enabled=is_translation_enabled,
+            agent=agent,
             updated_by=updated_by,
             last_published_at=last_published_at,
             last_published_by=last_published_by,

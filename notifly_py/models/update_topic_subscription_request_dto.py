@@ -23,7 +23,7 @@ class UpdateTopicSubscriptionRequestDto:
         name (str | Unset): The name of the subscription Example: My Subscription.
         preferences (list[GroupPreferenceFilterDto | str | WorkflowPreferenceRequestDto] | Unset): The preferences of
             the topic. Can be a simple workflow ID string, workflow preference object, or group filter object Example:
-            [{'workflowId': 'workflow-123', 'condition': {'===': [{'var': 'tier'}, 'premium']}}].
+            [{'workflowId': 'workflow-123', 'condition': {'===': [{'var': 'payload.tier'}, 'premium']}}].
     """
 
     name: str | Unset = UNSET

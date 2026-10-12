@@ -7,6 +7,7 @@ from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..models.integration_issue_enum import IntegrationIssueEnum
+from ..models.step_issue_severity_enum import StepIssueSeverityEnum
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="StepIntegrationIssue")
@@ -19,11 +20,14 @@ class StepIntegrationIssue:
         issue_type (IntegrationIssueEnum): Type of integration issue
         message (str): Detailed message describing the issue
         variable_name (str | Unset): Name of the variable related to the issue
+        severity (StepIssueSeverityEnum | Unset): Blocking severity of the issue. `error` (default when omitted) blocks
+            save; `warning` is a non-blocking notice.
     """
 
     issue_type: IntegrationIssueEnum
     message: str
     variable_name: str | Unset = UNSET
+    severity: StepIssueSeverityEnum | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -32,6 +36,10 @@ class StepIntegrationIssue:
         message = self.message
 
         variable_name = self.variable_name
+
+        severity: str | Unset = UNSET
+        if not isinstance(self.severity, Unset):
+            severity = self.severity.value
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -43,6 +51,8 @@ class StepIntegrationIssue:
         )
         if variable_name is not UNSET:
             field_dict["variableName"] = variable_name
+        if severity is not UNSET:
+            field_dict["severity"] = severity
 
         return field_dict
 
@@ -55,10 +65,18 @@ class StepIntegrationIssue:
 
         variable_name = d.pop("variableName", UNSET)
 
+        _severity = d.pop("severity", UNSET)
+        severity: StepIssueSeverityEnum | Unset
+        if isinstance(_severity, Unset):
+            severity = UNSET
+        else:
+            severity = StepIssueSeverityEnum(_severity)
+
         step_integration_issue = cls(
             issue_type=issue_type,
             message=message,
             variable_name=variable_name,
+            severity=severity,
         )
 
         step_integration_issue.additional_properties = d

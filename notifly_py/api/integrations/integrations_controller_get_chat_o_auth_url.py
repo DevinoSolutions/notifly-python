@@ -132,7 +132,7 @@ def sync_detailed(
 
      **Deprecated** — use `POST /integrations/channel-connections/oauth` (connect) or `POST
     /integrations/channel-endpoints/oauth` (link_user) instead.
-        Generate an OAuth URL for chat integrations like Slack and MS Teams.
+        Generate an OAuth URL for chat integrations like Slack, MS Teams, and Webex.
         This URL allows subscribers to authorize the integration, enabling the system to send messages
         through their chat workspace. The generated URL expires after 5 minutes.
 
@@ -170,7 +170,7 @@ def sync(
 
      **Deprecated** — use `POST /integrations/channel-connections/oauth` (connect) or `POST
     /integrations/channel-endpoints/oauth` (link_user) instead.
-        Generate an OAuth URL for chat integrations like Slack and MS Teams.
+        Generate an OAuth URL for chat integrations like Slack, MS Teams, and Webex.
         This URL allows subscribers to authorize the integration, enabling the system to send messages
         through their chat workspace. The generated URL expires after 5 minutes.
 
@@ -203,7 +203,7 @@ async def asyncio_detailed(
 
      **Deprecated** — use `POST /integrations/channel-connections/oauth` (connect) or `POST
     /integrations/channel-endpoints/oauth` (link_user) instead.
-        Generate an OAuth URL for chat integrations like Slack and MS Teams.
+        Generate an OAuth URL for chat integrations like Slack, MS Teams, and Webex.
         This URL allows subscribers to authorize the integration, enabling the system to send messages
         through their chat workspace. The generated URL expires after 5 minutes.
 
@@ -239,7 +239,7 @@ async def asyncio(
 
      **Deprecated** — use `POST /integrations/channel-connections/oauth` (connect) or `POST
     /integrations/channel-endpoints/oauth` (link_user) instead.
-        Generate an OAuth URL for chat integrations like Slack and MS Teams.
+        Generate an OAuth URL for chat integrations like Slack, MS Teams, and Webex.
         This URL allows subscribers to authorize the integration, enabling the system to send messages
         through their chat workspace. The generated URL expires after 5 minutes.
 

@@ -135,7 +135,7 @@ def sync_detailed(
 ) -> Response[ErrorDto | TopicResponseDto | ValidationErrorDto | str]:
     """Update a topic
 
-     Update a topic name by its unique key identifier **topicKey**
+     Update a topic name or data by its unique key identifier **topicKey**
 
     Args:
         topic_key (str):
@@ -172,7 +172,7 @@ def sync(
 ) -> ErrorDto | TopicResponseDto | ValidationErrorDto | str | None:
     """Update a topic
 
-     Update a topic name by its unique key identifier **topicKey**
+     Update a topic name or data by its unique key identifier **topicKey**
 
     Args:
         topic_key (str):
@@ -204,7 +204,7 @@ async def asyncio_detailed(
 ) -> Response[ErrorDto | TopicResponseDto | ValidationErrorDto | str]:
     """Update a topic
 
-     Update a topic name by its unique key identifier **topicKey**
+     Update a topic name or data by its unique key identifier **topicKey**
 
     Args:
         topic_key (str):
@@ -239,7 +239,7 @@ async def asyncio(
 ) -> ErrorDto | TopicResponseDto | ValidationErrorDto | str | None:
     """Update a topic
 
-     Update a topic name by its unique key identifier **topicKey**
+     Update a topic name or data by its unique key identifier **topicKey**
 
     Args:
         topic_key (str):

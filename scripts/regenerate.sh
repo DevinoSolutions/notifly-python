@@ -6,6 +6,11 @@
 # replaces the package and restored afterwards. Everything under notifly_py/api/ and
 # notifly_py/models/ is generated and must never be edited by hand.
 #
+# The generator reads a patched COPY of openapi.json (scripts/prepare_spec.py applies the named
+# spec fixes and keeps inline oneOf/anyOf variants in the order of the last release, new ones last, so
+# class names like ...ResultType7 never change meaning); the committed openapi.json stays a verbatim
+# export of the API. Review the scripts/union_order.json diff with the rest of the release.
+#
 # After regenerating: run `uv run pytest` (the envelope regression suite is the gate that
 # catches a generator change breaking the runtime unwrap), review the diff, and bump the
 # version in pyproject.toml before releasing.
@@ -13,7 +18,9 @@ set -euo pipefail
 
 GENERATOR_VERSION="0.29.0"
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-TMP_OUT="$(mktemp -d)/notifly-sdk-gen"
+TMP_DIR="$(mktemp -d)"
+TMP_OUT="${TMP_DIR}/notifly-sdk-gen"
+PATCHED_SPEC="${TMP_DIR}/openapi.patched.json"
 BACKUP="$(mktemp -d)/notifly-sdk-handwritten"
 
 # Hand-written modules layered on top of the generated client. Keep in sync with the
@@ -39,8 +46,10 @@ for file in "${HANDWRITTEN[@]}"; do
   cp "${REPO_ROOT}/notifly_py/${file}" "${BACKUP}/${file}"
 done
 
+uv run --no-project python "${REPO_ROOT}/scripts/prepare_spec.py" "${REPO_ROOT}/openapi.json" "${PATCHED_SPEC}"   --pins "${REPO_ROOT}/scripts/union_order.json" --update-pins
+
 uvx "openapi-python-client@${GENERATOR_VERSION}" generate \
-  --path "${REPO_ROOT}/openapi.json" \
+  --path "${PATCHED_SPEC}" \
   --config "${REPO_ROOT}/gen-config.yaml" \
   --meta uv \
   --output-path "${TMP_OUT}" \

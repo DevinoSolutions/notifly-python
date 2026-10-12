@@ -6,6 +6,8 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
 if TYPE_CHECKING:
     from ..models.get_context_response_dto_data import GetContextResponseDtoData
 
@@ -22,6 +24,7 @@ class GetContextResponseDto:
         data (GetContextResponseDtoData): Custom data associated with this context
         created_at (str): Creation timestamp
         updated_at (str): Last update timestamp
+        bridge_url (str | Unset): Bridge URL override for agent connect, if configured on this context
     """
 
     type_: str
@@ -29,6 +32,7 @@ class GetContextResponseDto:
     data: GetContextResponseDtoData
     created_at: str
     updated_at: str
+    bridge_url: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -42,6 +46,8 @@ class GetContextResponseDto:
 
         updated_at = self.updated_at
 
+        bridge_url = self.bridge_url
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -53,6 +59,8 @@ class GetContextResponseDto:
                 "updatedAt": updated_at,
             }
         )
+        if bridge_url is not UNSET:
+            field_dict["bridgeUrl"] = bridge_url
 
         return field_dict
 
@@ -71,12 +79,15 @@ class GetContextResponseDto:
 
         updated_at = d.pop("updatedAt")
 
+        bridge_url = d.pop("bridgeUrl", UNSET)
+
         get_context_response_dto = cls(
             type_=type_,
             id=id,
             data=data,
             created_at=created_at,
             updated_at=updated_at,
+            bridge_url=bridge_url,
         )
 
         get_context_response_dto.additional_properties = d

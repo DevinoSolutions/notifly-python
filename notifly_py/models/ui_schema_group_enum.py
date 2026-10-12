@@ -13,6 +13,7 @@ class UiSchemaGroupEnum(str, Enum):
     SKIP = "SKIP"
     SMS = "SMS"
     THROTTLE = "THROTTLE"
+    TOOL = "TOOL"
 
     def __str__(self) -> str:
         return str(self.value)

@@ -1,0 +1,432 @@
+{
+  "paths > /v1/channel-endpoints > post > requestBody > content > application/json > schema > oneOf": [
+    "CreateSlackChannelEndpointDto",
+    "CreateSlackUserEndpointDto",
+    "CreateWebhookEndpointDto",
+    "CreatePhoneEndpointDto",
+    "CreateMsTeamsChannelEndpointDto",
+    "CreateMsTeamsUserEndpointDto",
+    "CreateTelegramChatEndpointDto",
+    "CreateWebexRoomEndpointDto",
+    "CreateWebexPersonEndpointDto",
+    "CreateLineUserEndpointDto",
+    "CreatePagerDutyServiceEndpointDto",
+    "CreateOpsgenieIntegrationEndpointDto",
+    "CreateGrafanaOnCallIntegrationEndpointDto",
+    "CreateToolWebhookEndpointDto"
+  ],
+  "components > schemas > ErrorDto > properties > message > oneOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2",
+    "inline:#3",
+    "inline:#4"
+  ],
+  "components > schemas > ErrorDto > properties > message > oneOf > 4 > items > anyOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2",
+    "inline:#3"
+  ],
+  "components > schemas > ConstraintValidation > properties > value > oneOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2",
+    "inline:#3",
+    "inline:#4"
+  ],
+  "components > schemas > ConstraintValidation > properties > value > oneOf > 4 > items > anyOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2",
+    "inline:#3"
+  ],
+  "components > schemas > ValidationErrorDto > properties > message > oneOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2",
+    "inline:#3",
+    "inline:#4"
+  ],
+  "components > schemas > ValidationErrorDto > properties > message > oneOf > 4 > items > anyOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2",
+    "inline:#3"
+  ],
+  "components > schemas > PayloadValidationErrorDto > properties > value > oneOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2",
+    "inline:#3",
+    "inline:#4"
+  ],
+  "components > schemas > PayloadValidationErrorDto > properties > value > oneOf > 4 > items > anyOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2",
+    "inline:#3"
+  ],
+  "components > schemas > PayloadValidationExceptionDto > properties > message > oneOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2",
+    "inline:#3",
+    "inline:#4"
+  ],
+  "components > schemas > PayloadValidationExceptionDto > properties > message > oneOf > 4 > items > anyOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2",
+    "inline:#3"
+  ],
+  "components > schemas > TriggerEventRequestDto > properties > to > oneOf": [
+    "inline:#0",
+    "inline:#1",
+    "SubscriberPayloadDto",
+    "TopicPayloadDto"
+  ],
+  "components > schemas > TriggerEventRequestDto > properties > to > oneOf > 0 > items > oneOf": [
+    "SubscriberPayloadDto",
+    "TopicPayloadDto",
+    "inline:#0"
+  ],
+  "components > schemas > TriggerEventRequestDto > properties > actor > oneOf": [
+    "inline:#0",
+    "SubscriberPayloadDto"
+  ],
+  "components > schemas > TriggerEventRequestDto > properties > tenant > oneOf": [
+    "inline:#0",
+    "TenantPayloadDto"
+  ],
+  "components > schemas > TriggerEventRequestDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > TriggerEventToAllRequestDto > properties > actor > oneOf": [
+    "inline:#0",
+    "SubscriberPayloadDto"
+  ],
+  "components > schemas > TriggerEventToAllRequestDto > properties > tenant > oneOf": [
+    "inline:#0",
+    "TenantPayloadDto"
+  ],
+  "components > schemas > TriggerEventToAllRequestDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > EditPayloadDto > properties > content > oneOf": [
+    "MarkdownReplyContentDto",
+    "CardReplyContentDto",
+    "ToolApprovalCardReplyContentDto"
+  ],
+  "components > schemas > TriggerSignalDto > properties > to > oneOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2"
+  ],
+  "components > schemas > TriggerSignalDto > properties > to > oneOf > 2 > items > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > HumanSignalDto > properties > to > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > AgentReplyPayloadDto > properties > reply > oneOf": [
+    "MarkdownReplyContentDto",
+    "CardReplyContentDto",
+    "ToolApprovalCardReplyContentDto"
+  ],
+  "components > schemas > AgentReplyPayloadDto > properties > signals > items > oneOf": [
+    "MetadataSetSignalDto",
+    "MetadataDeleteSignalDto",
+    "MetadataClearSignalDto",
+    "TriggerSignalDto",
+    "HumanSignalDto"
+  ],
+  "components > schemas > AgentReplyPayloadDto > properties > typing > oneOf": [
+    "inline:#0",
+    "TypingStatusDto"
+  ],
+  "components > schemas > GenerateChatOauthUrlRequestDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > GenerateConnectOauthUrlRequestDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > GenerateLinkUserOauthUrlRequestDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > LinkChannelEndpointRequestDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > NotificationStepData > properties > metadata > oneOf": [
+    "DigestRegularMetadata",
+    "DigestTimedMetadata",
+    "DelayRegularMetadata",
+    "DelayScheduledMetadata"
+  ],
+  "components > schemas > NotificationStepDto > properties > metadata > oneOf": [
+    "DigestRegularMetadata",
+    "DigestTimedMetadata",
+    "DelayRegularMetadata",
+    "DelayScheduledMetadata"
+  ],
+  "components > schemas > MessageResponseDto > properties > content > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > MessageMarkAsRequestDto > properties > messageId > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > MarkAllMessageAsRequestDto > properties > feedIdentifier > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > BulkUpdateSubscriberPreferencesDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > PatchSubscriberPreferencesDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > UiSchemaProperty > properties > placeholder > anyOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2",
+    "inline:#3",
+    "inline:#4"
+  ],
+  "components > schemas > UiSchemaProperty > properties > placeholder > anyOf > 4 > items > anyOf": [
+    "inline:#0",
+    "inline:#1",
+    "inline:#2",
+    "inline:#3"
+  ],
+  "components > schemas > GenerateLayoutPreviewResponseDto > properties > result > oneOf": [
+    "inline:email#0"
+  ],
+  "components > schemas > CreateTopicSubscriptionsRequestDto > properties > subscriptions > items > oneOf": [
+    "inline:#0",
+    "TopicSubscriberIdentifierDto"
+  ],
+  "components > schemas > CreateTopicSubscriptionsRequestDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateTopicSubscriptionsRequestDto > properties > preferences > items > oneOf": [
+    "inline:#0",
+    "WorkflowPreferenceRequestDto",
+    "GroupPreferenceFilterDto"
+  ],
+  "components > schemas > DeleteTopicSubscriptionsRequestDto > properties > subscriptions > items > oneOf": [
+    "inline:#0",
+    "DeleteTopicSubscriberIdentifierDto"
+  ],
+  "components > schemas > UpdateTopicSubscriptionRequestDto > properties > preferences > items > oneOf": [
+    "inline:#0",
+    "WorkflowPreferenceRequestDto",
+    "GroupPreferenceFilterDto"
+  ],
+  "components > schemas > HttpRequestControlDto > properties > body > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > WorkflowPreferencesDto > properties > all > oneOf": [
+    "WorkflowPreferenceDto"
+  ],
+  "components > schemas > WorkflowResponseDto > properties > steps > items > oneOf": [
+    "InAppStepResponseDto",
+    "EmailStepResponseDto",
+    "SmsStepResponseDto",
+    "PushStepResponseDto",
+    "ChatStepResponseDto",
+    "DelayStepResponseDto",
+    "DigestStepResponseDto",
+    "CustomStepResponseDto",
+    "ThrottleStepResponseDto",
+    "HttpRequestStepResponseDto",
+    "ToolStepResponseDto"
+  ],
+  "components > schemas > InAppStepUpsertDto > properties > controlValues > oneOf": [
+    "InAppControlDto",
+    "inline:#0"
+  ],
+  "components > schemas > EmailStepUpsertDto > properties > controlValues > oneOf": [
+    "EmailControlDto",
+    "inline:#0"
+  ],
+  "components > schemas > SmsStepUpsertDto > properties > controlValues > oneOf": [
+    "SmsControlDto",
+    "inline:#0"
+  ],
+  "components > schemas > PushStepUpsertDto > properties > controlValues > oneOf": [
+    "PushControlDto",
+    "inline:#0"
+  ],
+  "components > schemas > ChatStepUpsertDto > properties > controlValues > oneOf": [
+    "ChatControlDto",
+    "inline:#0"
+  ],
+  "components > schemas > DelayStepUpsertDto > properties > controlValues > oneOf": [
+    "DelayControlDto",
+    "inline:#0"
+  ],
+  "components > schemas > DigestStepUpsertDto > properties > controlValues > oneOf": [
+    "DigestControlDto",
+    "inline:#0"
+  ],
+  "components > schemas > ThrottleStepUpsertDto > properties > controlValues > oneOf": [
+    "ThrottleControlDto",
+    "inline:#0"
+  ],
+  "components > schemas > ToolStepUpsertDto > properties > controlValues > oneOf": [
+    "ToolControlDto",
+    "inline:#0"
+  ],
+  "components > schemas > CustomStepUpsertDto > properties > controlValues > oneOf": [
+    "CustomControlDto",
+    "inline:#0"
+  ],
+  "components > schemas > HttpRequestStepUpsertDto > properties > controlValues > oneOf": [
+    "HttpRequestControlDto",
+    "inline:#0"
+  ],
+  "components > schemas > PreferencesRequestDto > properties > user > oneOf": [
+    "WorkflowPreferencesDto"
+  ],
+  "components > schemas > CreateWorkflowDto > properties > steps > items > oneOf": [
+    "InAppStepUpsertDto",
+    "EmailStepUpsertDto",
+    "SmsStepUpsertDto",
+    "PushStepUpsertDto",
+    "ChatStepUpsertDto",
+    "DelayStepUpsertDto",
+    "DigestStepUpsertDto",
+    "ThrottleStepUpsertDto",
+    "CustomStepUpsertDto",
+    "HttpRequestStepUpsertDto",
+    "ToolStepUpsertDto"
+  ],
+  "components > schemas > UpdateWorkflowDto > properties > steps > items > oneOf": [
+    "InAppStepUpsertDto",
+    "EmailStepUpsertDto",
+    "SmsStepUpsertDto",
+    "PushStepUpsertDto",
+    "ChatStepUpsertDto",
+    "DelayStepUpsertDto",
+    "DigestStepUpsertDto",
+    "ThrottleStepUpsertDto",
+    "CustomStepUpsertDto",
+    "HttpRequestStepUpsertDto",
+    "ToolStepUpsertDto"
+  ],
+  "components > schemas > PreviewPayloadDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > GeneratePreviewResponseDto > properties > result > oneOf": [
+    "inline:#0",
+    "inline:email#0",
+    "inline:email#1",
+    "inline:in_app#0",
+    "inline:sms#0",
+    "inline:push#0",
+    "inline:chat#0",
+    "inline:delay#0",
+    "inline:digest#0",
+    "inline:tool#0"
+  ],
+  "components > schemas > CreateChannelConnectionRequestDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateSlackChannelEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateSlackUserEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateWebhookEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreatePhoneEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateMsTeamsChannelEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateMsTeamsUserEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateTelegramChatEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateWebexPersonEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateWebexRoomEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateLineUserEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreatePagerDutyServiceEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateOpsgenieIntegrationEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateGrafanaOnCallIntegrationEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > CreateToolWebhookEndpointDto > properties > context > additionalProperties > oneOf": [
+    "inline:#0",
+    "inline:#1"
+  ],
+  "components > schemas > GetChannelEndpointResponseDto > properties > endpoint > oneOf": [
+    "SlackChannelEndpointDto",
+    "SlackUserEndpointDto",
+    "WebhookEndpointDto",
+    "PhoneEndpointDto",
+    "MsTeamsChannelEndpointDto",
+    "MsTeamsUserEndpointDto",
+    "TelegramChatEndpointDto",
+    "WebexRoomEndpointDto",
+    "WebexPersonEndpointDto",
+    "LineUserEndpointDto",
+    "PagerDutyServiceEndpointDto",
+    "OpsgenieIntegrationEndpointDto",
+    "GrafanaOnCallIntegrationEndpointDto",
+    "ToolWebhookEndpointDto"
+  ],
+  "components > schemas > UpdateChannelEndpointRequestDto > properties > endpoint > oneOf": [
+    "SlackChannelEndpointDto",
+    "SlackUserEndpointDto",
+    "WebhookEndpointDto",
+    "PhoneEndpointDto",
+    "WebexRoomEndpointDto",
+    "WebexPersonEndpointDto",
+    "ToolWebhookEndpointDto"
+  ]
+}

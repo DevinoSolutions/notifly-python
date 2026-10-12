@@ -11,10 +11,11 @@ T = TypeVar("T", bound="SubscriptionPreferenceDtoCondition")
 
 @_attrs_define
 class SubscriptionPreferenceDtoCondition:
-    """Optional condition using JSON Logic rules
+    """Optional JSON Logic condition evaluated against the trigger payload at fan-out time (for example, `{ "var":
+    "payload.tier" }`)
 
-    Example:
-        {'and': [{'===': [{'var': 'tier'}, 'premium']}]}
+        Example:
+            {'and': [{'===': [{'var': 'payload.tier'}, 'premium']}]}
 
     """
 

@@ -33,7 +33,15 @@ class TriggerEventRequestDto:
                 used to render the workflow, or perform routing rules based on it.
                   This data will also be available when fetching the notifications feed from the API to display certain
             parts of the UI. Example: {'comment_id': 'string', 'post': {'text': 'string'}}.
+        bridge_url (str | Unset): Optional Bridge Endpoint URL used to route this trigger to a specific Bridge
+            application. Useful during local development when multiple engineers share an organization: set this to your
+            personal tunnel URL from `npx novu@latest dev` (for example via NOVU_BRIDGE_URL) so app-fired triggers hit your
+            machine instead of the environment's synced Bridge URL. Must be a publicly reachable https URL — private or
+            localhost addresses are rejected. Example: https://your-tunnel.novu.co/api/novu.
         overrides (TriggerOverrides | Unset):
+        agent_id (None | str | Unset): Override the workflow-assigned agent for this trigger using the public agent
+            identifier. Omit to use the workflow default; pass null to disable agent routing for this execution. Example:
+            support-agent.
         transaction_id (str | Unset): A unique identifier for deduplication. If the same **transactionId** is sent
             again,
                   the trigger is ignored. Useful to prevent duplicate notifications. The retention period depends on your
@@ -49,7 +57,9 @@ class TriggerEventRequestDto:
     name: str
     to: list[str | SubscriberPayloadDto | TopicPayloadDto] | str | SubscriberPayloadDto | TopicPayloadDto
     payload: TriggerEventRequestDtoPayload | Unset = UNSET
+    bridge_url: str | Unset = UNSET
     overrides: TriggerOverrides | Unset = UNSET
+    agent_id: None | str | Unset = UNSET
     transaction_id: str | Unset = UNSET
     actor: str | SubscriberPayloadDto | Unset = UNSET
     tenant: str | TenantPayloadDto | Unset = UNSET
@@ -87,9 +97,17 @@ class TriggerEventRequestDto:
         if not isinstance(self.payload, Unset):
             payload = self.payload.to_dict()
 
+        bridge_url = self.bridge_url
+
         overrides: dict[str, Any] | Unset = UNSET
         if not isinstance(self.overrides, Unset):
             overrides = self.overrides.to_dict()
+
+        agent_id: None | str | Unset
+        if isinstance(self.agent_id, Unset):
+            agent_id = UNSET
+        else:
+            agent_id = self.agent_id
 
         transaction_id = self.transaction_id
 
@@ -123,8 +141,12 @@ class TriggerEventRequestDto:
         )
         if payload is not UNSET:
             field_dict["payload"] = payload
+        if bridge_url is not UNSET:
+            field_dict["bridgeUrl"] = bridge_url
         if overrides is not UNSET:
             field_dict["overrides"] = overrides
+        if agent_id is not UNSET:
+            field_dict["agentId"] = agent_id
         if transaction_id is not UNSET:
             field_dict["transactionId"] = transaction_id
         if actor is not UNSET:
@@ -213,12 +235,23 @@ class TriggerEventRequestDto:
         else:
             payload = TriggerEventRequestDtoPayload.from_dict(_payload)
 
+        bridge_url = d.pop("bridgeUrl", UNSET)
+
         _overrides = d.pop("overrides", UNSET)
         overrides: TriggerOverrides | Unset
         if isinstance(_overrides, Unset):
             overrides = UNSET
         else:
             overrides = TriggerOverrides.from_dict(_overrides)
+
+        def _parse_agent_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        agent_id = _parse_agent_id(d.pop("agentId", UNSET))
 
         transaction_id = d.pop("transactionId", UNSET)
 
@@ -263,7 +296,9 @@ class TriggerEventRequestDto:
             name=name,
             to=to,
             payload=payload,
+            bridge_url=bridge_url,
             overrides=overrides,
+            agent_id=agent_id,
             transaction_id=transaction_id,
             actor=actor,
             tenant=tenant,

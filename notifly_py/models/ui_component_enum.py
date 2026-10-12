@@ -4,6 +4,7 @@ from enum import Enum
 class UiComponentEnum(str, Enum):
     BLOCK_EDITOR = "BLOCK_EDITOR"
     CHAT_BODY = "CHAT_BODY"
+    CHAT_EDITOR_SELECT = "CHAT_EDITOR_SELECT"
     DATA = "DATA"
     DELAY_AMOUNT = "DELAY_AMOUNT"
     DELAY_CRON = "DELAY_CRON"
@@ -46,6 +47,7 @@ class UiComponentEnum(str, Enum):
     THROTTLE_TYPE = "THROTTLE_TYPE"
     THROTTLE_UNIT = "THROTTLE_UNIT"
     THROTTLE_WINDOW = "THROTTLE_WINDOW"
+    TOOL_BODY = "TOOL_BODY"
     URL_TEXT_BOX = "URL_TEXT_BOX"
 
     def __str__(self) -> str:

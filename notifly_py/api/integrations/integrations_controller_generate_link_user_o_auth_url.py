@@ -130,8 +130,8 @@ def sync_detailed(
 ) -> Response[ErrorDto | GenerateChatOAuthUrlResponseDto | ValidationErrorDto | str]:
     """Generate OAuth URL to link a subscriber user identity
 
-     Generate an OAuth URL that links a specific subscriber to their chat identity (Slack user ID or MS
-    Teams user OID).
+     Generate an OAuth URL that links a specific subscriber to their chat identity (Slack user ID, MS
+    Teams user OID, or Webex person).
         The generated URL expires after 5 minutes.
 
     Args:
@@ -166,8 +166,8 @@ def sync(
 ) -> ErrorDto | GenerateChatOAuthUrlResponseDto | ValidationErrorDto | str | None:
     """Generate OAuth URL to link a subscriber user identity
 
-     Generate an OAuth URL that links a specific subscriber to their chat identity (Slack user ID or MS
-    Teams user OID).
+     Generate an OAuth URL that links a specific subscriber to their chat identity (Slack user ID, MS
+    Teams user OID, or Webex person).
         The generated URL expires after 5 minutes.
 
     Args:
@@ -197,8 +197,8 @@ async def asyncio_detailed(
 ) -> Response[ErrorDto | GenerateChatOAuthUrlResponseDto | ValidationErrorDto | str]:
     """Generate OAuth URL to link a subscriber user identity
 
-     Generate an OAuth URL that links a specific subscriber to their chat identity (Slack user ID or MS
-    Teams user OID).
+     Generate an OAuth URL that links a specific subscriber to their chat identity (Slack user ID, MS
+    Teams user OID, or Webex person).
         The generated URL expires after 5 minutes.
 
     Args:
@@ -231,8 +231,8 @@ async def asyncio(
 ) -> ErrorDto | GenerateChatOAuthUrlResponseDto | ValidationErrorDto | str | None:
     """Generate OAuth URL to link a subscriber user identity
 
-     Generate an OAuth URL that links a specific subscriber to their chat identity (Slack user ID or MS
-    Teams user OID).
+     Generate an OAuth URL that links a specific subscriber to their chat identity (Slack user ID, MS
+    Teams user OID, or Webex person).
         The generated URL expires after 5 minutes.
 
     Args:

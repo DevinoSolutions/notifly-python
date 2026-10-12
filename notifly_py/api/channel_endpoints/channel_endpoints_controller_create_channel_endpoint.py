@@ -5,12 +5,19 @@ import httpx
 
 from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...models.create_grafana_on_call_integration_endpoint_dto import CreateGrafanaOnCallIntegrationEndpointDto
+from ...models.create_line_user_endpoint_dto import CreateLineUserEndpointDto
 from ...models.create_ms_teams_channel_endpoint_dto import CreateMsTeamsChannelEndpointDto
 from ...models.create_ms_teams_user_endpoint_dto import CreateMsTeamsUserEndpointDto
+from ...models.create_opsgenie_integration_endpoint_dto import CreateOpsgenieIntegrationEndpointDto
+from ...models.create_pager_duty_service_endpoint_dto import CreatePagerDutyServiceEndpointDto
 from ...models.create_phone_endpoint_dto import CreatePhoneEndpointDto
 from ...models.create_slack_channel_endpoint_dto import CreateSlackChannelEndpointDto
 from ...models.create_slack_user_endpoint_dto import CreateSlackUserEndpointDto
 from ...models.create_telegram_chat_endpoint_dto import CreateTelegramChatEndpointDto
+from ...models.create_tool_webhook_endpoint_dto import CreateToolWebhookEndpointDto
+from ...models.create_webex_person_endpoint_dto import CreateWebexPersonEndpointDto
+from ...models.create_webex_room_endpoint_dto import CreateWebexRoomEndpointDto
 from ...models.create_webhook_endpoint_dto import CreateWebhookEndpointDto
 from ...models.error_dto import ErrorDto
 from ...models.get_channel_endpoint_response_dto import GetChannelEndpointResponseDto
@@ -20,12 +27,19 @@ from ...types import UNSET, Response, Unset
 
 def _get_kwargs(
     *,
-    body: CreateMsTeamsChannelEndpointDto
+    body: CreateGrafanaOnCallIntegrationEndpointDto
+    | CreateLineUserEndpointDto
+    | CreateMsTeamsChannelEndpointDto
     | CreateMsTeamsUserEndpointDto
+    | CreateOpsgenieIntegrationEndpointDto
+    | CreatePagerDutyServiceEndpointDto
     | CreatePhoneEndpointDto
     | CreateSlackChannelEndpointDto
     | CreateSlackUserEndpointDto
     | CreateTelegramChatEndpointDto
+    | CreateToolWebhookEndpointDto
+    | CreateWebexPersonEndpointDto
+    | CreateWebexRoomEndpointDto
     | CreateWebhookEndpointDto,
     idempotency_key: str | Unset = UNSET,
 ) -> dict[str, Any]:
@@ -49,6 +63,20 @@ def _get_kwargs(
     elif isinstance(body, CreateMsTeamsChannelEndpointDto):
         _kwargs["json"] = body.to_dict()
     elif isinstance(body, CreateMsTeamsUserEndpointDto):
+        _kwargs["json"] = body.to_dict()
+    elif isinstance(body, CreateTelegramChatEndpointDto):
+        _kwargs["json"] = body.to_dict()
+    elif isinstance(body, CreateWebexRoomEndpointDto):
+        _kwargs["json"] = body.to_dict()
+    elif isinstance(body, CreateWebexPersonEndpointDto):
+        _kwargs["json"] = body.to_dict()
+    elif isinstance(body, CreateLineUserEndpointDto):
+        _kwargs["json"] = body.to_dict()
+    elif isinstance(body, CreatePagerDutyServiceEndpointDto):
+        _kwargs["json"] = body.to_dict()
+    elif isinstance(body, CreateOpsgenieIntegrationEndpointDto):
+        _kwargs["json"] = body.to_dict()
+    elif isinstance(body, CreateGrafanaOnCallIntegrationEndpointDto):
         _kwargs["json"] = body.to_dict()
     else:
         _kwargs["json"] = body.to_dict()
@@ -150,12 +178,19 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient,
-    body: CreateMsTeamsChannelEndpointDto
+    body: CreateGrafanaOnCallIntegrationEndpointDto
+    | CreateLineUserEndpointDto
+    | CreateMsTeamsChannelEndpointDto
     | CreateMsTeamsUserEndpointDto
+    | CreateOpsgenieIntegrationEndpointDto
+    | CreatePagerDutyServiceEndpointDto
     | CreatePhoneEndpointDto
     | CreateSlackChannelEndpointDto
     | CreateSlackUserEndpointDto
     | CreateTelegramChatEndpointDto
+    | CreateToolWebhookEndpointDto
+    | CreateWebexPersonEndpointDto
+    | CreateWebexRoomEndpointDto
     | CreateWebhookEndpointDto,
     idempotency_key: str | Unset = UNSET,
 ) -> Response[ErrorDto | GetChannelEndpointResponseDto | ValidationErrorDto | str]:
@@ -165,9 +200,12 @@ def sync_detailed(
 
     Args:
         idempotency_key (str | Unset):
-        body (CreateMsTeamsChannelEndpointDto | CreateMsTeamsUserEndpointDto |
+        body (CreateGrafanaOnCallIntegrationEndpointDto | CreateLineUserEndpointDto |
+            CreateMsTeamsChannelEndpointDto | CreateMsTeamsUserEndpointDto |
+            CreateOpsgenieIntegrationEndpointDto | CreatePagerDutyServiceEndpointDto |
             CreatePhoneEndpointDto | CreateSlackChannelEndpointDto | CreateSlackUserEndpointDto |
-            CreateTelegramChatEndpointDto | CreateWebhookEndpointDto):
+            CreateTelegramChatEndpointDto | CreateToolWebhookEndpointDto |
+            CreateWebexPersonEndpointDto | CreateWebexRoomEndpointDto | CreateWebhookEndpointDto):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -192,12 +230,19 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient,
-    body: CreateMsTeamsChannelEndpointDto
+    body: CreateGrafanaOnCallIntegrationEndpointDto
+    | CreateLineUserEndpointDto
+    | CreateMsTeamsChannelEndpointDto
     | CreateMsTeamsUserEndpointDto
+    | CreateOpsgenieIntegrationEndpointDto
+    | CreatePagerDutyServiceEndpointDto
     | CreatePhoneEndpointDto
     | CreateSlackChannelEndpointDto
     | CreateSlackUserEndpointDto
     | CreateTelegramChatEndpointDto
+    | CreateToolWebhookEndpointDto
+    | CreateWebexPersonEndpointDto
+    | CreateWebexRoomEndpointDto
     | CreateWebhookEndpointDto,
     idempotency_key: str | Unset = UNSET,
 ) -> ErrorDto | GetChannelEndpointResponseDto | ValidationErrorDto | str | None:
@@ -207,9 +252,12 @@ def sync(
 
     Args:
         idempotency_key (str | Unset):
-        body (CreateMsTeamsChannelEndpointDto | CreateMsTeamsUserEndpointDto |
+        body (CreateGrafanaOnCallIntegrationEndpointDto | CreateLineUserEndpointDto |
+            CreateMsTeamsChannelEndpointDto | CreateMsTeamsUserEndpointDto |
+            CreateOpsgenieIntegrationEndpointDto | CreatePagerDutyServiceEndpointDto |
             CreatePhoneEndpointDto | CreateSlackChannelEndpointDto | CreateSlackUserEndpointDto |
-            CreateTelegramChatEndpointDto | CreateWebhookEndpointDto):
+            CreateTelegramChatEndpointDto | CreateToolWebhookEndpointDto |
+            CreateWebexPersonEndpointDto | CreateWebexRoomEndpointDto | CreateWebhookEndpointDto):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -229,12 +277,19 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient,
-    body: CreateMsTeamsChannelEndpointDto
+    body: CreateGrafanaOnCallIntegrationEndpointDto
+    | CreateLineUserEndpointDto
+    | CreateMsTeamsChannelEndpointDto
     | CreateMsTeamsUserEndpointDto
+    | CreateOpsgenieIntegrationEndpointDto
+    | CreatePagerDutyServiceEndpointDto
     | CreatePhoneEndpointDto
     | CreateSlackChannelEndpointDto
     | CreateSlackUserEndpointDto
     | CreateTelegramChatEndpointDto
+    | CreateToolWebhookEndpointDto
+    | CreateWebexPersonEndpointDto
+    | CreateWebexRoomEndpointDto
     | CreateWebhookEndpointDto,
     idempotency_key: str | Unset = UNSET,
 ) -> Response[ErrorDto | GetChannelEndpointResponseDto | ValidationErrorDto | str]:
@@ -244,9 +299,12 @@ async def asyncio_detailed(
 
     Args:
         idempotency_key (str | Unset):
-        body (CreateMsTeamsChannelEndpointDto | CreateMsTeamsUserEndpointDto |
+        body (CreateGrafanaOnCallIntegrationEndpointDto | CreateLineUserEndpointDto |
+            CreateMsTeamsChannelEndpointDto | CreateMsTeamsUserEndpointDto |
+            CreateOpsgenieIntegrationEndpointDto | CreatePagerDutyServiceEndpointDto |
             CreatePhoneEndpointDto | CreateSlackChannelEndpointDto | CreateSlackUserEndpointDto |
-            CreateTelegramChatEndpointDto | CreateWebhookEndpointDto):
+            CreateTelegramChatEndpointDto | CreateToolWebhookEndpointDto |
+            CreateWebexPersonEndpointDto | CreateWebexRoomEndpointDto | CreateWebhookEndpointDto):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -269,12 +327,19 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient,
-    body: CreateMsTeamsChannelEndpointDto
+    body: CreateGrafanaOnCallIntegrationEndpointDto
+    | CreateLineUserEndpointDto
+    | CreateMsTeamsChannelEndpointDto
     | CreateMsTeamsUserEndpointDto
+    | CreateOpsgenieIntegrationEndpointDto
+    | CreatePagerDutyServiceEndpointDto
     | CreatePhoneEndpointDto
     | CreateSlackChannelEndpointDto
     | CreateSlackUserEndpointDto
     | CreateTelegramChatEndpointDto
+    | CreateToolWebhookEndpointDto
+    | CreateWebexPersonEndpointDto
+    | CreateWebexRoomEndpointDto
     | CreateWebhookEndpointDto,
     idempotency_key: str | Unset = UNSET,
 ) -> ErrorDto | GetChannelEndpointResponseDto | ValidationErrorDto | str | None:
@@ -284,9 +349,12 @@ async def asyncio(
 
     Args:
         idempotency_key (str | Unset):
-        body (CreateMsTeamsChannelEndpointDto | CreateMsTeamsUserEndpointDto |
+        body (CreateGrafanaOnCallIntegrationEndpointDto | CreateLineUserEndpointDto |
+            CreateMsTeamsChannelEndpointDto | CreateMsTeamsUserEndpointDto |
+            CreateOpsgenieIntegrationEndpointDto | CreatePagerDutyServiceEndpointDto |
             CreatePhoneEndpointDto | CreateSlackChannelEndpointDto | CreateSlackUserEndpointDto |
-            CreateTelegramChatEndpointDto | CreateWebhookEndpointDto):
+            CreateTelegramChatEndpointDto | CreateToolWebhookEndpointDto |
+            CreateWebexPersonEndpointDto | CreateWebexRoomEndpointDto | CreateWebhookEndpointDto):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

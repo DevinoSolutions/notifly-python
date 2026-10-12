@@ -11,12 +11,19 @@ from ..models.get_channel_endpoint_response_dto_provider_id import GetChannelEnd
 from ..models.get_channel_endpoint_response_dto_type import GetChannelEndpointResponseDtoType
 
 if TYPE_CHECKING:
+    from ..models.grafana_on_call_integration_endpoint_dto import GrafanaOnCallIntegrationEndpointDto
+    from ..models.line_user_endpoint_dto import LineUserEndpointDto
     from ..models.ms_teams_channel_endpoint_dto import MsTeamsChannelEndpointDto
     from ..models.ms_teams_user_endpoint_dto import MsTeamsUserEndpointDto
+    from ..models.opsgenie_integration_endpoint_dto import OpsgenieIntegrationEndpointDto
+    from ..models.pager_duty_service_endpoint_dto import PagerDutyServiceEndpointDto
     from ..models.phone_endpoint_dto import PhoneEndpointDto
     from ..models.slack_channel_endpoint_dto import SlackChannelEndpointDto
     from ..models.slack_user_endpoint_dto import SlackUserEndpointDto
     from ..models.telegram_chat_endpoint_dto import TelegramChatEndpointDto
+    from ..models.tool_webhook_endpoint_dto import ToolWebhookEndpointDto
+    from ..models.webex_person_endpoint_dto import WebexPersonEndpointDto
+    from ..models.webex_room_endpoint_dto import WebexRoomEndpointDto
     from ..models.webhook_endpoint_dto import WebhookEndpointDto
 
 
@@ -38,8 +45,10 @@ class GetChannelEndpointResponseDto:
         subscriber_id (None | str): The subscriber ID to which the channel endpoint is linked Example: subscriber-123.
         context_keys (list[str]): The context of the channel connection Example: ['tenant:org-123', 'region:us-east-1'].
         type_ (GetChannelEndpointResponseDtoType): Type of channel endpoint Example: slack_channel.
-        endpoint (MsTeamsChannelEndpointDto | MsTeamsUserEndpointDto | PhoneEndpointDto | SlackChannelEndpointDto |
-            SlackUserEndpointDto | TelegramChatEndpointDto | WebhookEndpointDto): Endpoint data specific to the channel type
+        endpoint (GrafanaOnCallIntegrationEndpointDto | LineUserEndpointDto | MsTeamsChannelEndpointDto |
+            MsTeamsUserEndpointDto | OpsgenieIntegrationEndpointDto | PagerDutyServiceEndpointDto | PhoneEndpointDto |
+            SlackChannelEndpointDto | SlackUserEndpointDto | TelegramChatEndpointDto | ToolWebhookEndpointDto |
+            WebexPersonEndpointDto | WebexRoomEndpointDto | WebhookEndpointDto): Endpoint data specific to the channel type
         created_at (str): The timestamp indicating when the channel endpoint was created, in ISO 8601 format.
         updated_at (str): The timestamp indicating when the channel endpoint was last updated, in ISO 8601 format.
     """
@@ -53,12 +62,19 @@ class GetChannelEndpointResponseDto:
     context_keys: list[str]
     type_: GetChannelEndpointResponseDtoType
     endpoint: (
-        MsTeamsChannelEndpointDto
+        GrafanaOnCallIntegrationEndpointDto
+        | LineUserEndpointDto
+        | MsTeamsChannelEndpointDto
         | MsTeamsUserEndpointDto
+        | OpsgenieIntegrationEndpointDto
+        | PagerDutyServiceEndpointDto
         | PhoneEndpointDto
         | SlackChannelEndpointDto
         | SlackUserEndpointDto
         | TelegramChatEndpointDto
+        | ToolWebhookEndpointDto
+        | WebexPersonEndpointDto
+        | WebexRoomEndpointDto
         | WebhookEndpointDto
     )
     created_at: str
@@ -66,11 +82,18 @@ class GetChannelEndpointResponseDto:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.grafana_on_call_integration_endpoint_dto import GrafanaOnCallIntegrationEndpointDto
+        from ..models.line_user_endpoint_dto import LineUserEndpointDto
         from ..models.ms_teams_channel_endpoint_dto import MsTeamsChannelEndpointDto
         from ..models.ms_teams_user_endpoint_dto import MsTeamsUserEndpointDto
+        from ..models.opsgenie_integration_endpoint_dto import OpsgenieIntegrationEndpointDto
+        from ..models.pager_duty_service_endpoint_dto import PagerDutyServiceEndpointDto
         from ..models.phone_endpoint_dto import PhoneEndpointDto
         from ..models.slack_channel_endpoint_dto import SlackChannelEndpointDto
         from ..models.slack_user_endpoint_dto import SlackUserEndpointDto
+        from ..models.telegram_chat_endpoint_dto import TelegramChatEndpointDto
+        from ..models.webex_person_endpoint_dto import WebexPersonEndpointDto
+        from ..models.webex_room_endpoint_dto import WebexRoomEndpointDto
         from ..models.webhook_endpoint_dto import WebhookEndpointDto
 
         identifier = self.identifier
@@ -105,6 +128,20 @@ class GetChannelEndpointResponseDto:
             endpoint = self.endpoint.to_dict()
         elif isinstance(self.endpoint, MsTeamsUserEndpointDto):
             endpoint = self.endpoint.to_dict()
+        elif isinstance(self.endpoint, TelegramChatEndpointDto):
+            endpoint = self.endpoint.to_dict()
+        elif isinstance(self.endpoint, WebexRoomEndpointDto):
+            endpoint = self.endpoint.to_dict()
+        elif isinstance(self.endpoint, WebexPersonEndpointDto):
+            endpoint = self.endpoint.to_dict()
+        elif isinstance(self.endpoint, LineUserEndpointDto):
+            endpoint = self.endpoint.to_dict()
+        elif isinstance(self.endpoint, PagerDutyServiceEndpointDto):
+            endpoint = self.endpoint.to_dict()
+        elif isinstance(self.endpoint, OpsgenieIntegrationEndpointDto):
+            endpoint = self.endpoint.to_dict()
+        elif isinstance(self.endpoint, GrafanaOnCallIntegrationEndpointDto):
+            endpoint = self.endpoint.to_dict()
         else:
             endpoint = self.endpoint.to_dict()
 
@@ -134,12 +171,19 @@ class GetChannelEndpointResponseDto:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.grafana_on_call_integration_endpoint_dto import GrafanaOnCallIntegrationEndpointDto
+        from ..models.line_user_endpoint_dto import LineUserEndpointDto
         from ..models.ms_teams_channel_endpoint_dto import MsTeamsChannelEndpointDto
         from ..models.ms_teams_user_endpoint_dto import MsTeamsUserEndpointDto
+        from ..models.opsgenie_integration_endpoint_dto import OpsgenieIntegrationEndpointDto
+        from ..models.pager_duty_service_endpoint_dto import PagerDutyServiceEndpointDto
         from ..models.phone_endpoint_dto import PhoneEndpointDto
         from ..models.slack_channel_endpoint_dto import SlackChannelEndpointDto
         from ..models.slack_user_endpoint_dto import SlackUserEndpointDto
         from ..models.telegram_chat_endpoint_dto import TelegramChatEndpointDto
+        from ..models.tool_webhook_endpoint_dto import ToolWebhookEndpointDto
+        from ..models.webex_person_endpoint_dto import WebexPersonEndpointDto
+        from ..models.webex_room_endpoint_dto import WebexRoomEndpointDto
         from ..models.webhook_endpoint_dto import WebhookEndpointDto
 
         d = dict(src_dict)
@@ -177,12 +221,19 @@ class GetChannelEndpointResponseDto:
         def _parse_endpoint(
             data: object,
         ) -> (
-            MsTeamsChannelEndpointDto
+            GrafanaOnCallIntegrationEndpointDto
+            | LineUserEndpointDto
+            | MsTeamsChannelEndpointDto
             | MsTeamsUserEndpointDto
+            | OpsgenieIntegrationEndpointDto
+            | PagerDutyServiceEndpointDto
             | PhoneEndpointDto
             | SlackChannelEndpointDto
             | SlackUserEndpointDto
             | TelegramChatEndpointDto
+            | ToolWebhookEndpointDto
+            | WebexPersonEndpointDto
+            | WebexRoomEndpointDto
             | WebhookEndpointDto
         ):
             try:
@@ -233,11 +284,67 @@ class GetChannelEndpointResponseDto:
                 return endpoint_type_5
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                endpoint_type_6 = TelegramChatEndpointDto.from_dict(data)
+
+                return endpoint_type_6
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                endpoint_type_7 = WebexRoomEndpointDto.from_dict(data)
+
+                return endpoint_type_7
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                endpoint_type_8 = WebexPersonEndpointDto.from_dict(data)
+
+                return endpoint_type_8
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                endpoint_type_9 = LineUserEndpointDto.from_dict(data)
+
+                return endpoint_type_9
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                endpoint_type_10 = PagerDutyServiceEndpointDto.from_dict(data)
+
+                return endpoint_type_10
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                endpoint_type_11 = OpsgenieIntegrationEndpointDto.from_dict(data)
+
+                return endpoint_type_11
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                endpoint_type_12 = GrafanaOnCallIntegrationEndpointDto.from_dict(data)
+
+                return endpoint_type_12
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
             if not isinstance(data, dict):
                 raise TypeError()
-            endpoint_type_6 = TelegramChatEndpointDto.from_dict(data)
+            endpoint_type_13 = ToolWebhookEndpointDto.from_dict(data)
 
-            return endpoint_type_6
+            return endpoint_type_13
 
         endpoint = _parse_endpoint(d.pop("endpoint"))
 

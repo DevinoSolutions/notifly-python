@@ -23,6 +23,8 @@ class WebhookInboundEmailMailDto:
         to (list[WebhookInboundEmailAddressDto]): Recipient address info
         subject (str): Email subject
         message_id (str): Message ID header
+        bcc (list[WebhookInboundEmailAddressDto] | Unset): Matched SMTP envelope recipient when it is absent from the To
+            and Cc headers
         html (str | Unset): HTML body
         text (str | Unset): Plain text body
     """
@@ -31,6 +33,7 @@ class WebhookInboundEmailMailDto:
     to: list[WebhookInboundEmailAddressDto]
     subject: str
     message_id: str
+    bcc: list[WebhookInboundEmailAddressDto] | Unset = UNSET
     html: str | Unset = UNSET
     text: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -47,6 +50,13 @@ class WebhookInboundEmailMailDto:
 
         message_id = self.message_id
 
+        bcc: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.bcc, Unset):
+            bcc = []
+            for bcc_item_data in self.bcc:
+                bcc_item = bcc_item_data.to_dict()
+                bcc.append(bcc_item)
+
         html = self.html
 
         text = self.text
@@ -61,6 +71,8 @@ class WebhookInboundEmailMailDto:
                 "messageId": message_id,
             }
         )
+        if bcc is not UNSET:
+            field_dict["bcc"] = bcc
         if html is not UNSET:
             field_dict["html"] = html
         if text is not UNSET:
@@ -86,6 +98,15 @@ class WebhookInboundEmailMailDto:
 
         message_id = d.pop("messageId")
 
+        _bcc = d.pop("bcc", UNSET)
+        bcc: list[WebhookInboundEmailAddressDto] | Unset = UNSET
+        if _bcc is not UNSET:
+            bcc = []
+            for bcc_item_data in _bcc:
+                bcc_item = WebhookInboundEmailAddressDto.from_dict(bcc_item_data)
+
+                bcc.append(bcc_item)
+
         html = d.pop("html", UNSET)
 
         text = d.pop("text", UNSET)
@@ -95,6 +116,7 @@ class WebhookInboundEmailMailDto:
             to=to,
             subject=subject,
             message_id=message_id,
+            bcc=bcc,
             html=html,
             text=text,
         )

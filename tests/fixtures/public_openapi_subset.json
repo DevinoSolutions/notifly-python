@@ -2,7 +2,7 @@
  "openapi": "3.0.0",
  "info": {
   "title": "Notifly API",
-  "version": "3.17.1",
+  "version": "3.19.1",
   "description": "Trimmed fixture of the public Notifly OpenAPI document (operationIds, security and response envelope shape only). Regenerate with scripts/refresh_public_fixture.py."
  },
  "servers": [
@@ -603,6 +603,698 @@
   "/v1/notifications/{notificationId}": {
    "get": {
     "operationId": "NotificationsController_getNotification",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/agents": {
+   "post": {
+    "operationId": "AgentsController_createAgent",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "get": {
+    "operationId": "AgentsController_listAgents",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/agents/{identifier}/bridge": {
+   "put": {
+    "operationId": "AgentsController_updateAgentBridge",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/agents/{identifier}": {
+   "get": {
+    "operationId": "AgentsController_getAgent",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "patch": {
+    "operationId": "AgentsController_updateAgent",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "AgentsController_deleteAgent",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/agents/{identifier}/integrations": {
+   "post": {
+    "operationId": "AgentIntegrationsController_addAgentIntegration",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "201": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "get": {
+    "operationId": "AgentIntegrationsController_listAgentIntegrations",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/agents/{identifier}/integrations/{agentIntegrationId}": {
+   "patch": {
+    "operationId": "AgentIntegrationsController_updateAgentIntegration",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   },
+   "delete": {
+    "operationId": "AgentIntegrationsController_removeAgentIntegration",
+    "security": [
+     {
+      "secretKey": []
+     }
+    ],
+    "responses": {
+     "204": {
+      "description": ""
+     },
+     "400": {
+      "description": ""
+     },
+     "401": {
+      "description": ""
+     },
+     "403": {
+      "description": ""
+     },
+     "404": {
+      "description": ""
+     },
+     "405": {
+      "description": ""
+     },
+     "409": {
+      "description": ""
+     },
+     "413": {
+      "description": ""
+     },
+     "414": {
+      "description": ""
+     },
+     "415": {
+      "description": ""
+     },
+     "422": {
+      "description": ""
+     },
+     "429": {
+      "description": ""
+     },
+     "500": {
+      "description": ""
+     },
+     "503": {
+      "description": ""
+     }
+    }
+   }
+  },
+  "/v1/agents/{agentId}/reply": {
+   "post": {
+    "operationId": "AgentReplyController_handleAgentReplyHandler",
     "security": [
      {
       "secretKey": []

@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from ..models.generate_preview_response_dto_result_type_6 import GeneratePreviewResponseDtoResultType6
     from ..models.generate_preview_response_dto_result_type_7 import GeneratePreviewResponseDtoResultType7
     from ..models.generate_preview_response_dto_result_type_8 import GeneratePreviewResponseDtoResultType8
+    from ..models.generate_preview_response_dto_result_type_9 import GeneratePreviewResponseDtoResultType9
     from ..models.generate_preview_response_dto_schema_type_0 import GeneratePreviewResponseDtoSchemaType0
     from ..models.preview_payload_dto import PreviewPayloadDto
 
@@ -34,7 +35,7 @@ class GeneratePreviewResponseDto:
             GeneratePreviewResponseDtoResultType2 | GeneratePreviewResponseDtoResultType3 |
             GeneratePreviewResponseDtoResultType4 | GeneratePreviewResponseDtoResultType5 |
             GeneratePreviewResponseDtoResultType6 | GeneratePreviewResponseDtoResultType7 |
-            GeneratePreviewResponseDtoResultType8): Preview result
+            GeneratePreviewResponseDtoResultType8 | GeneratePreviewResponseDtoResultType9): Preview result
         schema (GeneratePreviewResponseDtoSchemaType0 | None | Unset): The payload schema that was used to generate the
             preview payload example
         novu_signature (str | Unset): Sample novu-signature header value for HTTP request steps
@@ -51,6 +52,7 @@ class GeneratePreviewResponseDto:
         | GeneratePreviewResponseDtoResultType6
         | GeneratePreviewResponseDtoResultType7
         | GeneratePreviewResponseDtoResultType8
+        | GeneratePreviewResponseDtoResultType9
     )
     schema: GeneratePreviewResponseDtoSchemaType0 | None | Unset = UNSET
     novu_signature: str | Unset = UNSET
@@ -65,6 +67,7 @@ class GeneratePreviewResponseDto:
         from ..models.generate_preview_response_dto_result_type_5 import GeneratePreviewResponseDtoResultType5
         from ..models.generate_preview_response_dto_result_type_6 import GeneratePreviewResponseDtoResultType6
         from ..models.generate_preview_response_dto_result_type_7 import GeneratePreviewResponseDtoResultType7
+        from ..models.generate_preview_response_dto_result_type_8 import GeneratePreviewResponseDtoResultType8
         from ..models.generate_preview_response_dto_schema_type_0 import GeneratePreviewResponseDtoSchemaType0
 
         preview_payload_example = self.preview_payload_example.to_dict()
@@ -85,6 +88,8 @@ class GeneratePreviewResponseDto:
         elif isinstance(self.result, GeneratePreviewResponseDtoResultType6):
             result = self.result.to_dict()
         elif isinstance(self.result, GeneratePreviewResponseDtoResultType7):
+            result = self.result.to_dict()
+        elif isinstance(self.result, GeneratePreviewResponseDtoResultType8):
             result = self.result.to_dict()
         else:
             result = self.result.to_dict()
@@ -125,6 +130,7 @@ class GeneratePreviewResponseDto:
         from ..models.generate_preview_response_dto_result_type_6 import GeneratePreviewResponseDtoResultType6
         from ..models.generate_preview_response_dto_result_type_7 import GeneratePreviewResponseDtoResultType7
         from ..models.generate_preview_response_dto_result_type_8 import GeneratePreviewResponseDtoResultType8
+        from ..models.generate_preview_response_dto_result_type_9 import GeneratePreviewResponseDtoResultType9
         from ..models.generate_preview_response_dto_schema_type_0 import GeneratePreviewResponseDtoSchemaType0
         from ..models.preview_payload_dto import PreviewPayloadDto
 
@@ -143,6 +149,7 @@ class GeneratePreviewResponseDto:
             | GeneratePreviewResponseDtoResultType6
             | GeneratePreviewResponseDtoResultType7
             | GeneratePreviewResponseDtoResultType8
+            | GeneratePreviewResponseDtoResultType9
         ):
             try:
                 if not isinstance(data, dict):
@@ -208,11 +215,19 @@ class GeneratePreviewResponseDto:
                 return result_type_7
             except (TypeError, ValueError, AttributeError, KeyError):
                 pass
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                result_type_8 = GeneratePreviewResponseDtoResultType8.from_dict(data)
+
+                return result_type_8
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
             if not isinstance(data, dict):
                 raise TypeError()
-            result_type_8 = GeneratePreviewResponseDtoResultType8.from_dict(data)
+            result_type_9 = GeneratePreviewResponseDtoResultType9.from_dict(data)
 
-            return result_type_8
+            return result_type_9
 
         result = _parse_result(d.pop("result"))
 

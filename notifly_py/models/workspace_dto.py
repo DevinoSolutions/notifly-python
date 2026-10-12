@@ -17,16 +17,20 @@ class WorkspaceDto:
     Attributes:
         id (str):  Example: T123456.
         name (str | Unset):  Example: Acme HQ.
+        bot_user_id (str | Unset):  Example: U0123456789.
     """
 
     id: str
     name: str | Unset = UNSET
+    bot_user_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         name = self.name
+
+        bot_user_id = self.bot_user_id
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -37,6 +41,8 @@ class WorkspaceDto:
         )
         if name is not UNSET:
             field_dict["name"] = name
+        if bot_user_id is not UNSET:
+            field_dict["botUserId"] = bot_user_id
 
         return field_dict
 
@@ -47,9 +53,12 @@ class WorkspaceDto:
 
         name = d.pop("name", UNSET)
 
+        bot_user_id = d.pop("botUserId", UNSET)
+
         workspace_dto = cls(
             id=id,
             name=name,
+            bot_user_id=bot_user_id,
         )
 
         workspace_dto.additional_properties = d
