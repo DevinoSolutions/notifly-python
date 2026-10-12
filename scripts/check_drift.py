@@ -61,10 +61,19 @@ class DriftReport:
         return not self.findings
 
 
+# Cloudflare in front of api.notifly.io answers 403 to urllib's default ``Python-urllib/3.x``
+# user agent (verified 2026-10-12; httpx, requests and the SDK's own agent all get 200), which
+# crashed every scheduled run from 2026-09-28. Name the check instead of looking like a bare script.
+DRIFT_USER_AGENT = "notifly-python-spec-drift (+https://github.com/DevinoSolutions/notifly-python)"
+
+
 def load_spec(source: str) -> dict[str, Any]:
     """Load an OpenAPI document from a path or an ``http(s)`` URL."""
     if source.startswith("http://") or source.startswith("https://"):
-        with urllib.request.urlopen(source, timeout=60) as response:  # noqa: S310 - fixed https host
+        request = urllib.request.Request(
+            source, headers={"User-Agent": DRIFT_USER_AGENT, "Accept": "application/json"}
+        )
+        with urllib.request.urlopen(request, timeout=60) as response:  # noqa: S310 - fixed https host
             data: dict[str, Any] = json.loads(response.read().decode("utf-8"))
             return data
     return json.loads(Path(source).read_text(encoding="utf-8"))

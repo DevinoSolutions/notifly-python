@@ -32,7 +32,13 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const body = fs.readFileSync('drift-report.md', 'utf8');
+            // The check can fail BEFORE writing its report (e.g. the live fetch errors): still open the
+            // issue, naming the crash and the run, instead of crashing this step on a missing file.
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = fs.existsSync('drift-report.md')
+              ? fs.readFileSync('drift-report.md', 'utf8')
+              : '## Drift check crashed before writing a report\n\n' +
+                `See the "Compare the committed spec" step log: ${runUrl}\n`;
             const title = 'Notifly API spec drift detected';
             const existing = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
