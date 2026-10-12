@@ -182,3 +182,25 @@ def test_drift_gate_flags_a_version_bump(sdk_spec: dict[str, Any], public_spec: 
 
     assert not report.ok
     assert any("API version changed" in finding for finding in report.findings)
+
+
+def test_drift_gate_fetches_with_its_own_user_agent(monkeypatch: pytest.MonkeyPatch) -> None:
+    """urllib's default agent is refused (403) by the API's edge, so the live fetch must name itself."""
+    import io
+    import sys
+
+    sys.path.insert(0, str(REPO_ROOT / "scripts"))
+    import check_drift
+
+    seen: dict[str, Any] = {}
+
+    def fake_urlopen(request: Any, timeout: float) -> Any:
+        seen["user_agent"] = request.get_header("User-agent")
+        seen["url"] = request.full_url
+        return io.BytesIO(b'{"openapi": "3.0.0", "paths": {}}')
+
+    monkeypatch.setattr(check_drift.urllib.request, "urlopen", fake_urlopen)
+    assert check_drift.load_spec("https://api.notifly.io/openapi.json") == {"openapi": "3.0.0", "paths": {}}
+    assert seen["url"] == "https://api.notifly.io/openapi.json"
+    assert seen["user_agent"] == check_drift.DRIFT_USER_AGENT
+    assert not seen["user_agent"].startswith("Python-urllib")
