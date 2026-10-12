@@ -9,6 +9,10 @@ on:
 # self-hosted ubuntu-devino fleet sits in the Default runner group, which does not allow public
 # repositories (allows_public_repositories=false, checked 2026-09-23) — jobs would queue forever.
 
+# Least privilege: every job only reads the repo (CodeQL actions/missing-workflow-permissions).
+permissions:
+  contents: read
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
