@@ -32,7 +32,7 @@ class InAppControlDto:
         primary_action (ActionDto | Unset):
         secondary_action (ActionDto | Unset):
         redirect (RedirectDto | Unset):
-        disable_output_sanitization (bool | Unset): Disable sanitization of the output. Default: False.
+        disable_output_sanitization (bool | Unset): Disable sanitization of the output.
         data (InAppControlDtoData | Unset): Additional data payload for the step.
     """
 
@@ -43,7 +43,7 @@ class InAppControlDto:
     primary_action: ActionDto | Unset = UNSET
     secondary_action: ActionDto | Unset = UNSET
     redirect: RedirectDto | Unset = UNSET
-    disable_output_sanitization: bool | Unset = False
+    disable_output_sanitization: bool | Unset = UNSET
     data: InAppControlDtoData | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 

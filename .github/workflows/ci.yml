@@ -116,7 +116,7 @@ jobs:
           client = NotiflyClient(token="sk_ci_smoke")
           assert client.prefix == "ApiKey", client.prefix
           notifly = Notifly(client=client)
-          for group in ("events", "subscribers", "topics", "workflows", "messages", "notifications", "integrations"):
+          for group in ("events", "subscribers", "topics", "workflows", "messages", "notifications", "integrations", "agents"):
               assert hasattr(notifly, group), group
           from notifly_py.api.events import events_controller_trigger  # generated escape hatch
           assert hasattr(events_controller_trigger, "sync")

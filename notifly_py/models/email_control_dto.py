@@ -27,9 +27,8 @@ class EmailControlDto:
             Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full
             typing reference. Example: {'and': [{'==': [{'var': 'payload.tier'}, 'pro']}, {'==': [{'var':
             'subscriber.data.role'}, 'admin']}, {'>': [{'var': 'payload.amount'}, '4']}]}.
-        editor_type (EmailControlDtoEditorType | Unset): Type of editor to use for the body. Default:
-            EmailControlDtoEditorType.BLOCK.
-        disable_output_sanitization (bool | Unset): Disable sanitization of the output. Default: False.
+        editor_type (EmailControlDtoEditorType | Unset): Type of editor to use for the body.
+        disable_output_sanitization (bool | Unset): Disable sanitization of the output.
         layout_id (None | str | Unset): Layout ID to use for the email. Null means no layout, undefined means default
             layout.
         from_ (EmailFromControlDto | Unset):
@@ -42,8 +41,8 @@ class EmailControlDto:
     subject: str
     body: str = ""
     skip: EmailControlDtoSkip | Unset = UNSET
-    editor_type: EmailControlDtoEditorType | Unset = EmailControlDtoEditorType.BLOCK
-    disable_output_sanitization: bool | Unset = False
+    editor_type: EmailControlDtoEditorType | Unset = UNSET
+    disable_output_sanitization: bool | Unset = UNSET
     layout_id: None | str | Unset = UNSET
     from_: EmailFromControlDto | Unset = UNSET
     use_provider_defaults: bool | Unset = UNSET

@@ -20,13 +20,13 @@ class UpdateLayoutDto:
     """
     Attributes:
         name (str): Name of the layout
-        is_translation_enabled (bool | Unset): Enable or disable translations for this layout Default: False.
+        is_translation_enabled (bool | Unset): Enable or disable translations for this layout
         control_values (LayoutControlValuesDto | None | Unset): Control values for the layout. Omit to leave unchanged,
             or set to null to clear stored control values.
     """
 
     name: str
-    is_translation_enabled: bool | Unset = False
+    is_translation_enabled: bool | Unset = UNSET
     control_values: LayoutControlValuesDto | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 

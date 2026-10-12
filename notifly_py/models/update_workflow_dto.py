@@ -41,10 +41,10 @@ class UpdateWorkflowDto:
         preferences (PreferencesRequestDto):
         description (str | Unset): Description of the workflow
         tags (list[str] | Unset): Tags associated with the workflow
-        active (bool | Unset): Whether the workflow is active Default: False.
+        active (bool | Unset): Whether the workflow is active
         validate_payload (bool | Unset): Enable or disable payload schema validation
         payload_schema (None | Unset | UpdateWorkflowDtoPayloadSchemaType0): The payload JSON Schema for the workflow
-        is_translation_enabled (bool | Unset): Enable or disable translations for this workflow Default: False.
+        is_translation_enabled (bool | Unset): Enable or disable translations for this workflow
         agent (None | Unset | WorkflowAgentConfigDto): Optional agent assignment used to route this workflow through an
             agent's connected channels. Pass null to clear.
         workflow_id (str | Unset): Workflow ID (allowed only for code-first workflows)
@@ -69,10 +69,10 @@ class UpdateWorkflowDto:
     preferences: PreferencesRequestDto
     description: str | Unset = UNSET
     tags: list[str] | Unset = UNSET
-    active: bool | Unset = False
+    active: bool | Unset = UNSET
     validate_payload: bool | Unset = UNSET
     payload_schema: None | Unset | UpdateWorkflowDtoPayloadSchemaType0 = UNSET
-    is_translation_enabled: bool | Unset = False
+    is_translation_enabled: bool | Unset = UNSET
     agent: None | Unset | WorkflowAgentConfigDto = UNSET
     workflow_id: str | Unset = UNSET
     origin: ResourceOriginEnum | Unset = UNSET

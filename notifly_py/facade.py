@@ -26,11 +26,24 @@ Design rules:
 from __future__ import annotations
 
 from collections.abc import AsyncIterator, Iterator, Mapping, Sequence
+from enum import Enum
 from http import HTTPStatus
 from typing import Any
 
 import httpx
 
+from ._version import PACKAGE_NAME
+from .api.agents import agent_integrations_controller_add_agent_integration as _agents_add_integration
+from .api.agents import agent_integrations_controller_list_agent_integrations as _agents_list_integrations
+from .api.agents import agent_integrations_controller_remove_agent_integration as _agents_remove_integration
+from .api.agents import agent_integrations_controller_update_agent_integration as _agents_update_integration
+from .api.agents import agent_reply_controller_handle_agent_reply_handler as _agents_reply
+from .api.agents import agents_controller_create_agent as _agents_create
+from .api.agents import agents_controller_delete_agent as _agents_delete
+from .api.agents import agents_controller_get_agent as _agents_get
+from .api.agents import agents_controller_list_agents as _agents_list
+from .api.agents import agents_controller_update_agent as _agents_update
+from .api.agents import agents_controller_update_agent_bridge as _agents_update_bridge
 from .api.events import events_controller_broadcast_event_to_all as _events_broadcast
 from .api.events import events_controller_cancel as _events_cancel
 from .api.events import events_controller_trigger as _events_trigger
@@ -72,17 +85,28 @@ from .api.workflows import workflow_controller_search_workflows as _workflows_se
 from .api.workflows import workflow_controller_sync as _workflows_sync
 from .api.workflows import workflow_controller_update as _workflows_update
 from .exceptions import raise_for_response
+from .models.add_agent_integration_request_dto import AddAgentIntegrationRequestDto
+from .models.agent_behavior_dto import AgentBehaviorDto
+from .models.agent_reply_payload_dto import AgentReplyPayloadDto
 from .models.bulk_trigger_event_dto import BulkTriggerEventDto
+from .models.create_agent_request_dto import CreateAgentRequestDto
+from .models.create_agent_request_dto_runtime import CreateAgentRequestDtoRuntime
 from .models.create_subscriber_request_dto import CreateSubscriberRequestDto
 from .models.create_topic_subscriptions_request_dto import CreateTopicSubscriptionsRequestDto
 from .models.create_update_topic_request_dto import CreateUpdateTopicRequestDto
 from .models.delete_topic_subscriptions_request_dto import DeleteTopicSubscriptionsRequestDto
+from .models.managed_runtime_dto import ManagedRuntimeDto
 from .models.patch_subscriber_request_dto import PatchSubscriberRequestDto
+from .models.patch_workflow_dto import PatchWorkflowDto
 from .models.trigger_event_request_dto import TriggerEventRequestDto
 from .models.trigger_event_request_dto_context import TriggerEventRequestDtoContext
 from .models.trigger_event_request_dto_payload import TriggerEventRequestDtoPayload
 from .models.trigger_overrides import TriggerOverrides
+from .models.update_agent_bridge_request_dto import UpdateAgentBridgeRequestDto
+from .models.update_agent_integration_request_dto import UpdateAgentIntegrationRequestDto
+from .models.update_agent_request_dto import UpdateAgentRequestDto
 from .models.update_topic_request_dto import UpdateTopicRequestDto
+from .models.update_workflow_dto import UpdateWorkflowDto
 from .notifly_client import DEFAULT_BASE_URL, NotiflyClient, from_secret_key
 from .pagination import (
     DEFAULT_PAGE_SIZE,
@@ -111,6 +135,17 @@ def _model(model_cls: Any, body: Any, fields: Mapping[str, Any]) -> Any:
     if body is not None:
         return body if not isinstance(body, Mapping) else model_cls.from_dict(dict(body))
     return model_cls(**_drop_none(fields))
+
+
+def _coerce(fields: Mapping[str, Any], **targets: Any) -> dict[str, Any]:
+    """Build the nested DTO / enum fields named in ``targets`` from the mappings / strings a caller passed."""
+    coerced = dict(fields)
+    for name, target in targets.items():
+        value = coerced.get(name)
+        if value is None or isinstance(value, target):
+            continue
+        coerced[name] = target(value) if issubclass(target, Enum) else target.from_dict(dict(value))
+    return coerced
 
 
 def _free_form(model_cls: Any, value: Any) -> Any:
@@ -695,13 +730,36 @@ class WorkflowsResource(_SyncResource):
         """Fetch a workflow by id or trigger identifier."""
         return self._call(_workflows_get, workflow_id=workflow_id, **kwargs)
 
-    def update(self, workflow_id: str, body: Any, **kwargs: Any) -> Any:
-        """Replace a workflow (PUT)."""
-        return self._call(_workflows_update, workflow_id=workflow_id, body=body, **kwargs)
+    def update(
+        self,
+        workflow_id: str,
+        body: UpdateWorkflowDto | Mapping[str, Any],
+        *,
+        idempotency_key: str | None = None,
+    ) -> Any:
+        """Replace a workflow (PUT). Only the fields set on ``body`` reach the wire."""
+        return self._call(
+            _workflows_update,
+            workflow_id=workflow_id,
+            body=_model(UpdateWorkflowDto, body, {}),
+            idempotency_key=idempotency_key,
+        )
 
-    def patch(self, workflow_id: str, body: Any, **kwargs: Any) -> Any:
-        """Partially update a workflow (PATCH)."""
-        return self._call(_workflows_patch, workflow_id=workflow_id, body=body, **kwargs)
+    def patch(
+        self,
+        workflow_id: str,
+        body: PatchWorkflowDto | Mapping[str, Any] | None = None,
+        *,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        """Partially update a workflow (PATCH), e.g. ``patch("welcome", active=False)``: only what you pass is sent."""
+        return self._call(
+            _workflows_patch,
+            workflow_id=workflow_id,
+            body=_model(PatchWorkflowDto, body, fields),
+            idempotency_key=idempotency_key,
+        )
 
     def delete(self, workflow_id: str, **kwargs: Any) -> Any:
         """Delete a workflow."""
@@ -736,11 +794,34 @@ class AsyncWorkflowsResource(_AsyncResource):
     async def get(self, workflow_id: str, **kwargs: Any) -> Any:
         return await self._call(_workflows_get, workflow_id=workflow_id, **kwargs)
 
-    async def update(self, workflow_id: str, body: Any, **kwargs: Any) -> Any:
-        return await self._call(_workflows_update, workflow_id=workflow_id, body=body, **kwargs)
+    async def update(
+        self,
+        workflow_id: str,
+        body: UpdateWorkflowDto | Mapping[str, Any],
+        *,
+        idempotency_key: str | None = None,
+    ) -> Any:
+        return await self._call(
+            _workflows_update,
+            workflow_id=workflow_id,
+            body=_model(UpdateWorkflowDto, body, {}),
+            idempotency_key=idempotency_key,
+        )
 
-    async def patch(self, workflow_id: str, body: Any, **kwargs: Any) -> Any:
-        return await self._call(_workflows_patch, workflow_id=workflow_id, body=body, **kwargs)
+    async def patch(
+        self,
+        workflow_id: str,
+        body: PatchWorkflowDto | Mapping[str, Any] | None = None,
+        *,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        return await self._call(
+            _workflows_patch,
+            workflow_id=workflow_id,
+            body=_model(PatchWorkflowDto, body, fields),
+            idempotency_key=idempotency_key,
+        )
 
     async def delete(self, workflow_id: str, **kwargs: Any) -> Any:
         return await self._call(_workflows_remove, workflow_id=workflow_id, **kwargs)
@@ -889,6 +970,382 @@ class AsyncIntegrationsResource(_AsyncResource):
 
 
 # --------------------------------------------------------------------------------------
+# Agents
+# --------------------------------------------------------------------------------------
+#: Sent as the required ``Novu-Analytics-Source`` header of ``agents.create``; override per call with
+#: ``analytics_source=``.
+AGENTS_ANALYTICS_SOURCE = PACKAGE_NAME
+
+
+def _create_agent_body(body: Any, fields: Mapping[str, Any]) -> Any:
+    return _model(
+        CreateAgentRequestDto,
+        body,
+        _coerce(fields, runtime=CreateAgentRequestDtoRuntime, managed_runtime=ManagedRuntimeDto),
+    )
+
+
+def _update_agent_body(body: Any, fields: Mapping[str, Any]) -> Any:
+    return _model(UpdateAgentRequestDto, body, _coerce(fields, behavior=AgentBehaviorDto))
+
+
+def _delete_from_provider(value: bool | str) -> str:
+    """The API takes ``deleteFromProvider`` as a string query value (``"true"`` / ``"false"``)."""
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, str) and value.lower() in ("true", "false"):
+        return value.lower()
+    raise ValueError(f"delete_from_provider must be a bool or 'true' / 'false', got {value!r}")
+
+
+#: ``AgentReplyPayloadDto`` fields holding nested DTOs (or lists of them), keyed by attribute -> wire name.
+_REPLY_NESTED_FIELDS = {
+    "reply": "reply",
+    "tool_approval_request": "toolApprovalRequest",
+    "edit": "edit",
+    "resolve": "resolve",
+    "signals": "signals",
+    "tool_results": "toolResults",
+    "add_reactions": "addReactions",
+    "delete_messages": "deleteMessages",
+    "typing": "typing",
+}
+
+
+def _reply_fields(fields: Mapping[str, Any]) -> dict[str, Any]:
+    """Turn plain mappings given for the reply's nested fields into the DTOs the generated ``to_dict`` needs.
+
+    ``reply`` and ``signals`` are unions, so they are parsed by ``AgentReplyPayloadDto.from_dict`` itself rather
+    than guessed here; values that are already models are kept as they are. Mappings use the API's wire keys.
+    """
+    coerced = dict(fields)
+    wire: dict[str, Any] = {}
+    for name, wire_name in _REPLY_NESTED_FIELDS.items():
+        value = coerced.get(name)
+        if isinstance(value, Mapping):
+            wire[wire_name] = dict(value)
+        elif isinstance(value, list) and any(isinstance(item, Mapping) for item in value):
+            wire[wire_name] = [item.to_dict() if hasattr(item, "to_dict") else dict(item) for item in value]
+    if wire:
+        parsed = AgentReplyPayloadDto.from_dict({"conversationId": "", "integrationIdentifier": "", **wire})
+        for name, wire_name in _REPLY_NESTED_FIELDS.items():
+            if wire_name in wire:
+                coerced[name] = getattr(parsed, name)
+    return coerced
+
+
+class AgentsResource(_SyncResource):
+    """Create agents, link their integrations and reply on their behalf — ``notifly.agents``."""
+
+    def create(
+        self,
+        body: CreateAgentRequestDto | Mapping[str, Any] | None = None,
+        *,
+        analytics_source: str | None = AGENTS_ANALYTICS_SOURCE,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        """Create an agent, e.g. ``create(name="Support bot", identifier="support-bot")``.
+
+        ``analytics_source`` fills the ``Novu-Analytics-Source`` header the API requires on this call;
+        ``None`` keeps the default.
+        """
+        return self._call(
+            _agents_create,
+            body=_create_agent_body(body, fields),
+            novu_analytics_source=analytics_source or AGENTS_ANALYTICS_SOURCE,
+            idempotency_key=idempotency_key,
+        )
+
+    def get(self, identifier: str, *, idempotency_key: str | None = None) -> Any:
+        """Fetch an agent by identifier."""
+        return self._call(_agents_get, identifier=identifier, idempotency_key=idempotency_key)
+
+    def update(
+        self,
+        identifier: str,
+        body: UpdateAgentRequestDto | Mapping[str, Any] | None = None,
+        *,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        """Partially update an agent (PATCH): only the fields you pass are sent."""
+        return self._call(
+            _agents_update,
+            identifier=identifier,
+            body=_update_agent_body(body, fields),
+            idempotency_key=idempotency_key,
+        )
+
+    def delete(
+        self, identifier: str, *, delete_from_provider: bool | str = False, idempotency_key: str | None = None
+    ) -> Any:
+        """Delete an agent; ``delete_from_provider=True`` also removes it from its managed runtime provider."""
+        return self._call(
+            _agents_delete,
+            identifier=identifier,
+            delete_from_provider=_delete_from_provider(delete_from_provider),
+            idempotency_key=idempotency_key,
+        )
+
+    def list(self, **filters: Any) -> Any:
+        """Return one page of agents (cursor paginated: ``after``, ``limit``, ``identifier``, ...)."""
+        return self._call(_agents_list, **filters)
+
+    def iter_all(
+        self, *, limit: int = DEFAULT_PAGE_SIZE, max_pages: int | None = None, **filters: Any
+    ) -> Iterator[Any]:
+        """Iterate every agent, following the ``next`` cursor across pages."""
+        return iterate_cursor(
+            lambda **params: self.list(**{**filters, **params}), limit=limit, max_pages=max_pages
+        )
+
+    def update_bridge(
+        self,
+        identifier: str,
+        body: UpdateAgentBridgeRequestDto | Mapping[str, Any] | None = None,
+        *,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        """Set an agent's bridge URLs (PUT), e.g. ``update_bridge("support-bot", bridge_url="https://...")``."""
+        return self._call(
+            _agents_update_bridge,
+            identifier=identifier,
+            body=_model(UpdateAgentBridgeRequestDto, body, fields),
+            idempotency_key=idempotency_key,
+        )
+
+    def add_integration(
+        self,
+        identifier: str,
+        integration_identifier: str | None = None,
+        *,
+        body: AddAgentIntegrationRequestDto | Mapping[str, Any] | None = None,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        """Link an integration to an agent by its integration identifier (or auto-create one via ``provider_id``)."""
+        if integration_identifier is not None:
+            fields.setdefault("integration_identifier", integration_identifier)
+        return self._call(
+            _agents_add_integration,
+            identifier=identifier,
+            body=_model(AddAgentIntegrationRequestDto, body, fields),
+            idempotency_key=idempotency_key,
+        )
+
+    def list_integrations(self, identifier: str, **filters: Any) -> Any:
+        """Return one page of the integrations linked to an agent (cursor paginated)."""
+        return self._call(_agents_list_integrations, identifier=identifier, **filters)
+
+    def iter_integrations(
+        self, identifier: str, *, limit: int = DEFAULT_PAGE_SIZE, max_pages: int | None = None, **filters: Any
+    ) -> Iterator[Any]:
+        """Iterate an agent's linked integrations across pages."""
+        return iterate_cursor(
+            lambda **params: self.list_integrations(identifier, **{**filters, **params}),
+            limit=limit,
+            max_pages=max_pages,
+        )
+
+    def update_integration(
+        self,
+        identifier: str,
+        agent_integration_id: str,
+        integration_identifier: str | None = None,
+        *,
+        body: UpdateAgentIntegrationRequestDto | Mapping[str, Any] | None = None,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        """Point an existing agent-integration link at another integration."""
+        if integration_identifier is not None:
+            fields.setdefault("integration_identifier", integration_identifier)
+        return self._call(
+            _agents_update_integration,
+            identifier=identifier,
+            agent_integration_id=agent_integration_id,
+            body=_model(UpdateAgentIntegrationRequestDto, body, fields),
+            idempotency_key=idempotency_key,
+        )
+
+    def remove_integration(
+        self, identifier: str, agent_integration_id: str, *, idempotency_key: str | None = None
+    ) -> Any:
+        """Unlink an integration from an agent."""
+        return self._call(
+            _agents_remove_integration,
+            identifier=identifier,
+            agent_integration_id=agent_integration_id,
+            idempotency_key=idempotency_key,
+        )
+
+    def reply(
+        self,
+        agent_id: str,
+        body: AgentReplyPayloadDto | Mapping[str, Any] | None = None,
+        *,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        """Post an agent's reply into a conversation (``conversation_id`` and ``integration_identifier`` are required)."""
+        return self._call(
+            _agents_reply,
+            agent_id=agent_id,
+            body=_model(AgentReplyPayloadDto, body, _reply_fields(fields)),
+            idempotency_key=idempotency_key,
+        )
+
+
+class AsyncAgentsResource(_AsyncResource):
+    """Async twin of :class:`AgentsResource`."""
+
+    async def create(
+        self,
+        body: CreateAgentRequestDto | Mapping[str, Any] | None = None,
+        *,
+        analytics_source: str | None = AGENTS_ANALYTICS_SOURCE,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        return await self._call(
+            _agents_create,
+            body=_create_agent_body(body, fields),
+            novu_analytics_source=analytics_source or AGENTS_ANALYTICS_SOURCE,
+            idempotency_key=idempotency_key,
+        )
+
+    async def get(self, identifier: str, *, idempotency_key: str | None = None) -> Any:
+        return await self._call(_agents_get, identifier=identifier, idempotency_key=idempotency_key)
+
+    async def update(
+        self,
+        identifier: str,
+        body: UpdateAgentRequestDto | Mapping[str, Any] | None = None,
+        *,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        return await self._call(
+            _agents_update,
+            identifier=identifier,
+            body=_update_agent_body(body, fields),
+            idempotency_key=idempotency_key,
+        )
+
+    async def delete(
+        self, identifier: str, *, delete_from_provider: bool | str = False, idempotency_key: str | None = None
+    ) -> Any:
+        return await self._call(
+            _agents_delete,
+            identifier=identifier,
+            delete_from_provider=_delete_from_provider(delete_from_provider),
+            idempotency_key=idempotency_key,
+        )
+
+    async def list(self, **filters: Any) -> Any:
+        return await self._call(_agents_list, **filters)
+
+    def iter_all(
+        self, *, limit: int = DEFAULT_PAGE_SIZE, max_pages: int | None = None, **filters: Any
+    ) -> AsyncIterator[Any]:
+        return aiterate_cursor(
+            lambda **params: self.list(**{**filters, **params}), limit=limit, max_pages=max_pages
+        )
+
+    async def update_bridge(
+        self,
+        identifier: str,
+        body: UpdateAgentBridgeRequestDto | Mapping[str, Any] | None = None,
+        *,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        return await self._call(
+            _agents_update_bridge,
+            identifier=identifier,
+            body=_model(UpdateAgentBridgeRequestDto, body, fields),
+            idempotency_key=idempotency_key,
+        )
+
+    async def add_integration(
+        self,
+        identifier: str,
+        integration_identifier: str | None = None,
+        *,
+        body: AddAgentIntegrationRequestDto | Mapping[str, Any] | None = None,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        if integration_identifier is not None:
+            fields.setdefault("integration_identifier", integration_identifier)
+        return await self._call(
+            _agents_add_integration,
+            identifier=identifier,
+            body=_model(AddAgentIntegrationRequestDto, body, fields),
+            idempotency_key=idempotency_key,
+        )
+
+    async def list_integrations(self, identifier: str, **filters: Any) -> Any:
+        return await self._call(_agents_list_integrations, identifier=identifier, **filters)
+
+    def iter_integrations(
+        self, identifier: str, *, limit: int = DEFAULT_PAGE_SIZE, max_pages: int | None = None, **filters: Any
+    ) -> AsyncIterator[Any]:
+        return aiterate_cursor(
+            lambda **params: self.list_integrations(identifier, **{**filters, **params}),
+            limit=limit,
+            max_pages=max_pages,
+        )
+
+    async def update_integration(
+        self,
+        identifier: str,
+        agent_integration_id: str,
+        integration_identifier: str | None = None,
+        *,
+        body: UpdateAgentIntegrationRequestDto | Mapping[str, Any] | None = None,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        if integration_identifier is not None:
+            fields.setdefault("integration_identifier", integration_identifier)
+        return await self._call(
+            _agents_update_integration,
+            identifier=identifier,
+            agent_integration_id=agent_integration_id,
+            body=_model(UpdateAgentIntegrationRequestDto, body, fields),
+            idempotency_key=idempotency_key,
+        )
+
+    async def remove_integration(
+        self, identifier: str, agent_integration_id: str, *, idempotency_key: str | None = None
+    ) -> Any:
+        return await self._call(
+            _agents_remove_integration,
+            identifier=identifier,
+            agent_integration_id=agent_integration_id,
+            idempotency_key=idempotency_key,
+        )
+
+    async def reply(
+        self,
+        agent_id: str,
+        body: AgentReplyPayloadDto | Mapping[str, Any] | None = None,
+        *,
+        idempotency_key: str | None = None,
+        **fields: Any,
+    ) -> Any:
+        return await self._call(
+            _agents_reply,
+            agent_id=agent_id,
+            body=_model(AgentReplyPayloadDto, body, _reply_fields(fields)),
+            idempotency_key=idempotency_key,
+        )
+
+
+# --------------------------------------------------------------------------------------
 # Facades
 # --------------------------------------------------------------------------------------
 class Notifly:
@@ -920,6 +1377,7 @@ class Notifly:
         self.messages = MessagesResource(client)
         self.notifications = NotificationsResource(client)
         self.integrations = IntegrationsResource(client)
+        self.agents = AgentsResource(client)
 
     def __enter__(self) -> Notifly:
         self.client.__enter__()
@@ -962,6 +1420,7 @@ class AsyncNotifly:
         self.messages = AsyncMessagesResource(client)
         self.notifications = AsyncNotificationsResource(client)
         self.integrations = AsyncIntegrationsResource(client)
+        self.agents = AsyncAgentsResource(client)
 
     async def __aenter__(self) -> AsyncNotifly:
         await self.client.__aenter__()
@@ -976,6 +1435,9 @@ class AsyncNotifly:
 
 
 __all__ = [
+    "AGENTS_ANALYTICS_SOURCE",
+    "AgentsResource",
+    "AsyncAgentsResource",
     "AsyncEventsResource",
     "AsyncIntegrationsResource",
     "AsyncMessagesResource",
