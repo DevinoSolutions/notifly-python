@@ -28,6 +28,31 @@ from .activity_notification_template_response_dto import ActivityNotificationTem
 from .activity_topic_dto import ActivityTopicDto
 from .actor_feed_item_dto import ActorFeedItemDto
 from .actor_type_enum import ActorTypeEnum
+from .add_agent_integration_request_dto import AddAgentIntegrationRequestDto
+from .add_reaction_payload_dto import AddReactionPayloadDto
+from .agent_behavior_dto import AgentBehaviorDto
+from .agent_behavior_dto_subscriber_access import AgentBehaviorDtoSubscriberAccess
+from .agent_integration_response_dto import AgentIntegrationResponseDto
+from .agent_integration_response_dto_connected_at_type_0 import AgentIntegrationResponseDtoConnectedAtType0
+from .agent_integration_response_integration_dto import AgentIntegrationResponseIntegrationDto
+from .agent_integration_summary_dto import AgentIntegrationSummaryDto
+from .agent_integrations_controller_list_agent_integrations_order_direction import (
+    AgentIntegrationsControllerListAgentIntegrationsOrderDirection,
+)
+from .agent_mcp_server_dto import AgentMcpServerDto
+from .agent_plan_usage_dto import AgentPlanUsageDto
+from .agent_plan_usage_dto_limit_source import AgentPlanUsageDtoLimitSource
+from .agent_reply_payload_dto import AgentReplyPayloadDto
+from .agent_reply_payload_dto_typing_type_0 import AgentReplyPayloadDtoTypingType0
+from .agent_response_dto import AgentResponseDto
+from .agent_response_dto_runtime import AgentResponseDtoRuntime
+from .agent_response_dto_visibility import AgentResponseDtoVisibility
+from .agent_skill_input_dto import AgentSkillInputDto
+from .agent_skill_input_dto_type import AgentSkillInputDtoType
+from .agent_skill_input_dto_version_type_0 import AgentSkillInputDtoVersionType0
+from .agent_tool_dto import AgentToolDto
+from .agent_tool_dto_type import AgentToolDtoType
+from .agents_controller_list_agents_order_direction import AgentsControllerListAgentsOrderDirection
 from .api_key_dto import ApiKeyDto
 from .audit_log_controller_export_format import AuditLogControllerExportFormat
 from .audit_log_controller_list_response_200 import AuditLogControllerListResponse200
@@ -49,8 +74,13 @@ from .bulk_update_subscriber_preferences_dto_context_additional_property_type_1_
     BulkUpdateSubscriberPreferencesDtoContextAdditionalPropertyType1Data,
 )
 from .button_type_enum import ButtonTypeEnum
+from .card_reply_content_dto import CardReplyContentDto
+from .card_reply_content_dto_card import CardReplyContentDtoCard
 from .channel_connections_controller_list_channel_connections_channel import (
     ChannelConnectionsControllerListChannelConnectionsChannel,
+)
+from .channel_connections_controller_list_channel_connections_connection_mode import (
+    ChannelConnectionsControllerListChannelConnectionsConnectionMode,
 )
 from .channel_connections_controller_list_channel_connections_order_direction import (
     ChannelConnectionsControllerListChannelConnectionsOrderDirection,
@@ -69,15 +99,25 @@ from .channel_preference_dto import ChannelPreferenceDto
 from .channel_settings_dto import ChannelSettingsDto
 from .channel_type_enum import ChannelTypeEnum
 from .chat_control_dto import ChatControlDto
+from .chat_control_dto_editor_type import ChatControlDtoEditorType
 from .chat_control_dto_skip import ChatControlDtoSkip
 from .chat_controls_metadata_response_dto import ChatControlsMetadataResponseDto
 from .chat_controls_metadata_response_dto_data_schema import ChatControlsMetadataResponseDtoDataSchema
 from .chat_or_push_provider_enum import ChatOrPushProviderEnum
 from .chat_render_output import ChatRenderOutput
+from .chat_render_output_card import ChatRenderOutputCard
 from .chat_step_response_dto import ChatStepResponseDto
+from .chat_step_response_dto_provider_overrides_type_0 import ChatStepResponseDtoProviderOverridesType0
+from .chat_step_response_dto_provider_overrides_type_0_additional_property import (
+    ChatStepResponseDtoProviderOverridesType0AdditionalProperty,
+)
 from .chat_step_response_dto_variables import ChatStepResponseDtoVariables
 from .chat_step_upsert_dto import ChatStepUpsertDto
 from .chat_step_upsert_dto_control_values_type_1 import ChatStepUpsertDtoControlValuesType1
+from .chat_step_upsert_dto_provider_overrides_type_0 import ChatStepUpsertDtoProviderOverridesType0
+from .chat_step_upsert_dto_provider_overrides_type_0_additional_property import (
+    ChatStepUpsertDtoProviderOverridesType0AdditionalProperty,
+)
 from .configurations_dto import ConfigurationsDto
 from .configure_telegram_webhook_response_dto import ConfigureTelegramWebhookResponseDto
 from .constraint_validation import ConstraintValidation
@@ -87,6 +127,8 @@ from .content_issue_enum import ContentIssueEnum
 from .contexts_controller_list_contexts_order_direction import ContextsControllerListContextsOrderDirection
 from .controls_metadata_dto import ControlsMetadataDto
 from .controls_metadata_dto_data_schema import ControlsMetadataDtoDataSchema
+from .create_agent_request_dto import CreateAgentRequestDto
+from .create_agent_request_dto_runtime import CreateAgentRequestDtoRuntime
 from .create_channel_connection_request_dto import CreateChannelConnectionRequestDto
 from .create_channel_connection_request_dto_connection_mode import CreateChannelConnectionRequestDtoConnectionMode
 from .create_channel_connection_request_dto_context import CreateChannelConnectionRequestDtoContext
@@ -101,11 +143,30 @@ from .create_context_request_dto_data import CreateContextRequestDtoData
 from .create_environment_request_dto import CreateEnvironmentRequestDto
 from .create_environment_variable_request_dto import CreateEnvironmentVariableRequestDto
 from .create_environment_variable_request_dto_type import CreateEnvironmentVariableRequestDtoType
+from .create_grafana_on_call_integration_endpoint_dto import CreateGrafanaOnCallIntegrationEndpointDto
+from .create_grafana_on_call_integration_endpoint_dto_context import CreateGrafanaOnCallIntegrationEndpointDtoContext
+from .create_grafana_on_call_integration_endpoint_dto_context_additional_property_type_1 import (
+    CreateGrafanaOnCallIntegrationEndpointDtoContextAdditionalPropertyType1,
+)
+from .create_grafana_on_call_integration_endpoint_dto_context_additional_property_type_1_data import (
+    CreateGrafanaOnCallIntegrationEndpointDtoContextAdditionalPropertyType1Data,
+)
+from .create_grafana_on_call_integration_endpoint_dto_type import CreateGrafanaOnCallIntegrationEndpointDtoType
 from .create_integration_request_dto import CreateIntegrationRequestDto
 from .create_integration_request_dto_channel import CreateIntegrationRequestDtoChannel
 from .create_integration_request_dto_configurations import CreateIntegrationRequestDtoConfigurations
 from .create_integration_request_dto_kind import CreateIntegrationRequestDtoKind
+from .create_integration_request_dto_rules_type_0 import CreateIntegrationRequestDtoRulesType0
 from .create_layout_dto import CreateLayoutDto
+from .create_line_user_endpoint_dto import CreateLineUserEndpointDto
+from .create_line_user_endpoint_dto_context import CreateLineUserEndpointDtoContext
+from .create_line_user_endpoint_dto_context_additional_property_type_1 import (
+    CreateLineUserEndpointDtoContextAdditionalPropertyType1,
+)
+from .create_line_user_endpoint_dto_context_additional_property_type_1_data import (
+    CreateLineUserEndpointDtoContextAdditionalPropertyType1Data,
+)
+from .create_line_user_endpoint_dto_type import CreateLineUserEndpointDtoType
 from .create_ms_teams_channel_endpoint_dto import CreateMsTeamsChannelEndpointDto
 from .create_ms_teams_channel_endpoint_dto_context import CreateMsTeamsChannelEndpointDtoContext
 from .create_ms_teams_channel_endpoint_dto_context_additional_property_type_1 import (
@@ -124,6 +185,24 @@ from .create_ms_teams_user_endpoint_dto_context_additional_property_type_1_data 
     CreateMsTeamsUserEndpointDtoContextAdditionalPropertyType1Data,
 )
 from .create_ms_teams_user_endpoint_dto_type import CreateMsTeamsUserEndpointDtoType
+from .create_opsgenie_integration_endpoint_dto import CreateOpsgenieIntegrationEndpointDto
+from .create_opsgenie_integration_endpoint_dto_context import CreateOpsgenieIntegrationEndpointDtoContext
+from .create_opsgenie_integration_endpoint_dto_context_additional_property_type_1 import (
+    CreateOpsgenieIntegrationEndpointDtoContextAdditionalPropertyType1,
+)
+from .create_opsgenie_integration_endpoint_dto_context_additional_property_type_1_data import (
+    CreateOpsgenieIntegrationEndpointDtoContextAdditionalPropertyType1Data,
+)
+from .create_opsgenie_integration_endpoint_dto_type import CreateOpsgenieIntegrationEndpointDtoType
+from .create_pager_duty_service_endpoint_dto import CreatePagerDutyServiceEndpointDto
+from .create_pager_duty_service_endpoint_dto_context import CreatePagerDutyServiceEndpointDtoContext
+from .create_pager_duty_service_endpoint_dto_context_additional_property_type_1 import (
+    CreatePagerDutyServiceEndpointDtoContextAdditionalPropertyType1,
+)
+from .create_pager_duty_service_endpoint_dto_context_additional_property_type_1_data import (
+    CreatePagerDutyServiceEndpointDtoContextAdditionalPropertyType1Data,
+)
+from .create_pager_duty_service_endpoint_dto_type import CreatePagerDutyServiceEndpointDtoType
 from .create_phone_endpoint_dto import CreatePhoneEndpointDto
 from .create_phone_endpoint_dto_context import CreatePhoneEndpointDtoContext
 from .create_phone_endpoint_dto_context_additional_property_type_1 import (
@@ -163,6 +242,15 @@ from .create_telegram_chat_endpoint_dto_context_additional_property_type_1_data 
     CreateTelegramChatEndpointDtoContextAdditionalPropertyType1Data,
 )
 from .create_telegram_chat_endpoint_dto_type import CreateTelegramChatEndpointDtoType
+from .create_tool_webhook_endpoint_dto import CreateToolWebhookEndpointDto
+from .create_tool_webhook_endpoint_dto_context import CreateToolWebhookEndpointDtoContext
+from .create_tool_webhook_endpoint_dto_context_additional_property_type_1 import (
+    CreateToolWebhookEndpointDtoContextAdditionalPropertyType1,
+)
+from .create_tool_webhook_endpoint_dto_context_additional_property_type_1_data import (
+    CreateToolWebhookEndpointDtoContextAdditionalPropertyType1Data,
+)
+from .create_tool_webhook_endpoint_dto_type import CreateToolWebhookEndpointDtoType
 from .create_topic_subscriptions_request_dto import CreateTopicSubscriptionsRequestDto
 from .create_topic_subscriptions_request_dto_context import CreateTopicSubscriptionsRequestDtoContext
 from .create_topic_subscriptions_request_dto_context_additional_property_type_1 import (
@@ -174,6 +262,25 @@ from .create_topic_subscriptions_request_dto_context_additional_property_type_1_
 from .create_translation_request_dto import CreateTranslationRequestDto
 from .create_translation_request_dto_content import CreateTranslationRequestDtoContent
 from .create_update_topic_request_dto import CreateUpdateTopicRequestDto
+from .create_update_topic_request_dto_data_type_0 import CreateUpdateTopicRequestDtoDataType0
+from .create_webex_person_endpoint_dto import CreateWebexPersonEndpointDto
+from .create_webex_person_endpoint_dto_context import CreateWebexPersonEndpointDtoContext
+from .create_webex_person_endpoint_dto_context_additional_property_type_1 import (
+    CreateWebexPersonEndpointDtoContextAdditionalPropertyType1,
+)
+from .create_webex_person_endpoint_dto_context_additional_property_type_1_data import (
+    CreateWebexPersonEndpointDtoContextAdditionalPropertyType1Data,
+)
+from .create_webex_person_endpoint_dto_type import CreateWebexPersonEndpointDtoType
+from .create_webex_room_endpoint_dto import CreateWebexRoomEndpointDto
+from .create_webex_room_endpoint_dto_context import CreateWebexRoomEndpointDtoContext
+from .create_webex_room_endpoint_dto_context_additional_property_type_1 import (
+    CreateWebexRoomEndpointDtoContextAdditionalPropertyType1,
+)
+from .create_webex_room_endpoint_dto_context_additional_property_type_1_data import (
+    CreateWebexRoomEndpointDtoContextAdditionalPropertyType1Data,
+)
+from .create_webex_room_endpoint_dto_type import CreateWebexRoomEndpointDtoType
 from .create_webhook_endpoint_dto import CreateWebhookEndpointDto
 from .create_webhook_endpoint_dto_context import CreateWebhookEndpointDtoContext
 from .create_webhook_endpoint_dto_context_additional_property_type_1 import (
@@ -187,12 +294,17 @@ from .create_workflow_dto import CreateWorkflowDto
 from .create_workflow_dto_payload_schema_type_0 import CreateWorkflowDtoPayloadSchemaType0
 from .created_subscriber_dto import CreatedSubscriberDto
 from .credentials_dto import CredentialsDto
+from .credentials_dto_hmac_secret_key_encoding import CredentialsDtoHmacSecretKeyEncoding
 from .credentials_dto_tls_options import CredentialsDtoTlsOptions
 from .custom_control_dto import CustomControlDto
 from .custom_control_dto_custom import CustomControlDtoCustom
 from .custom_controls_metadata_response_dto import CustomControlsMetadataResponseDto
 from .custom_controls_metadata_response_dto_data_schema import CustomControlsMetadataResponseDtoDataSchema
 from .custom_step_response_dto import CustomStepResponseDto
+from .custom_step_response_dto_provider_overrides_type_0 import CustomStepResponseDtoProviderOverridesType0
+from .custom_step_response_dto_provider_overrides_type_0_additional_property import (
+    CustomStepResponseDtoProviderOverridesType0AdditionalProperty,
+)
 from .custom_step_response_dto_variables import CustomStepResponseDtoVariables
 from .custom_step_upsert_dto import CustomStepUpsertDto
 from .custom_step_upsert_dto_control_values_type_1 import CustomStepUpsertDtoControlValuesType1
@@ -212,9 +324,14 @@ from .delay_render_output import DelayRenderOutput
 from .delay_scheduled_metadata import DelayScheduledMetadata
 from .delay_scheduled_metadata_type import DelayScheduledMetadataType
 from .delay_step_response_dto import DelayStepResponseDto
+from .delay_step_response_dto_provider_overrides_type_0 import DelayStepResponseDtoProviderOverridesType0
+from .delay_step_response_dto_provider_overrides_type_0_additional_property import (
+    DelayStepResponseDtoProviderOverridesType0AdditionalProperty,
+)
 from .delay_step_response_dto_variables import DelayStepResponseDtoVariables
 from .delay_step_upsert_dto import DelayStepUpsertDto
 from .delay_step_upsert_dto_control_values_type_1 import DelayStepUpsertDtoControlValuesType1
+from .delete_message_payload_dto import DeleteMessagePayloadDto
 from .delete_message_response_dto import DeleteMessageResponseDto
 from .delete_message_response_dto_status import DeleteMessageResponseDtoStatus
 from .delete_topic_response_dto import DeleteTopicResponseDto
@@ -242,6 +359,10 @@ from .digest_regular_metadata_unit import DigestRegularMetadataUnit
 from .digest_regular_output import DigestRegularOutput
 from .digest_regular_output_look_back_window import DigestRegularOutputLookBackWindow
 from .digest_step_response_dto import DigestStepResponseDto
+from .digest_step_response_dto_provider_overrides_type_0 import DigestStepResponseDtoProviderOverridesType0
+from .digest_step_response_dto_provider_overrides_type_0_additional_property import (
+    DigestStepResponseDtoProviderOverridesType0AdditionalProperty,
+)
 from .digest_step_response_dto_variables import DigestStepResponseDtoVariables
 from .digest_step_upsert_dto import DigestStepUpsertDto
 from .digest_step_upsert_dto_control_values_type_1 import DigestStepUpsertDtoControlValuesType1
@@ -256,6 +377,7 @@ from .digest_unit_enum import DigestUnitEnum
 from .direction_enum import DirectionEnum
 from .duplicate_layout_dto import DuplicateLayoutDto
 from .duplicate_workflow_dto import DuplicateWorkflowDto
+from .edit_payload_dto import EditPayloadDto
 from .email_block import EmailBlock
 from .email_block_styles import EmailBlockStyles
 from .email_block_type_enum import EmailBlockTypeEnum
@@ -267,9 +389,14 @@ from .email_controls_dto import EmailControlsDto
 from .email_controls_dto_editor_type import EmailControlsDtoEditorType
 from .email_controls_metadata_response_dto import EmailControlsMetadataResponseDto
 from .email_controls_metadata_response_dto_data_schema import EmailControlsMetadataResponseDtoDataSchema
+from .email_from_control_dto import EmailFromControlDto
 from .email_layout_render_output import EmailLayoutRenderOutput
 from .email_render_output import EmailRenderOutput
 from .email_step_response_dto import EmailStepResponseDto
+from .email_step_response_dto_provider_overrides_type_0 import EmailStepResponseDtoProviderOverridesType0
+from .email_step_response_dto_provider_overrides_type_0_additional_property import (
+    EmailStepResponseDtoProviderOverridesType0AdditionalProperty,
+)
 from .email_step_response_dto_variables import EmailStepResponseDtoVariables
 from .email_step_upsert_dto import EmailStepUpsertDto
 from .email_step_upsert_dto_control_values_type_1 import EmailStepUpsertDtoControlValuesType1
@@ -293,6 +420,7 @@ from .feed_response_dto import FeedResponseDto
 from .field_filter_part_dto import FieldFilterPartDto
 from .field_filter_part_dto_on import FieldFilterPartDtoOn
 from .field_filter_part_dto_operator import FieldFilterPartDtoOperator
+from .file_ref_dto import FileRefDto
 from .generate_chat_o_auth_url_response_dto import GenerateChatOAuthUrlResponseDto
 from .generate_chat_oauth_url_request_dto import GenerateChatOauthUrlRequestDto
 from .generate_chat_oauth_url_request_dto_connection_mode import GenerateChatOauthUrlRequestDtoConnectionMode
@@ -342,9 +470,12 @@ from .generate_preview_response_dto_result_type_5_type import GeneratePreviewRes
 from .generate_preview_response_dto_result_type_6 import GeneratePreviewResponseDtoResultType6
 from .generate_preview_response_dto_result_type_6_type import GeneratePreviewResponseDtoResultType6Type
 from .generate_preview_response_dto_result_type_7 import GeneratePreviewResponseDtoResultType7
+from .generate_preview_response_dto_result_type_7_preview import GeneratePreviewResponseDtoResultType7Preview
 from .generate_preview_response_dto_result_type_7_type import GeneratePreviewResponseDtoResultType7Type
 from .generate_preview_response_dto_result_type_8 import GeneratePreviewResponseDtoResultType8
 from .generate_preview_response_dto_result_type_8_type import GeneratePreviewResponseDtoResultType8Type
+from .generate_preview_response_dto_result_type_9 import GeneratePreviewResponseDtoResultType9
+from .generate_preview_response_dto_result_type_9_type import GeneratePreviewResponseDtoResultType9Type
 from .generate_preview_response_dto_schema_type_0 import GeneratePreviewResponseDtoSchemaType0
 from .get_channel_connection_response_dto import GetChannelConnectionResponseDto
 from .get_channel_connection_response_dto_channel import GetChannelConnectionResponseDtoChannel
@@ -385,6 +516,7 @@ from .get_workflow_runs_dto_status import GetWorkflowRunsDtoStatus
 from .get_workflow_runs_response_dto import GetWorkflowRunsResponseDto
 from .get_workflow_runs_response_dto_next_type_0 import GetWorkflowRunsResponseDtoNextType0
 from .get_workflow_runs_response_dto_previous_type_0 import GetWorkflowRunsResponseDtoPreviousType0
+from .grafana_on_call_integration_endpoint_dto import GrafanaOnCallIntegrationEndpointDto
 from .group_preference_filter_details_dto import GroupPreferenceFilterDetailsDto
 from .group_preference_filter_dto import GroupPreferenceFilterDto
 from .group_preference_filter_dto_condition import GroupPreferenceFilterDtoCondition
@@ -395,9 +527,16 @@ from .http_request_controls_metadata_response_dto import HttpRequestControlsMeta
 from .http_request_controls_metadata_response_dto_data_schema import HttpRequestControlsMetadataResponseDtoDataSchema
 from .http_request_key_value_pair_dto import HttpRequestKeyValuePairDto
 from .http_request_step_response_dto import HttpRequestStepResponseDto
+from .http_request_step_response_dto_provider_overrides_type_0 import HttpRequestStepResponseDtoProviderOverridesType0
+from .http_request_step_response_dto_provider_overrides_type_0_additional_property import (
+    HttpRequestStepResponseDtoProviderOverridesType0AdditionalProperty,
+)
 from .http_request_step_response_dto_variables import HttpRequestStepResponseDtoVariables
 from .http_request_step_upsert_dto import HttpRequestStepUpsertDto
 from .http_request_step_upsert_dto_control_values_type_1 import HttpRequestStepUpsertDtoControlValuesType1
+from .human_signal_dto import HumanSignalDto
+from .human_signal_dto_kind import HumanSignalDtoKind
+from .human_signal_dto_type import HumanSignalDtoType
 from .import_master_json_response_dto import ImportMasterJsonResponseDto
 from .in_app_control_dto import InAppControlDto
 from .in_app_control_dto_data import InAppControlDtoData
@@ -407,6 +546,10 @@ from .in_app_controls_metadata_response_dto_data_schema import InAppControlsMeta
 from .in_app_render_output import InAppRenderOutput
 from .in_app_render_output_data import InAppRenderOutputData
 from .in_app_step_response_dto import InAppStepResponseDto
+from .in_app_step_response_dto_provider_overrides_type_0 import InAppStepResponseDtoProviderOverridesType0
+from .in_app_step_response_dto_provider_overrides_type_0_additional_property import (
+    InAppStepResponseDtoProviderOverridesType0AdditionalProperty,
+)
 from .in_app_step_response_dto_variables import InAppStepResponseDtoVariables
 from .in_app_step_upsert_dto import InAppStepUpsertDto
 from .in_app_step_upsert_dto_control_values_type_1 import InAppStepUpsertDtoControlValuesType1
@@ -419,6 +562,7 @@ from .integration_issue_enum import IntegrationIssueEnum
 from .integration_response_dto import IntegrationResponseDto
 from .integration_response_dto_channel import IntegrationResponseDtoChannel
 from .integration_response_dto_kind import IntegrationResponseDtoKind
+from .integration_response_dto_rules_type_0 import IntegrationResponseDtoRulesType0
 from .issue_integration_mobile_link_request_dto import IssueIntegrationMobileLinkRequestDto
 from .issue_telegram_mobile_link_response_dto import IssueTelegramMobileLinkResponseDto
 from .layout_control_values_dto import LayoutControlValuesDto
@@ -431,9 +575,19 @@ from .layout_preview_request_dto_control_values import LayoutPreviewRequestDtoCo
 from .layout_response_dto import LayoutResponseDto
 from .layout_response_dto_sort_field import LayoutResponseDtoSortField
 from .layout_response_dto_variables_type_0 import LayoutResponseDtoVariablesType0
+from .line_user_endpoint_dto import LineUserEndpointDto
 from .link_channel_endpoint_request_dto import LinkChannelEndpointRequestDto
+from .link_channel_endpoint_request_dto_context import LinkChannelEndpointRequestDtoContext
+from .link_channel_endpoint_request_dto_context_additional_property_type_1 import (
+    LinkChannelEndpointRequestDtoContextAdditionalPropertyType1,
+)
+from .link_channel_endpoint_request_dto_context_additional_property_type_1_data import (
+    LinkChannelEndpointRequestDtoContextAdditionalPropertyType1Data,
+)
 from .link_channel_endpoint_response_dto import LinkChannelEndpointResponseDto
 from .link_channel_endpoint_response_dto_provider_metadata import LinkChannelEndpointResponseDtoProviderMetadata
+from .list_agent_integrations_response_dto import ListAgentIntegrationsResponseDto
+from .list_agents_response_dto import ListAgentsResponseDto
 from .list_channel_connections_response_dto import ListChannelConnectionsResponseDto
 from .list_channel_endpoints_response_dto import ListChannelEndpointsResponseDto
 from .list_contexts_response_dto import ListContextsResponseDto
@@ -445,6 +599,9 @@ from .list_translation_groups_response_dto import ListTranslationGroupsResponseD
 from .list_workflow_response import ListWorkflowResponse
 from .look_back_window_dto import LookBackWindowDto
 from .look_back_window_dto_unit import LookBackWindowDtoUnit
+from .managed_runtime_dto import ManagedRuntimeDto
+from .managed_runtime_dto_provider_id import ManagedRuntimeDtoProviderId
+from .managed_runtime_response_dto import ManagedRuntimeResponseDto
 from .mark_all_message_as_request_dto import MarkAllMessageAsRequestDto
 from .mark_all_message_as_request_dto_mark_as import MarkAllMessageAsRequestDtoMarkAs
 from .mark_message_action_as_seen_dto import MarkMessageActionAsSeenDto
@@ -452,6 +609,7 @@ from .mark_message_action_as_seen_dto_payload import MarkMessageActionAsSeenDtoP
 from .mark_message_action_as_seen_dto_status import MarkMessageActionAsSeenDtoStatus
 from .mark_subscriber_notifications_as_seen_dto import MarkSubscriberNotificationsAsSeenDto
 from .mark_subscriber_notifications_as_seen_dto_tags import MarkSubscriberNotificationsAsSeenDtoTags
+from .markdown_reply_content_dto import MarkdownReplyContentDto
 from .message_action import MessageAction
 from .message_action_result import MessageActionResult
 from .message_action_result_payload import MessageActionResultPayload
@@ -474,6 +632,16 @@ from .messages_controller_delete_messages_by_transaction_id_channel import (
 )
 from .messages_response_dto import MessagesResponseDto
 from .meta_dto import MetaDto
+from .metadata_clear_signal_dto import MetadataClearSignalDto
+from .metadata_clear_signal_dto_action import MetadataClearSignalDtoAction
+from .metadata_clear_signal_dto_type import MetadataClearSignalDtoType
+from .metadata_delete_signal_dto import MetadataDeleteSignalDto
+from .metadata_delete_signal_dto_action import MetadataDeleteSignalDtoAction
+from .metadata_delete_signal_dto_type import MetadataDeleteSignalDtoType
+from .metadata_set_signal_dto import MetadataSetSignalDto
+from .metadata_set_signal_dto_action import MetadataSetSignalDtoAction
+from .metadata_set_signal_dto_type import MetadataSetSignalDtoType
+from .metadata_set_signal_dto_value import MetadataSetSignalDtoValue
 from .monthly_type_enum import MonthlyTypeEnum
 from .ms_teams_channel_endpoint_dto import MsTeamsChannelEndpointDto
 from .ms_teams_user_endpoint_dto import MsTeamsUserEndpointDto
@@ -492,8 +660,12 @@ from .notification_trigger_type import NotificationTriggerType
 from .notification_trigger_variable import NotificationTriggerVariable
 from .notification_workflow_dto import NotificationWorkflowDto
 from .notification_workflow_dto_data import NotificationWorkflowDtoData
+from .opsgenie_integration_endpoint_dto import OpsgenieIntegrationEndpointDto
+from .opsgenie_integration_endpoint_dto_region import OpsgenieIntegrationEndpointDtoRegion
 from .ordinal_enum import OrdinalEnum
 from .ordinal_value_enum import OrdinalValueEnum
+from .pager_duty_service_endpoint_dto import PagerDutyServiceEndpointDto
+from .pager_duty_service_endpoint_dto_region import PagerDutyServiceEndpointDtoRegion
 from .patch_preference_channels_dto import PatchPreferenceChannelsDto
 from .patch_subscriber_preferences_dto import PatchSubscriberPreferencesDto
 from .patch_subscriber_preferences_dto_context import PatchSubscriberPreferencesDtoContext
@@ -518,6 +690,7 @@ from .payload_validation_exception_dto_message_type_4_item_type_3 import (
 )
 from .payload_validation_exception_dto_schema import PayloadValidationExceptionDtoSchema
 from .phone_endpoint_dto import PhoneEndpointDto
+from .plan_usage_dto import PlanUsageDto
 from .preference_level_enum import PreferenceLevelEnum
 from .preference_override_source_enum import PreferenceOverrideSourceEnum
 from .preferences_request_dto import PreferencesRequestDto
@@ -541,6 +714,10 @@ from .push_controls_metadata_response_dto import PushControlsMetadataResponseDto
 from .push_controls_metadata_response_dto_data_schema import PushControlsMetadataResponseDtoDataSchema
 from .push_render_output import PushRenderOutput
 from .push_step_response_dto import PushStepResponseDto
+from .push_step_response_dto_provider_overrides_type_0 import PushStepResponseDtoProviderOverridesType0
+from .push_step_response_dto_provider_overrides_type_0_additional_property import (
+    PushStepResponseDtoProviderOverridesType0AdditionalProperty,
+)
 from .push_step_response_dto_variables import PushStepResponseDtoVariables
 from .push_step_upsert_dto import PushStepUpsertDto
 from .push_step_upsert_dto_control_values_type_1 import PushStepUpsertDtoControlValuesType1
@@ -550,9 +727,13 @@ from .register_subscriber_device_token_request_dto import RegisterSubscriberDevi
 from .remove_subscriber_device_token_request_dto import RemoveSubscriberDeviceTokenRequestDto
 from .remove_subscriber_response_dto import RemoveSubscriberResponseDto
 from .reply_callback import ReplyCallback
+from .reply_content_dto import ReplyContentDto
+from .reply_content_dto_card import ReplyContentDtoCard
+from .reply_content_dto_tool_approval_card import ReplyContentDtoToolApprovalCard
 from .request_log_response_dto import RequestLogResponseDto
 from .request_log_response_dto_source import RequestLogResponseDtoSource
 from .request_log_response_dto_transaction_id_type_0 import RequestLogResponseDtoTransactionIdType0
+from .resolve_dto import ResolveDto
 from .resource_dependency_dto import ResourceDependencyDto
 from .resource_diff_dto import ResourceDiffDto
 from .resource_diff_dto_diffs import ResourceDiffDtoDiffs
@@ -566,6 +747,7 @@ from .resource_type import ResourceType
 from .resource_type_enum import ResourceTypeEnum
 from .runtime_issue_dto import RuntimeIssueDto
 from .schedule_dto import ScheduleDto
+from .sent_message_info_dto import SentMessageInfoDto
 from .severity_level_enum import SeverityLevelEnum
 from .skipped_workflow_dto import SkippedWorkflowDto
 from .slack_channel_endpoint_dto import SlackChannelEndpointDto
@@ -576,6 +758,10 @@ from .sms_controls_metadata_response_dto import SmsControlsMetadataResponseDto
 from .sms_controls_metadata_response_dto_data_schema import SmsControlsMetadataResponseDtoDataSchema
 from .sms_render_output import SmsRenderOutput
 from .sms_step_response_dto import SmsStepResponseDto
+from .sms_step_response_dto_provider_overrides_type_0 import SmsStepResponseDtoProviderOverridesType0
+from .sms_step_response_dto_provider_overrides_type_0_additional_property import (
+    SmsStepResponseDtoProviderOverridesType0AdditionalProperty,
+)
 from .sms_step_response_dto_variables import SmsStepResponseDtoVariables
 from .sms_step_upsert_dto import SmsStepUpsertDto
 from .sms_step_upsert_dto_control_values_type_1 import SmsStepUpsertDtoControlValuesType1
@@ -586,12 +772,17 @@ from .step_execution_detail_dto_raw_type_0 import StepExecutionDetailDtoRawType0
 from .step_filter_dto import StepFilterDto
 from .step_filter_dto_value import StepFilterDtoValue
 from .step_integration_issue import StepIntegrationIssue
+from .step_issue_severity_enum import StepIssueSeverityEnum
 from .step_issues_dto import StepIssuesDto
 from .step_issues_dto_controls import StepIssuesDtoControls
 from .step_issues_dto_integration import StepIssuesDtoIntegration
 from .step_list_response_dto import StepListResponseDto
 from .step_response_dto import StepResponseDto
 from .step_response_dto_control_values import StepResponseDtoControlValues
+from .step_response_dto_provider_overrides_type_0 import StepResponseDtoProviderOverridesType0
+from .step_response_dto_provider_overrides_type_0_additional_property import (
+    StepResponseDtoProviderOverridesType0AdditionalProperty,
+)
 from .step_response_dto_variables import StepResponseDtoVariables
 from .step_run_dto import StepRunDto
 from .step_run_dto_status import StepRunDtoStatus
@@ -654,6 +845,10 @@ from .throttle_control_dto_unit import ThrottleControlDtoUnit
 from .throttle_controls_metadata_response_dto import ThrottleControlsMetadataResponseDto
 from .throttle_controls_metadata_response_dto_data_schema import ThrottleControlsMetadataResponseDtoDataSchema
 from .throttle_step_response_dto import ThrottleStepResponseDto
+from .throttle_step_response_dto_provider_overrides_type_0 import ThrottleStepResponseDtoProviderOverridesType0
+from .throttle_step_response_dto_provider_overrides_type_0_additional_property import (
+    ThrottleStepResponseDtoProviderOverridesType0AdditionalProperty,
+)
 from .throttle_step_response_dto_variables import ThrottleStepResponseDtoVariables
 from .throttle_step_upsert_dto import ThrottleStepUpsertDto
 from .throttle_step_upsert_dto_control_values_type_1 import ThrottleStepUpsertDtoControlValuesType1
@@ -664,9 +859,36 @@ from .timed_config_monthly_type import TimedConfigMonthlyType
 from .timed_config_ordinal import TimedConfigOrdinal
 from .timed_config_ordinal_value import TimedConfigOrdinalValue
 from .timed_config_week_days_item import TimedConfigWeekDaysItem
+from .tool_approval_card_reply_content_dto import ToolApprovalCardReplyContentDto
+from .tool_approval_card_reply_content_dto_tool_approval_card import ToolApprovalCardReplyContentDtoToolApprovalCard
+from .tool_approval_request_payload_dto import ToolApprovalRequestPayloadDto
+from .tool_approval_request_payload_dto_input import ToolApprovalRequestPayloadDtoInput
+from .tool_control_dto import ToolControlDto
+from .tool_control_dto_skip import ToolControlDtoSkip
+from .tool_controls_metadata_response_dto import ToolControlsMetadataResponseDto
+from .tool_controls_metadata_response_dto_data_schema import ToolControlsMetadataResponseDtoDataSchema
+from .tool_result_dto import ToolResultDto
+from .tool_result_dto_output import ToolResultDtoOutput
+from .tool_step_response_dto import ToolStepResponseDto
+from .tool_step_response_dto_provider_overrides_type_0 import ToolStepResponseDtoProviderOverridesType0
+from .tool_step_response_dto_provider_overrides_type_0_additional_property import (
+    ToolStepResponseDtoProviderOverridesType0AdditionalProperty,
+)
+from .tool_step_response_dto_variables import ToolStepResponseDtoVariables
+from .tool_step_upsert_dto import ToolStepUpsertDto
+from .tool_step_upsert_dto_control_values_type_1 import ToolStepUpsertDtoControlValuesType1
+from .tool_step_upsert_dto_provider_overrides_type_0 import ToolStepUpsertDtoProviderOverridesType0
+from .tool_step_upsert_dto_provider_overrides_type_0_additional_property import (
+    ToolStepUpsertDtoProviderOverridesType0AdditionalProperty,
+)
+from .tool_webhook_endpoint_dto import ToolWebhookEndpointDto
+from .tool_webhook_endpoint_dto_headers import ToolWebhookEndpointDtoHeaders
+from .tool_webhook_endpoint_dto_method import ToolWebhookEndpointDtoMethod
 from .topic_dto import TopicDto
+from .topic_dto_data import TopicDtoData
 from .topic_payload_dto import TopicPayloadDto
 from .topic_response_dto import TopicResponseDto
+from .topic_response_dto_data import TopicResponseDtoData
 from .topic_subscriber_dto import TopicSubscriberDto
 from .topic_subscriber_identifier_dto import TopicSubscriberIdentifierDto
 from .topic_subscription_response_dto import TopicSubscriptionResponseDto
@@ -713,6 +935,12 @@ from .trigger_overrides_push import TriggerOverridesPush
 from .trigger_overrides_sms import TriggerOverridesSms
 from .trigger_overrides_steps import TriggerOverridesSteps
 from .trigger_recipients_type_enum import TriggerRecipientsTypeEnum
+from .trigger_signal_dto import TriggerSignalDto
+from .trigger_signal_dto_payload import TriggerSignalDtoPayload
+from .trigger_signal_dto_to_type_1 import TriggerSignalDtoToType1
+from .trigger_signal_dto_to_type_2_item_type_1 import TriggerSignalDtoToType2ItemType1
+from .trigger_signal_dto_type import TriggerSignalDtoType
+from .typing_status_dto import TypingStatusDto
 from .ui_component_enum import UiComponentEnum
 from .ui_schema import UiSchema
 from .ui_schema_group_enum import UiSchemaGroupEnum
@@ -722,6 +950,9 @@ from .ui_schema_property_placeholder_type_3 import UiSchemaPropertyPlaceholderTy
 from .ui_schema_property_placeholder_type_4_item_type_3 import UiSchemaPropertyPlaceholderType4ItemType3
 from .ui_schema_property_properties import UiSchemaPropertyProperties
 from .unseen_count_response import UnseenCountResponse
+from .update_agent_bridge_request_dto import UpdateAgentBridgeRequestDto
+from .update_agent_integration_request_dto import UpdateAgentIntegrationRequestDto
+from .update_agent_request_dto import UpdateAgentRequestDto
 from .update_all_subscriber_notifications_dto import UpdateAllSubscriberNotificationsDto
 from .update_all_subscriber_notifications_dto_tags import UpdateAllSubscriberNotificationsDtoTags
 from .update_channel_connection_request_dto import UpdateChannelConnectionRequestDto
@@ -733,10 +964,12 @@ from .update_environment_variable_request_dto import UpdateEnvironmentVariableRe
 from .update_environment_variable_request_dto_type import UpdateEnvironmentVariableRequestDtoType
 from .update_integration_request_dto import UpdateIntegrationRequestDto
 from .update_integration_request_dto_configurations import UpdateIntegrationRequestDtoConfigurations
+from .update_integration_request_dto_rules_type_0 import UpdateIntegrationRequestDtoRulesType0
 from .update_layout_dto import UpdateLayoutDto
 from .update_subscriber_channel_request_dto import UpdateSubscriberChannelRequestDto
 from .update_subscriber_online_flag_request_dto import UpdateSubscriberOnlineFlagRequestDto
 from .update_topic_request_dto import UpdateTopicRequestDto
+from .update_topic_request_dto_data_type_0 import UpdateTopicRequestDtoDataType0
 from .update_topic_subscription_request_dto import UpdateTopicSubscriptionRequestDto
 from .update_workflow_dto import UpdateWorkflowDto
 from .update_workflow_dto_payload_schema_type_0 import UpdateWorkflowDtoPayloadSchemaType0
@@ -749,6 +982,8 @@ from .validation_error_dto_ctx import ValidationErrorDtoCtx
 from .validation_error_dto_errors import ValidationErrorDtoErrors
 from .validation_error_dto_message_type_3_type_0 import ValidationErrorDtoMessageType3Type0
 from .validation_error_dto_message_type_4_item_type_3 import ValidationErrorDtoMessageType4ItemType3
+from .webex_person_endpoint_dto import WebexPersonEndpointDto
+from .webex_room_endpoint_dto import WebexRoomEndpointDto
 from .webhook_created_workflow_dto import WebhookCreatedWorkflowDto
 from .webhook_created_workflow_dto_webhook_payload_wrapper import WebhookCreatedWorkflowDtoWebhookPayloadWrapper
 from .webhook_created_workflow_dto_webhook_payload_wrapper_object import (
@@ -800,6 +1035,9 @@ from .webhook_updated_workflow_dto_webhook_payload_wrapper_type import (
     WebhookUpdatedWorkflowDtoWebhookPayloadWrapperType,
 )
 from .weekly_schedule_dto import WeeklyScheduleDto
+from .workflow_agent_config_dto import WorkflowAgentConfigDto
+from .workflow_agent_config_dto_providers import WorkflowAgentConfigDtoProviders
+from .workflow_agent_config_dto_providers_additional_property import WorkflowAgentConfigDtoProvidersAdditionalProperty
 from .workflow_creation_source_enum import WorkflowCreationSourceEnum
 from .workflow_dto import WorkflowDto
 from .workflow_dto_data import WorkflowDtoData
@@ -851,6 +1089,29 @@ __all__ = (
     "ActivityTopicDto",
     "ActorFeedItemDto",
     "ActorTypeEnum",
+    "AddAgentIntegrationRequestDto",
+    "AddReactionPayloadDto",
+    "AgentBehaviorDto",
+    "AgentBehaviorDtoSubscriberAccess",
+    "AgentIntegrationResponseDto",
+    "AgentIntegrationResponseDtoConnectedAtType0",
+    "AgentIntegrationResponseIntegrationDto",
+    "AgentIntegrationsControllerListAgentIntegrationsOrderDirection",
+    "AgentIntegrationSummaryDto",
+    "AgentMcpServerDto",
+    "AgentPlanUsageDto",
+    "AgentPlanUsageDtoLimitSource",
+    "AgentReplyPayloadDto",
+    "AgentReplyPayloadDtoTypingType0",
+    "AgentResponseDto",
+    "AgentResponseDtoRuntime",
+    "AgentResponseDtoVisibility",
+    "AgentsControllerListAgentsOrderDirection",
+    "AgentSkillInputDto",
+    "AgentSkillInputDtoType",
+    "AgentSkillInputDtoVersionType0",
+    "AgentToolDto",
+    "AgentToolDtoType",
     "ApiKeyDto",
     "AuditLogControllerExportFormat",
     "AuditLogControllerListResponse200",
@@ -868,7 +1129,10 @@ __all__ = (
     "BulkUpdateSubscriberPreferencesDtoContextAdditionalPropertyType1",
     "BulkUpdateSubscriberPreferencesDtoContextAdditionalPropertyType1Data",
     "ButtonTypeEnum",
+    "CardReplyContentDto",
+    "CardReplyContentDtoCard",
     "ChannelConnectionsControllerListChannelConnectionsChannel",
+    "ChannelConnectionsControllerListChannelConnectionsConnectionMode",
     "ChannelConnectionsControllerListChannelConnectionsOrderDirection",
     "ChannelCredentials",
     "ChannelCredentialsDto",
@@ -880,15 +1144,21 @@ __all__ = (
     "ChannelSettingsDto",
     "ChannelTypeEnum",
     "ChatControlDto",
+    "ChatControlDtoEditorType",
     "ChatControlDtoSkip",
     "ChatControlsMetadataResponseDto",
     "ChatControlsMetadataResponseDtoDataSchema",
     "ChatOrPushProviderEnum",
     "ChatRenderOutput",
+    "ChatRenderOutputCard",
     "ChatStepResponseDto",
+    "ChatStepResponseDtoProviderOverridesType0",
+    "ChatStepResponseDtoProviderOverridesType0AdditionalProperty",
     "ChatStepResponseDtoVariables",
     "ChatStepUpsertDto",
     "ChatStepUpsertDtoControlValuesType1",
+    "ChatStepUpsertDtoProviderOverridesType0",
+    "ChatStepUpsertDtoProviderOverridesType0AdditionalProperty",
     "ConfigurationsDto",
     "ConfigureTelegramWebhookResponseDto",
     "ConstraintValidation",
@@ -898,6 +1168,8 @@ __all__ = (
     "ContextsControllerListContextsOrderDirection",
     "ControlsMetadataDto",
     "ControlsMetadataDtoDataSchema",
+    "CreateAgentRequestDto",
+    "CreateAgentRequestDtoRuntime",
     "CreateChannelConnectionRequestDto",
     "CreateChannelConnectionRequestDtoConnectionMode",
     "CreateChannelConnectionRequestDtoContext",
@@ -909,11 +1181,22 @@ __all__ = (
     "CreateEnvironmentRequestDto",
     "CreateEnvironmentVariableRequestDto",
     "CreateEnvironmentVariableRequestDtoType",
+    "CreateGrafanaOnCallIntegrationEndpointDto",
+    "CreateGrafanaOnCallIntegrationEndpointDtoContext",
+    "CreateGrafanaOnCallIntegrationEndpointDtoContextAdditionalPropertyType1",
+    "CreateGrafanaOnCallIntegrationEndpointDtoContextAdditionalPropertyType1Data",
+    "CreateGrafanaOnCallIntegrationEndpointDtoType",
     "CreateIntegrationRequestDto",
     "CreateIntegrationRequestDtoChannel",
     "CreateIntegrationRequestDtoConfigurations",
     "CreateIntegrationRequestDtoKind",
+    "CreateIntegrationRequestDtoRulesType0",
     "CreateLayoutDto",
+    "CreateLineUserEndpointDto",
+    "CreateLineUserEndpointDtoContext",
+    "CreateLineUserEndpointDtoContextAdditionalPropertyType1",
+    "CreateLineUserEndpointDtoContextAdditionalPropertyType1Data",
+    "CreateLineUserEndpointDtoType",
     "CreateMsTeamsChannelEndpointDto",
     "CreateMsTeamsChannelEndpointDtoContext",
     "CreateMsTeamsChannelEndpointDtoContextAdditionalPropertyType1",
@@ -924,6 +1207,16 @@ __all__ = (
     "CreateMsTeamsUserEndpointDtoContextAdditionalPropertyType1",
     "CreateMsTeamsUserEndpointDtoContextAdditionalPropertyType1Data",
     "CreateMsTeamsUserEndpointDtoType",
+    "CreateOpsgenieIntegrationEndpointDto",
+    "CreateOpsgenieIntegrationEndpointDtoContext",
+    "CreateOpsgenieIntegrationEndpointDtoContextAdditionalPropertyType1",
+    "CreateOpsgenieIntegrationEndpointDtoContextAdditionalPropertyType1Data",
+    "CreateOpsgenieIntegrationEndpointDtoType",
+    "CreatePagerDutyServiceEndpointDto",
+    "CreatePagerDutyServiceEndpointDtoContext",
+    "CreatePagerDutyServiceEndpointDtoContextAdditionalPropertyType1",
+    "CreatePagerDutyServiceEndpointDtoContextAdditionalPropertyType1Data",
+    "CreatePagerDutyServiceEndpointDtoType",
     "CreatePhoneEndpointDto",
     "CreatePhoneEndpointDtoContext",
     "CreatePhoneEndpointDtoContextAdditionalPropertyType1",
@@ -947,6 +1240,11 @@ __all__ = (
     "CreateTelegramChatEndpointDtoContextAdditionalPropertyType1",
     "CreateTelegramChatEndpointDtoContextAdditionalPropertyType1Data",
     "CreateTelegramChatEndpointDtoType",
+    "CreateToolWebhookEndpointDto",
+    "CreateToolWebhookEndpointDtoContext",
+    "CreateToolWebhookEndpointDtoContextAdditionalPropertyType1",
+    "CreateToolWebhookEndpointDtoContextAdditionalPropertyType1Data",
+    "CreateToolWebhookEndpointDtoType",
     "CreateTopicSubscriptionsRequestDto",
     "CreateTopicSubscriptionsRequestDtoContext",
     "CreateTopicSubscriptionsRequestDtoContextAdditionalPropertyType1",
@@ -954,6 +1252,17 @@ __all__ = (
     "CreateTranslationRequestDto",
     "CreateTranslationRequestDtoContent",
     "CreateUpdateTopicRequestDto",
+    "CreateUpdateTopicRequestDtoDataType0",
+    "CreateWebexPersonEndpointDto",
+    "CreateWebexPersonEndpointDtoContext",
+    "CreateWebexPersonEndpointDtoContextAdditionalPropertyType1",
+    "CreateWebexPersonEndpointDtoContextAdditionalPropertyType1Data",
+    "CreateWebexPersonEndpointDtoType",
+    "CreateWebexRoomEndpointDto",
+    "CreateWebexRoomEndpointDtoContext",
+    "CreateWebexRoomEndpointDtoContextAdditionalPropertyType1",
+    "CreateWebexRoomEndpointDtoContextAdditionalPropertyType1Data",
+    "CreateWebexRoomEndpointDtoType",
     "CreateWebhookEndpointDto",
     "CreateWebhookEndpointDtoContext",
     "CreateWebhookEndpointDtoContextAdditionalPropertyType1",
@@ -962,12 +1271,15 @@ __all__ = (
     "CreateWorkflowDto",
     "CreateWorkflowDtoPayloadSchemaType0",
     "CredentialsDto",
+    "CredentialsDtoHmacSecretKeyEncoding",
     "CredentialsDtoTlsOptions",
     "CustomControlDto",
     "CustomControlDtoCustom",
     "CustomControlsMetadataResponseDto",
     "CustomControlsMetadataResponseDtoDataSchema",
     "CustomStepResponseDto",
+    "CustomStepResponseDtoProviderOverridesType0",
+    "CustomStepResponseDtoProviderOverridesType0AdditionalProperty",
     "CustomStepResponseDtoVariables",
     "CustomStepUpsertDto",
     "CustomStepUpsertDtoControlValuesType1",
@@ -987,9 +1299,12 @@ __all__ = (
     "DelayScheduledMetadata",
     "DelayScheduledMetadataType",
     "DelayStepResponseDto",
+    "DelayStepResponseDtoProviderOverridesType0",
+    "DelayStepResponseDtoProviderOverridesType0AdditionalProperty",
     "DelayStepResponseDtoVariables",
     "DelayStepUpsertDto",
     "DelayStepUpsertDtoControlValuesType1",
+    "DeleteMessagePayloadDto",
     "DeleteMessageResponseDto",
     "DeleteMessageResponseDtoStatus",
     "DeleteTopicResponseDto",
@@ -1017,6 +1332,8 @@ __all__ = (
     "DigestRegularOutput",
     "DigestRegularOutputLookBackWindow",
     "DigestStepResponseDto",
+    "DigestStepResponseDtoProviderOverridesType0",
+    "DigestStepResponseDtoProviderOverridesType0AdditionalProperty",
     "DigestStepResponseDtoVariables",
     "DigestStepUpsertDto",
     "DigestStepUpsertDtoControlValuesType1",
@@ -1031,6 +1348,7 @@ __all__ = (
     "DirectionEnum",
     "DuplicateLayoutDto",
     "DuplicateWorkflowDto",
+    "EditPayloadDto",
     "EmailBlock",
     "EmailBlockStyles",
     "EmailBlockTypeEnum",
@@ -1042,9 +1360,12 @@ __all__ = (
     "EmailControlsDtoEditorType",
     "EmailControlsMetadataResponseDto",
     "EmailControlsMetadataResponseDtoDataSchema",
+    "EmailFromControlDto",
     "EmailLayoutRenderOutput",
     "EmailRenderOutput",
     "EmailStepResponseDto",
+    "EmailStepResponseDtoProviderOverridesType0",
+    "EmailStepResponseDtoProviderOverridesType0AdditionalProperty",
     "EmailStepResponseDtoVariables",
     "EmailStepUpsertDto",
     "EmailStepUpsertDtoControlValuesType1",
@@ -1068,6 +1389,7 @@ __all__ = (
     "FieldFilterPartDto",
     "FieldFilterPartDtoOn",
     "FieldFilterPartDtoOperator",
+    "FileRefDto",
     "GenerateChatOauthUrlRequestDto",
     "GenerateChatOauthUrlRequestDtoConnectionMode",
     "GenerateChatOauthUrlRequestDtoContext",
@@ -1105,9 +1427,12 @@ __all__ = (
     "GeneratePreviewResponseDtoResultType6",
     "GeneratePreviewResponseDtoResultType6Type",
     "GeneratePreviewResponseDtoResultType7",
+    "GeneratePreviewResponseDtoResultType7Preview",
     "GeneratePreviewResponseDtoResultType7Type",
     "GeneratePreviewResponseDtoResultType8",
     "GeneratePreviewResponseDtoResultType8Type",
+    "GeneratePreviewResponseDtoResultType9",
+    "GeneratePreviewResponseDtoResultType9Type",
     "GeneratePreviewResponseDtoSchemaType0",
     "GetChannelConnectionResponseDto",
     "GetChannelConnectionResponseDtoChannel",
@@ -1148,6 +1473,7 @@ __all__ = (
     "GetWorkflowRunsResponseDto",
     "GetWorkflowRunsResponseDtoNextType0",
     "GetWorkflowRunsResponseDtoPreviousType0",
+    "GrafanaOnCallIntegrationEndpointDto",
     "GroupPreferenceFilterDetailsDto",
     "GroupPreferenceFilterDto",
     "GroupPreferenceFilterDtoCondition",
@@ -1158,9 +1484,14 @@ __all__ = (
     "HttpRequestControlsMetadataResponseDtoDataSchema",
     "HttpRequestKeyValuePairDto",
     "HttpRequestStepResponseDto",
+    "HttpRequestStepResponseDtoProviderOverridesType0",
+    "HttpRequestStepResponseDtoProviderOverridesType0AdditionalProperty",
     "HttpRequestStepResponseDtoVariables",
     "HttpRequestStepUpsertDto",
     "HttpRequestStepUpsertDtoControlValuesType1",
+    "HumanSignalDto",
+    "HumanSignalDtoKind",
+    "HumanSignalDtoType",
     "ImportMasterJsonResponseDto",
     "InAppControlDto",
     "InAppControlDtoData",
@@ -1170,6 +1501,8 @@ __all__ = (
     "InAppRenderOutput",
     "InAppRenderOutputData",
     "InAppStepResponseDto",
+    "InAppStepResponseDtoProviderOverridesType0",
+    "InAppStepResponseDtoProviderOverridesType0AdditionalProperty",
     "InAppStepResponseDtoVariables",
     "InAppStepUpsertDto",
     "InAppStepUpsertDtoControlValuesType1",
@@ -1182,6 +1515,7 @@ __all__ = (
     "IntegrationResponseDto",
     "IntegrationResponseDtoChannel",
     "IntegrationResponseDtoKind",
+    "IntegrationResponseDtoRulesType0",
     "IssueIntegrationMobileLinkRequestDto",
     "IssueTelegramMobileLinkResponseDto",
     "LayoutControlsDto",
@@ -1194,9 +1528,15 @@ __all__ = (
     "LayoutResponseDto",
     "LayoutResponseDtoSortField",
     "LayoutResponseDtoVariablesType0",
+    "LineUserEndpointDto",
     "LinkChannelEndpointRequestDto",
+    "LinkChannelEndpointRequestDtoContext",
+    "LinkChannelEndpointRequestDtoContextAdditionalPropertyType1",
+    "LinkChannelEndpointRequestDtoContextAdditionalPropertyType1Data",
     "LinkChannelEndpointResponseDto",
     "LinkChannelEndpointResponseDtoProviderMetadata",
+    "ListAgentIntegrationsResponseDto",
+    "ListAgentsResponseDto",
     "ListChannelConnectionsResponseDto",
     "ListChannelEndpointsResponseDto",
     "ListContextsResponseDto",
@@ -1208,8 +1548,12 @@ __all__ = (
     "ListWorkflowResponse",
     "LookBackWindowDto",
     "LookBackWindowDtoUnit",
+    "ManagedRuntimeDto",
+    "ManagedRuntimeDtoProviderId",
+    "ManagedRuntimeResponseDto",
     "MarkAllMessageAsRequestDto",
     "MarkAllMessageAsRequestDtoMarkAs",
+    "MarkdownReplyContentDto",
     "MarkMessageActionAsSeenDto",
     "MarkMessageActionAsSeenDtoPayload",
     "MarkMessageActionAsSeenDtoStatus",
@@ -1234,6 +1578,16 @@ __all__ = (
     "MessageStatusEnum",
     "MessageTemplate",
     "MessageTemplateDto",
+    "MetadataClearSignalDto",
+    "MetadataClearSignalDtoAction",
+    "MetadataClearSignalDtoType",
+    "MetadataDeleteSignalDto",
+    "MetadataDeleteSignalDtoAction",
+    "MetadataDeleteSignalDtoType",
+    "MetadataSetSignalDto",
+    "MetadataSetSignalDtoAction",
+    "MetadataSetSignalDtoType",
+    "MetadataSetSignalDtoValue",
     "MetaDto",
     "MonthlyTypeEnum",
     "MsTeamsChannelEndpointDto",
@@ -1253,8 +1607,12 @@ __all__ = (
     "NotificationTriggerVariable",
     "NotificationWorkflowDto",
     "NotificationWorkflowDtoData",
+    "OpsgenieIntegrationEndpointDto",
+    "OpsgenieIntegrationEndpointDtoRegion",
     "OrdinalEnum",
     "OrdinalValueEnum",
+    "PagerDutyServiceEndpointDto",
+    "PagerDutyServiceEndpointDtoRegion",
     "PatchPreferenceChannelsDto",
     "PatchSubscriberPreferencesDto",
     "PatchSubscriberPreferencesDtoContext",
@@ -1273,6 +1631,7 @@ __all__ = (
     "PayloadValidationExceptionDtoMessageType4ItemType3",
     "PayloadValidationExceptionDtoSchema",
     "PhoneEndpointDto",
+    "PlanUsageDto",
     "PreferenceLevelEnum",
     "PreferenceOverrideSourceEnum",
     "PreferencesRequestDto",
@@ -1294,6 +1653,8 @@ __all__ = (
     "PushControlsMetadataResponseDtoDataSchema",
     "PushRenderOutput",
     "PushStepResponseDto",
+    "PushStepResponseDtoProviderOverridesType0",
+    "PushStepResponseDtoProviderOverridesType0AdditionalProperty",
     "PushStepResponseDtoVariables",
     "PushStepUpsertDto",
     "PushStepUpsertDtoControlValuesType1",
@@ -1303,9 +1664,13 @@ __all__ = (
     "RemoveSubscriberDeviceTokenRequestDto",
     "RemoveSubscriberResponseDto",
     "ReplyCallback",
+    "ReplyContentDto",
+    "ReplyContentDtoCard",
+    "ReplyContentDtoToolApprovalCard",
     "RequestLogResponseDto",
     "RequestLogResponseDtoSource",
     "RequestLogResponseDtoTransactionIdType0",
+    "ResolveDto",
     "ResourceDependencyDto",
     "ResourceDiffDto",
     "ResourceDiffDtoDiffs",
@@ -1319,6 +1684,7 @@ __all__ = (
     "ResourceTypeEnum",
     "RuntimeIssueDto",
     "ScheduleDto",
+    "SentMessageInfoDto",
     "SeverityLevelEnum",
     "SkippedWorkflowDto",
     "SlackChannelEndpointDto",
@@ -1329,6 +1695,8 @@ __all__ = (
     "SmsControlsMetadataResponseDtoDataSchema",
     "SmsRenderOutput",
     "SmsStepResponseDto",
+    "SmsStepResponseDtoProviderOverridesType0",
+    "SmsStepResponseDtoProviderOverridesType0AdditionalProperty",
     "SmsStepResponseDtoVariables",
     "SmsStepUpsertDto",
     "SmsStepUpsertDtoControlValuesType1",
@@ -1342,9 +1710,12 @@ __all__ = (
     "StepIssuesDto",
     "StepIssuesDtoControls",
     "StepIssuesDtoIntegration",
+    "StepIssueSeverityEnum",
     "StepListResponseDto",
     "StepResponseDto",
     "StepResponseDtoControlValues",
+    "StepResponseDtoProviderOverridesType0",
+    "StepResponseDtoProviderOverridesType0AdditionalProperty",
     "StepResponseDtoVariables",
     "StepRunDto",
     "StepRunDtoStatus",
@@ -1395,6 +1766,8 @@ __all__ = (
     "ThrottleControlsMetadataResponseDto",
     "ThrottleControlsMetadataResponseDtoDataSchema",
     "ThrottleStepResponseDto",
+    "ThrottleStepResponseDtoProviderOverridesType0",
+    "ThrottleStepResponseDtoProviderOverridesType0AdditionalProperty",
     "ThrottleStepResponseDtoVariables",
     "ThrottleStepUpsertDto",
     "ThrottleStepUpsertDtoControlValuesType1",
@@ -1405,9 +1778,32 @@ __all__ = (
     "TimedConfigWeekDaysItem",
     "TimeRangeDto",
     "TimeUnitEnum",
+    "ToolApprovalCardReplyContentDto",
+    "ToolApprovalCardReplyContentDtoToolApprovalCard",
+    "ToolApprovalRequestPayloadDto",
+    "ToolApprovalRequestPayloadDtoInput",
+    "ToolControlDto",
+    "ToolControlDtoSkip",
+    "ToolControlsMetadataResponseDto",
+    "ToolControlsMetadataResponseDtoDataSchema",
+    "ToolResultDto",
+    "ToolResultDtoOutput",
+    "ToolStepResponseDto",
+    "ToolStepResponseDtoProviderOverridesType0",
+    "ToolStepResponseDtoProviderOverridesType0AdditionalProperty",
+    "ToolStepResponseDtoVariables",
+    "ToolStepUpsertDto",
+    "ToolStepUpsertDtoControlValuesType1",
+    "ToolStepUpsertDtoProviderOverridesType0",
+    "ToolStepUpsertDtoProviderOverridesType0AdditionalProperty",
+    "ToolWebhookEndpointDto",
+    "ToolWebhookEndpointDtoHeaders",
+    "ToolWebhookEndpointDtoMethod",
     "TopicDto",
+    "TopicDtoData",
     "TopicPayloadDto",
     "TopicResponseDto",
+    "TopicResponseDtoData",
     "TopicsControllerListTopicsOrderDirection",
     "TopicsControllerListTopicSubscriptionsOrderDirection",
     "TopicSubscriberDto",
@@ -1444,6 +1840,12 @@ __all__ = (
     "TriggerOverridesSms",
     "TriggerOverridesSteps",
     "TriggerRecipientsTypeEnum",
+    "TriggerSignalDto",
+    "TriggerSignalDtoPayload",
+    "TriggerSignalDtoToType1",
+    "TriggerSignalDtoToType2ItemType1",
+    "TriggerSignalDtoType",
+    "TypingStatusDto",
     "UiComponentEnum",
     "UiSchema",
     "UiSchemaGroupEnum",
@@ -1453,6 +1855,9 @@ __all__ = (
     "UiSchemaPropertyPlaceholderType4ItemType3",
     "UiSchemaPropertyProperties",
     "UnseenCountResponse",
+    "UpdateAgentBridgeRequestDto",
+    "UpdateAgentIntegrationRequestDto",
+    "UpdateAgentRequestDto",
     "UpdateAllSubscriberNotificationsDto",
     "UpdateAllSubscriberNotificationsDtoTags",
     "UpdateChannelConnectionRequestDto",
@@ -1465,10 +1870,12 @@ __all__ = (
     "UpdateEnvironmentVariableRequestDtoType",
     "UpdateIntegrationRequestDto",
     "UpdateIntegrationRequestDtoConfigurations",
+    "UpdateIntegrationRequestDtoRulesType0",
     "UpdateLayoutDto",
     "UpdateSubscriberChannelRequestDto",
     "UpdateSubscriberOnlineFlagRequestDto",
     "UpdateTopicRequestDto",
+    "UpdateTopicRequestDtoDataType0",
     "UpdateTopicSubscriptionRequestDto",
     "UpdateWorkflowDto",
     "UpdateWorkflowDtoPayloadSchemaType0",
@@ -1480,6 +1887,8 @@ __all__ = (
     "ValidationErrorDtoErrors",
     "ValidationErrorDtoMessageType3Type0",
     "ValidationErrorDtoMessageType4ItemType3",
+    "WebexPersonEndpointDto",
+    "WebexRoomEndpointDto",
     "WebhookCreatedWorkflowDto",
     "WebhookCreatedWorkflowDtoWebhookPayloadWrapper",
     "WebhookCreatedWorkflowDtoWebhookPayloadWrapperObject",
@@ -1517,6 +1926,9 @@ __all__ = (
     "WebhookUpdatedWorkflowDtoWebhookPayloadWrapperObject",
     "WebhookUpdatedWorkflowDtoWebhookPayloadWrapperType",
     "WeeklyScheduleDto",
+    "WorkflowAgentConfigDto",
+    "WorkflowAgentConfigDtoProviders",
+    "WorkflowAgentConfigDtoProvidersAdditionalProperty",
     "WorkflowCreationSourceEnum",
     "WorkflowDto",
     "WorkflowDtoData",

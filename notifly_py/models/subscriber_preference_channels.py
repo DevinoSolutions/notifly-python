@@ -20,6 +20,7 @@ class SubscriberPreferenceChannels:
         in_app (bool | Unset): In-app channel preference Example: True.
         chat (bool | Unset): Chat channel preference
         push (bool | Unset): Push notification channel preference Example: True.
+        tool (bool | Unset): Tool channel preference Example: True.
     """
 
     email: bool | Unset = UNSET
@@ -27,6 +28,7 @@ class SubscriberPreferenceChannels:
     in_app: bool | Unset = UNSET
     chat: bool | Unset = UNSET
     push: bool | Unset = UNSET
+    tool: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -39,6 +41,8 @@ class SubscriberPreferenceChannels:
         chat = self.chat
 
         push = self.push
+
+        tool = self.tool
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -53,6 +57,8 @@ class SubscriberPreferenceChannels:
             field_dict["chat"] = chat
         if push is not UNSET:
             field_dict["push"] = push
+        if tool is not UNSET:
+            field_dict["tool"] = tool
 
         return field_dict
 
@@ -69,12 +75,15 @@ class SubscriberPreferenceChannels:
 
         push = d.pop("push", UNSET)
 
+        tool = d.pop("tool", UNSET)
+
         subscriber_preference_channels = cls(
             email=email,
             sms=sms,
             in_app=in_app,
             chat=chat,
             push=push,
+            tool=tool,
         )
 
         subscriber_preference_channels.additional_properties = d

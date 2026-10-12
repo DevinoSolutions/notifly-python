@@ -88,6 +88,7 @@ files = [
     "notifly_py/notifly_client.py",
     "notifly_py/pagination.py",
     "scripts/check_drift.py",
+    "scripts/prepare_spec.py",
 ]
 follow_imports = "silent"
 disallow_any_explicit = false

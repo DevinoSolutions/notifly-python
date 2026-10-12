@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,6 +13,7 @@ from ..types import UNSET, Unset
 if TYPE_CHECKING:
     from ..models.configurations_dto import ConfigurationsDto
     from ..models.credentials_dto import CredentialsDto
+    from ..models.integration_response_dto_rules_type_0 import IntegrationResponseDtoRulesType0
     from ..models.step_filter_dto import StepFilterDto
 
 
@@ -48,8 +49,9 @@ class IntegrationResponseDto:
             integration is soft deleted.
         deleted_by (str | Unset): The identifier of the user who performed the deletion of this integration. Useful for
             audit trails.
-        conditions (list[StepFilterDto] | Unset): An array of conditions associated with the integration that may
-            influence its behavior or processing logic.
+        conditions (list[StepFilterDto] | Unset): Legacy StepFilter conditions. Ignored when `rules` is also set.
+        rules (IntegrationResponseDtoRulesType0 | None | Unset): JSONLogic used at send time to select this integration.
+            Takes precedence over `conditions`. Example: {'==': [{'var': 'context.tenant.id'}, 'acme']}.
     """
 
     field_environment_id: str
@@ -68,9 +70,12 @@ class IntegrationResponseDto:
     deleted_at: str | Unset = UNSET
     deleted_by: str | Unset = UNSET
     conditions: list[StepFilterDto] | Unset = UNSET
+    rules: IntegrationResponseDtoRulesType0 | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.integration_response_dto_rules_type_0 import IntegrationResponseDtoRulesType0
+
         field_environment_id = self.field_environment_id
 
         field_organization_id = self.field_organization_id
@@ -116,6 +121,14 @@ class IntegrationResponseDto:
                 conditions_item = conditions_item_data.to_dict()
                 conditions.append(conditions_item)
 
+        rules: dict[str, Any] | None | Unset
+        if isinstance(self.rules, Unset):
+            rules = UNSET
+        elif isinstance(self.rules, IntegrationResponseDtoRulesType0):
+            rules = self.rules.to_dict()
+        else:
+            rules = self.rules
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -146,6 +159,8 @@ class IntegrationResponseDto:
             field_dict["deletedBy"] = deleted_by
         if conditions is not UNSET:
             field_dict["conditions"] = conditions
+        if rules is not UNSET:
+            field_dict["rules"] = rules
 
         return field_dict
 
@@ -153,6 +168,7 @@ class IntegrationResponseDto:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.configurations_dto import ConfigurationsDto
         from ..models.credentials_dto import CredentialsDto
+        from ..models.integration_response_dto_rules_type_0 import IntegrationResponseDtoRulesType0
         from ..models.step_filter_dto import StepFilterDto
 
         d = dict(src_dict)
@@ -215,6 +231,23 @@ class IntegrationResponseDto:
 
                 conditions.append(conditions_item)
 
+        def _parse_rules(data: object) -> IntegrationResponseDtoRulesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                rules_type_0 = IntegrationResponseDtoRulesType0.from_dict(data)
+
+                return rules_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(IntegrationResponseDtoRulesType0 | None | Unset, data)
+
+        rules = _parse_rules(d.pop("rules", UNSET))
+
         integration_response_dto = cls(
             field_environment_id=field_environment_id,
             field_organization_id=field_organization_id,
@@ -232,6 +265,7 @@ class IntegrationResponseDto:
             deleted_at=deleted_at,
             deleted_by=deleted_by,
             conditions=conditions,
+            rules=rules,
         )
 
         integration_response_dto.additional_properties = d

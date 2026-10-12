@@ -131,7 +131,7 @@ def sync_detailed(
     """Generate OAuth URL for a workspace/tenant connection
 
      Generate an OAuth URL that creates a workspace or tenant-level channel connection (Slack workspace
-    install or MS Teams admin consent).
+    install, MS Teams admin consent, or Webex integration authorization).
         The generated URL expires after 5 minutes.
 
     Args:
@@ -167,7 +167,7 @@ def sync(
     """Generate OAuth URL for a workspace/tenant connection
 
      Generate an OAuth URL that creates a workspace or tenant-level channel connection (Slack workspace
-    install or MS Teams admin consent).
+    install, MS Teams admin consent, or Webex integration authorization).
         The generated URL expires after 5 minutes.
 
     Args:
@@ -198,7 +198,7 @@ async def asyncio_detailed(
     """Generate OAuth URL for a workspace/tenant connection
 
      Generate an OAuth URL that creates a workspace or tenant-level channel connection (Slack workspace
-    install or MS Teams admin consent).
+    install, MS Teams admin consent, or Webex integration authorization).
         The generated URL expires after 5 minutes.
 
     Args:
@@ -232,7 +232,7 @@ async def asyncio(
     """Generate OAuth URL for a workspace/tenant connection
 
      Generate an OAuth URL that creates a workspace or tenant-level channel connection (Slack workspace
-    install or MS Teams admin consent).
+    install, MS Teams admin consent, or Webex integration authorization).
         The generated URL expires after 5 minutes.
 
     Args:

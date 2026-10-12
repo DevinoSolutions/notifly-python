@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class GeneratePreviewResponseDtoResultType8Type(str, Enum):
-    DIGEST = "digest"
+    DELAY = "delay"
 
     def __str__(self) -> str:
         return str(self.value)

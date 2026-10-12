@@ -21,8 +21,10 @@ class WorkflowPreferenceRequestDto:
     Attributes:
         workflow_id (str): The workflow identifier Example: workflow-123.
         enabled (bool | Unset): Whether the preference is enabled. Used when condition is not provided. Example: True.
-        condition (WorkflowPreferenceRequestDtoCondition | Unset): Optional condition using JSON Logic rules Example:
-            {'and': [{'===': [{'var': 'tier'}, 'premium']}]}.
+        condition (WorkflowPreferenceRequestDtoCondition | Unset): Optional JSON Logic condition evaluated at fan-out
+            time against trigger payload, subscriber profile, actor, and context (for example, `{ "var": "payload.tier" }`,
+            `{ "var": "subscriber.data.plan" }`, or `{ "var": "actor.data.role" }`) Example: {'and': [{'===': [{'var':
+            'payload.tier'}, 'premium']}]}.
     """
 
     workflow_id: str

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 from uuid import UUID
 
 from attrs import define as _attrs_define
@@ -13,6 +13,7 @@ from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.create_integration_request_dto_configurations import CreateIntegrationRequestDtoConfigurations
+    from ..models.create_integration_request_dto_rules_type_0 import CreateIntegrationRequestDtoRulesType0
     from ..models.credentials_dto import CredentialsDto
     from ..models.step_filter_dto import StepFilterDto
 
@@ -35,7 +36,9 @@ class CreateIntegrationRequestDto:
         credentials (CredentialsDto | Unset):
         active (bool | Unset): If the integration is active, the validation on the credentials field will run
         check (bool | Unset): Flag to check the integration status
-        conditions (list[StepFilterDto] | Unset): Conditions for the integration
+        conditions (list[StepFilterDto] | Unset): Legacy StepFilter conditions. Ignored when `rules` is also set.
+        rules (CreateIntegrationRequestDtoRulesType0 | None | Unset): JSONLogic used at send time to select this
+            integration. Takes precedence over `conditions`. Example: {'==': [{'var': 'context.tenant.id'}, 'acme']}.
         configurations (CreateIntegrationRequestDtoConfigurations | Unset): Configurations for the integration
     """
 
@@ -49,10 +52,13 @@ class CreateIntegrationRequestDto:
     active: bool | Unset = UNSET
     check: bool | Unset = UNSET
     conditions: list[StepFilterDto] | Unset = UNSET
+    rules: CreateIntegrationRequestDtoRulesType0 | None | Unset = UNSET
     configurations: CreateIntegrationRequestDtoConfigurations | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.create_integration_request_dto_rules_type_0 import CreateIntegrationRequestDtoRulesType0
+
         name = self.name
 
         identifier = self.identifier
@@ -86,6 +92,14 @@ class CreateIntegrationRequestDto:
                 conditions_item = conditions_item_data.to_dict()
                 conditions.append(conditions_item)
 
+        rules: dict[str, Any] | None | Unset
+        if isinstance(self.rules, Unset):
+            rules = UNSET
+        elif isinstance(self.rules, CreateIntegrationRequestDtoRulesType0):
+            rules = self.rules.to_dict()
+        else:
+            rules = self.rules
+
         configurations: dict[str, Any] | Unset = UNSET
         if not isinstance(self.configurations, Unset):
             configurations = self.configurations.to_dict()
@@ -113,6 +127,8 @@ class CreateIntegrationRequestDto:
             field_dict["check"] = check
         if conditions is not UNSET:
             field_dict["conditions"] = conditions
+        if rules is not UNSET:
+            field_dict["rules"] = rules
         if configurations is not UNSET:
             field_dict["configurations"] = configurations
 
@@ -121,6 +137,7 @@ class CreateIntegrationRequestDto:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.create_integration_request_dto_configurations import CreateIntegrationRequestDtoConfigurations
+        from ..models.create_integration_request_dto_rules_type_0 import CreateIntegrationRequestDtoRulesType0
         from ..models.credentials_dto import CredentialsDto
         from ..models.step_filter_dto import StepFilterDto
 
@@ -172,6 +189,23 @@ class CreateIntegrationRequestDto:
 
                 conditions.append(conditions_item)
 
+        def _parse_rules(data: object) -> CreateIntegrationRequestDtoRulesType0 | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                rules_type_0 = CreateIntegrationRequestDtoRulesType0.from_dict(data)
+
+                return rules_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(CreateIntegrationRequestDtoRulesType0 | None | Unset, data)
+
+        rules = _parse_rules(d.pop("rules", UNSET))
+
         _configurations = d.pop("configurations", UNSET)
         configurations: CreateIntegrationRequestDtoConfigurations | Unset
         if isinstance(_configurations, Unset):
@@ -190,6 +224,7 @@ class CreateIntegrationRequestDto:
             active=active,
             check=check,
             conditions=conditions,
+            rules=rules,
             configurations=configurations,
         )
 

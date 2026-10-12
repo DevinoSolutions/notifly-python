@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.chat_control_dto_editor_type import ChatControlDtoEditorType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,10 +25,13 @@ class ChatControlDto:
             typing reference. Example: {'and': [{'==': [{'var': 'payload.tier'}, 'pro']}, {'==': [{'var':
             'subscriber.data.role'}, 'admin']}, {'>': [{'var': 'payload.amount'}, '4']}]}.
         body (str | Unset): Content of the chat message.
+        editor_type (ChatControlDtoEditorType | Unset): Type of editor to use for the body. When omitted, inferred from
+            the body: Maily JSON is "block", otherwise "text".
     """
 
     skip: ChatControlDtoSkip | Unset = UNSET
     body: str | Unset = UNSET
+    editor_type: ChatControlDtoEditorType | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -37,6 +41,10 @@ class ChatControlDto:
 
         body = self.body
 
+        editor_type: str | Unset = UNSET
+        if not isinstance(self.editor_type, Unset):
+            editor_type = self.editor_type.value
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -44,6 +52,8 @@ class ChatControlDto:
             field_dict["skip"] = skip
         if body is not UNSET:
             field_dict["body"] = body
+        if editor_type is not UNSET:
+            field_dict["editorType"] = editor_type
 
         return field_dict
 
@@ -61,9 +71,17 @@ class ChatControlDto:
 
         body = d.pop("body", UNSET)
 
+        _editor_type = d.pop("editorType", UNSET)
+        editor_type: ChatControlDtoEditorType | Unset
+        if isinstance(_editor_type, Unset):
+            editor_type = UNSET
+        else:
+            editor_type = ChatControlDtoEditorType(_editor_type)
+
         chat_control_dto = cls(
             skip=skip,
             body=body,
+            editor_type=editor_type,
         )
 
         chat_control_dto.additional_properties = d

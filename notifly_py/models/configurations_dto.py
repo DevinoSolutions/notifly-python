@@ -17,16 +17,20 @@ class ConfigurationsDto:
     Attributes:
         inbound_webhook_enabled (bool | Unset):
         inbound_webhook_signing_key (str | Unset):
+        payload_schema (str | Unset): JSON Schema describing the payload accepted by this integration.
     """
 
     inbound_webhook_enabled: bool | Unset = UNSET
     inbound_webhook_signing_key: str | Unset = UNSET
+    payload_schema: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         inbound_webhook_enabled = self.inbound_webhook_enabled
 
         inbound_webhook_signing_key = self.inbound_webhook_signing_key
+
+        payload_schema = self.payload_schema
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -35,6 +39,8 @@ class ConfigurationsDto:
             field_dict["inboundWebhookEnabled"] = inbound_webhook_enabled
         if inbound_webhook_signing_key is not UNSET:
             field_dict["inboundWebhookSigningKey"] = inbound_webhook_signing_key
+        if payload_schema is not UNSET:
+            field_dict["payloadSchema"] = payload_schema
 
         return field_dict
 
@@ -45,9 +51,12 @@ class ConfigurationsDto:
 
         inbound_webhook_signing_key = d.pop("inboundWebhookSigningKey", UNSET)
 
+        payload_schema = d.pop("payloadSchema", UNSET)
+
         configurations_dto = cls(
             inbound_webhook_enabled=inbound_webhook_enabled,
             inbound_webhook_signing_key=inbound_webhook_signing_key,
+            payload_schema=payload_schema,
         )
 
         configurations_dto.additional_properties = d

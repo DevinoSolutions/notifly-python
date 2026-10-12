@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.topic_response_dto_data import TopicResponseDtoData
+
 
 T = TypeVar("T", bound="TopicResponseDto")
 
@@ -18,6 +22,8 @@ class TopicResponseDto:
         field_id (str): The identifier of the topic Example: 64da692e9a94fb2e6449ad06.
         key (str): The unique key of the topic Example: product-updates.
         name (str | Unset): The name of the topic Example: Product Updates.
+        data (TopicResponseDtoData | Unset): Additional custom data associated with the topic Example: {'category':
+            'product', 'priority': 1}.
         created_at (str | Unset): The date the topic was created Example: 2023-08-15T00:00:00.000Z.
         updated_at (str | Unset): The date the topic was last updated Example: 2023-08-15T00:00:00.000Z.
     """
@@ -25,6 +31,7 @@ class TopicResponseDto:
     field_id: str
     key: str
     name: str | Unset = UNSET
+    data: TopicResponseDtoData | Unset = UNSET
     created_at: str | Unset = UNSET
     updated_at: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -35,6 +42,10 @@ class TopicResponseDto:
         key = self.key
 
         name = self.name
+
+        data: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.data, Unset):
+            data = self.data.to_dict()
 
         created_at = self.created_at
 
@@ -50,6 +61,8 @@ class TopicResponseDto:
         )
         if name is not UNSET:
             field_dict["name"] = name
+        if data is not UNSET:
+            field_dict["data"] = data
         if created_at is not UNSET:
             field_dict["createdAt"] = created_at
         if updated_at is not UNSET:
@@ -59,12 +72,21 @@ class TopicResponseDto:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.topic_response_dto_data import TopicResponseDtoData
+
         d = dict(src_dict)
         field_id = d.pop("_id")
 
         key = d.pop("key")
 
         name = d.pop("name", UNSET)
+
+        _data = d.pop("data", UNSET)
+        data: TopicResponseDtoData | Unset
+        if isinstance(_data, Unset):
+            data = UNSET
+        else:
+            data = TopicResponseDtoData.from_dict(_data)
 
         created_at = d.pop("createdAt", UNSET)
 
@@ -74,6 +96,7 @@ class TopicResponseDto:
             field_id=field_id,
             key=key,
             name=name,
+            data=data,
             created_at=created_at,
             updated_at=updated_at,
         )

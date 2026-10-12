@@ -7,6 +7,7 @@ class IntegrationResponseDtoChannel(str, Enum):
     IN_APP = "in_app"
     PUSH = "push"
     SMS = "sms"
+    TOOL = "tool"
 
     def __str__(self) -> str:
         return str(self.value)

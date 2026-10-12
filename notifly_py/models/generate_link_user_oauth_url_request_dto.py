@@ -23,17 +23,23 @@ class GenerateLinkUserOauthUrlRequestDto:
             specific subscriber to a user identity in the chat provider. Example: subscriber-123.
         integration_identifier (str): Integration identifier
         connection_identifier (str | Unset): Identifier of the existing channel connection to associate this user
-            endpoint with. Generated automatically if not provided. Example: slack-connection-abc123.
+            endpoint with. Generated automatically if not provided for providers that support standalone user linking.
+            Required for Webex. Example: slack-connection-abc123.
         context (GenerateLinkUserOauthUrlRequestDtoContext | Unset):
+        context_hash (str | Unset): HMAC-SHA256 of the canonicalized `context`, signed with the tenant environment
+            secret key (the same "Inbox with context" signing scheme). Required when the integration has HMAC validation
+            enabled and the session did not already HMAC-verify the context, so the per-user link carries a trustworthy
+            subscriber/tenant binding. Example: a1b2c3d4e5f6....
         user_scope (list[str] | Unset): **Slack only**: User-level OAuth scopes for "Sign in with Slack". Defaults to:
-            identity.basic. **MS Teams**: ignored — uses delegated OpenID scopes (openid, profile, User.Read). Example:
-            ['identity.basic'].
+            identity.basic. **Webex**: Optional Webex scopes for people/me; defaults to spark:people_read. **MS Teams**:
+            ignored — uses delegated OpenID scopes (openid, profile, User.Read). Example: ['identity.basic'].
     """
 
     subscriber_id: str
     integration_identifier: str
     connection_identifier: str | Unset = UNSET
     context: GenerateLinkUserOauthUrlRequestDtoContext | Unset = UNSET
+    context_hash: str | Unset = UNSET
     user_scope: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -47,6 +53,8 @@ class GenerateLinkUserOauthUrlRequestDto:
         context: dict[str, Any] | Unset = UNSET
         if not isinstance(self.context, Unset):
             context = self.context.to_dict()
+
+        context_hash = self.context_hash
 
         user_scope: list[str] | Unset = UNSET
         if not isinstance(self.user_scope, Unset):
@@ -64,6 +72,8 @@ class GenerateLinkUserOauthUrlRequestDto:
             field_dict["connectionIdentifier"] = connection_identifier
         if context is not UNSET:
             field_dict["context"] = context
+        if context_hash is not UNSET:
+            field_dict["contextHash"] = context_hash
         if user_scope is not UNSET:
             field_dict["userScope"] = user_scope
 
@@ -87,6 +97,8 @@ class GenerateLinkUserOauthUrlRequestDto:
         else:
             context = GenerateLinkUserOauthUrlRequestDtoContext.from_dict(_context)
 
+        context_hash = d.pop("contextHash", UNSET)
+
         user_scope = cast(list[str], d.pop("userScope", UNSET))
 
         generate_link_user_oauth_url_request_dto = cls(
@@ -94,6 +106,7 @@ class GenerateLinkUserOauthUrlRequestDto:
             integration_identifier=integration_identifier,
             connection_identifier=connection_identifier,
             context=context,
+            context_hash=context_hash,
             user_scope=user_scope,
         )
 

@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.credentials_dto_hmac_secret_key_encoding import CredentialsDtoHmacSecretKeyEncoding
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -22,6 +23,9 @@ class CredentialsDto:
         api_key (str | Unset):
         user (str | Unset):
         secret_key (str | Unset):
+        hmac_secret_key_encoding (CredentialsDtoHmacSecretKeyEncoding | Unset): Email webhook: how `secretKey` is
+            interpreted when signing webhook calls. `text` signs with the raw UTF-8 bytes; `base64`/`hex` decode it to
+            binary first (e.g. for AWS KMS).
         domain (str | Unset):
         password (str | Unset):
         host (str | Unset):
@@ -45,6 +49,7 @@ class CredentialsDto:
         hmac (bool | Unset):
         service_account (str | Unset):
         ip_pool_name (str | Unset):
+        configuration_set_name (str | Unset):
         api_key_request_header (str | Unset):
         secret_key_request_header (str | Unset):
         id_path (str | Unset):
@@ -67,6 +72,9 @@ class CredentialsDto:
         app_io_base_url (str | Unset):
         signing_secret (str | Unset):
         outbound_integration_id (str | Unset):
+        outbound_connected_at (str | Unset):
+        whats_next_completed_at (str | Unset): ISO timestamp marking Layer-2 What's next completion (Connected badge +
+            guide hide). WhatsApp Business: stamped on post-connect Access Token rotation or manual confirm.
         use_from_address_override (bool | Unset):
         from_address_override (str | Unset):
         email_slug_prefix (str | Unset): Agent default shared inbox slug prefix used in
@@ -84,6 +92,7 @@ class CredentialsDto:
     api_key: str | Unset = UNSET
     user: str | Unset = UNSET
     secret_key: str | Unset = UNSET
+    hmac_secret_key_encoding: CredentialsDtoHmacSecretKeyEncoding | Unset = UNSET
     domain: str | Unset = UNSET
     password: str | Unset = UNSET
     host: str | Unset = UNSET
@@ -107,6 +116,7 @@ class CredentialsDto:
     hmac: bool | Unset = UNSET
     service_account: str | Unset = UNSET
     ip_pool_name: str | Unset = UNSET
+    configuration_set_name: str | Unset = UNSET
     api_key_request_header: str | Unset = UNSET
     secret_key_request_header: str | Unset = UNSET
     id_path: str | Unset = UNSET
@@ -129,6 +139,8 @@ class CredentialsDto:
     app_io_base_url: str | Unset = UNSET
     signing_secret: str | Unset = UNSET
     outbound_integration_id: str | Unset = UNSET
+    outbound_connected_at: str | Unset = UNSET
+    whats_next_completed_at: str | Unset = UNSET
     use_from_address_override: bool | Unset = UNSET
     from_address_override: str | Unset = UNSET
     email_slug_prefix: str | Unset = UNSET
@@ -143,6 +155,10 @@ class CredentialsDto:
         user = self.user
 
         secret_key = self.secret_key
+
+        hmac_secret_key_encoding: str | Unset = UNSET
+        if not isinstance(self.hmac_secret_key_encoding, Unset):
+            hmac_secret_key_encoding = self.hmac_secret_key_encoding.value
 
         domain = self.domain
 
@@ -192,6 +208,8 @@ class CredentialsDto:
 
         ip_pool_name = self.ip_pool_name
 
+        configuration_set_name = self.configuration_set_name
+
         api_key_request_header = self.api_key_request_header
 
         secret_key_request_header = self.secret_key_request_header
@@ -236,6 +254,10 @@ class CredentialsDto:
 
         outbound_integration_id = self.outbound_integration_id
 
+        outbound_connected_at = self.outbound_connected_at
+
+        whats_next_completed_at = self.whats_next_completed_at
+
         use_from_address_override = self.use_from_address_override
 
         from_address_override = self.from_address_override
@@ -257,6 +279,8 @@ class CredentialsDto:
             field_dict["user"] = user
         if secret_key is not UNSET:
             field_dict["secretKey"] = secret_key
+        if hmac_secret_key_encoding is not UNSET:
+            field_dict["hmacSecretKeyEncoding"] = hmac_secret_key_encoding
         if domain is not UNSET:
             field_dict["domain"] = domain
         if password is not UNSET:
@@ -303,6 +327,8 @@ class CredentialsDto:
             field_dict["serviceAccount"] = service_account
         if ip_pool_name is not UNSET:
             field_dict["ipPoolName"] = ip_pool_name
+        if configuration_set_name is not UNSET:
+            field_dict["configurationSetName"] = configuration_set_name
         if api_key_request_header is not UNSET:
             field_dict["apiKeyRequestHeader"] = api_key_request_header
         if secret_key_request_header is not UNSET:
@@ -347,6 +373,10 @@ class CredentialsDto:
             field_dict["signingSecret"] = signing_secret
         if outbound_integration_id is not UNSET:
             field_dict["outboundIntegrationId"] = outbound_integration_id
+        if outbound_connected_at is not UNSET:
+            field_dict["outboundConnectedAt"] = outbound_connected_at
+        if whats_next_completed_at is not UNSET:
+            field_dict["whatsNextCompletedAt"] = whats_next_completed_at
         if use_from_address_override is not UNSET:
             field_dict["useFromAddressOverride"] = use_from_address_override
         if from_address_override is not UNSET:
@@ -372,6 +402,13 @@ class CredentialsDto:
         user = d.pop("user", UNSET)
 
         secret_key = d.pop("secretKey", UNSET)
+
+        _hmac_secret_key_encoding = d.pop("hmacSecretKeyEncoding", UNSET)
+        hmac_secret_key_encoding: CredentialsDtoHmacSecretKeyEncoding | Unset
+        if isinstance(_hmac_secret_key_encoding, Unset):
+            hmac_secret_key_encoding = UNSET
+        else:
+            hmac_secret_key_encoding = CredentialsDtoHmacSecretKeyEncoding(_hmac_secret_key_encoding)
 
         domain = d.pop("domain", UNSET)
 
@@ -424,6 +461,8 @@ class CredentialsDto:
 
         ip_pool_name = d.pop("ipPoolName", UNSET)
 
+        configuration_set_name = d.pop("configurationSetName", UNSET)
+
         api_key_request_header = d.pop("apiKeyRequestHeader", UNSET)
 
         secret_key_request_header = d.pop("secretKeyRequestHeader", UNSET)
@@ -468,6 +507,10 @@ class CredentialsDto:
 
         outbound_integration_id = d.pop("outboundIntegrationId", UNSET)
 
+        outbound_connected_at = d.pop("outboundConnectedAt", UNSET)
+
+        whats_next_completed_at = d.pop("whatsNextCompletedAt", UNSET)
+
         use_from_address_override = d.pop("useFromAddressOverride", UNSET)
 
         from_address_override = d.pop("fromAddressOverride", UNSET)
@@ -484,6 +527,7 @@ class CredentialsDto:
             api_key=api_key,
             user=user,
             secret_key=secret_key,
+            hmac_secret_key_encoding=hmac_secret_key_encoding,
             domain=domain,
             password=password,
             host=host,
@@ -507,6 +551,7 @@ class CredentialsDto:
             hmac=hmac,
             service_account=service_account,
             ip_pool_name=ip_pool_name,
+            configuration_set_name=configuration_set_name,
             api_key_request_header=api_key_request_header,
             secret_key_request_header=secret_key_request_header,
             id_path=id_path,
@@ -529,6 +574,8 @@ class CredentialsDto:
             app_io_base_url=app_io_base_url,
             signing_secret=signing_secret,
             outbound_integration_id=outbound_integration_id,
+            outbound_connected_at=outbound_connected_at,
+            whats_next_completed_at=whats_next_completed_at,
             use_from_address_override=use_from_address_override,
             from_address_override=from_address_override,
             email_slug_prefix=email_slug_prefix,

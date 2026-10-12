@@ -20,6 +20,7 @@ class PatchPreferenceChannelsDto:
         in_app (bool | Unset): In-app channel preference
         push (bool | Unset): Push channel preference
         chat (bool | Unset): Chat channel preference
+        tool (bool | Unset): Tool channel preference
     """
 
     email: bool | Unset = UNSET
@@ -27,6 +28,7 @@ class PatchPreferenceChannelsDto:
     in_app: bool | Unset = UNSET
     push: bool | Unset = UNSET
     chat: bool | Unset = UNSET
+    tool: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -39,6 +41,8 @@ class PatchPreferenceChannelsDto:
         push = self.push
 
         chat = self.chat
+
+        tool = self.tool
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -53,6 +57,8 @@ class PatchPreferenceChannelsDto:
             field_dict["push"] = push
         if chat is not UNSET:
             field_dict["chat"] = chat
+        if tool is not UNSET:
+            field_dict["tool"] = tool
 
         return field_dict
 
@@ -69,12 +75,15 @@ class PatchPreferenceChannelsDto:
 
         chat = d.pop("chat", UNSET)
 
+        tool = d.pop("tool", UNSET)
+
         patch_preference_channels_dto = cls(
             email=email,
             sms=sms,
             in_app=in_app,
             push=push,
             chat=chat,
+            tool=tool,
         )
 
         patch_preference_channels_dto.additional_properties = d

@@ -12,6 +12,7 @@ class ActivityNotificationJobResponseDtoType(str, Enum):
     PUSH = "push"
     SMS = "sms"
     THROTTLE = "throttle"
+    TOOL = "tool"
     TRIGGER = "trigger"
 
     def __str__(self) -> str:

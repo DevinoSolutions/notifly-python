@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class GeneratePreviewResponseDtoResultType7Type(str, Enum):
-    DELAY = "delay"
+    TOOL = "tool"
 
     def __str__(self) -> str:
         return str(self.value)

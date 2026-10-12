@@ -24,29 +24,36 @@ class GenerateConnectOauthUrlRequestDto:
     Attributes:
         integration_identifier (str): Integration identifier
         subscriber_id (str | Unset): The subscriber ID to associate with the channel connection. For Slack: optional for
-            workspace connections (required only for incoming-webhook scope). For MS Teams: optional. Admin consent is
-            tenant-wide. Example: subscriber-123.
+            workspace connections (required only for incoming-webhook scope). For Webex: optional for workspace connections.
+            For MS Teams: optional. Admin consent is tenant-wide. Example: subscriber-123.
         connection_identifier (str | Unset): Identifier of the channel connection that will be created. Generated
             automatically if not provided. Example: slack-connection-abc123.
         context (GenerateConnectOauthUrlRequestDtoContext | Unset):
+        context_hash (str | Unset): HMAC-SHA256 of the canonicalized `context`, signed with the tenant environment
+            secret key (the same "Inbox with context" signing scheme). Required when the integration has HMAC validation
+            enabled and the session did not already HMAC-verify the context. Establishes that the context/tenant binding was
+            minted by an authenticated backend rather than forged in the browser. Example: a1b2c3d4e5f6....
         scope (list[str] | Unset): **Slack only**: OAuth scopes to request during authorization. If not specified,
             default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read,
-            users:read.email. **MS Teams**: ignored — uses admin consent with pre-configured Azure AD permissions. Example:
-            ['chat:write', 'chat:write.public', 'channels:read'].
+            users:read.email. **Webex**: OAuth scopes to request during authorization. Defaults to: spark:messages_write,
+            spark:rooms_read, spark:people_read, spark:memberships_read, spark:kms. **MS Teams**: ignored — uses admin
+            consent with pre-configured Azure AD permissions. Example: ['chat:write', 'chat:write.public', 'channels:read'].
         connection_mode (GenerateConnectOauthUrlRequestDtoConnectionMode | Unset): Connection mode that determines how
             the channel connection is scoped. "subscriber" (default) associates the connection with a specific subscriber.
             "shared" associates the connection with a context instead of a subscriber. Example: shared.
         auto_link_user (bool | Unset): When true (default when connectionMode is "subscriber"), after the
             workspace/tenant connection is created the OAuth flow also links the subscriber who clicked "Connect" as a
-            personal endpoint. For Slack, uses the authed_user.id returned by oauth.v2.access — no extra redirect. For MS
-            Teams, triggers a second OAuth redirect for delegated user-identity consent. Set to false to only create the
-            workspace connection without linking the individual user. Example: True.
+            personal endpoint. For Slack, uses the authed_user.id returned by oauth.v2.access — no extra redirect. For
+            Webex, uses the authenticated Webex person returned by people/me — no extra redirect. For MS Teams, triggers a
+            second OAuth redirect for delegated user-identity consent. Set to false to only create the workspace connection
+            without linking the individual user. Example: True.
     """
 
     integration_identifier: str
     subscriber_id: str | Unset = UNSET
     connection_identifier: str | Unset = UNSET
     context: GenerateConnectOauthUrlRequestDtoContext | Unset = UNSET
+    context_hash: str | Unset = UNSET
     scope: list[str] | Unset = UNSET
     connection_mode: GenerateConnectOauthUrlRequestDtoConnectionMode | Unset = UNSET
     auto_link_user: bool | Unset = UNSET
@@ -62,6 +69,8 @@ class GenerateConnectOauthUrlRequestDto:
         context: dict[str, Any] | Unset = UNSET
         if not isinstance(self.context, Unset):
             context = self.context.to_dict()
+
+        context_hash = self.context_hash
 
         scope: list[str] | Unset = UNSET
         if not isinstance(self.scope, Unset):
@@ -86,6 +95,8 @@ class GenerateConnectOauthUrlRequestDto:
             field_dict["connectionIdentifier"] = connection_identifier
         if context is not UNSET:
             field_dict["context"] = context
+        if context_hash is not UNSET:
+            field_dict["contextHash"] = context_hash
         if scope is not UNSET:
             field_dict["scope"] = scope
         if connection_mode is not UNSET:
@@ -113,6 +124,8 @@ class GenerateConnectOauthUrlRequestDto:
         else:
             context = GenerateConnectOauthUrlRequestDtoContext.from_dict(_context)
 
+        context_hash = d.pop("contextHash", UNSET)
+
         scope = cast(list[str], d.pop("scope", UNSET))
 
         _connection_mode = d.pop("connectionMode", UNSET)
@@ -129,6 +142,7 @@ class GenerateConnectOauthUrlRequestDto:
             subscriber_id=subscriber_id,
             connection_identifier=connection_identifier,
             context=context,
+            context_hash=context_hash,
             scope=scope,
             connection_mode=connection_mode,
             auto_link_user=auto_link_user,

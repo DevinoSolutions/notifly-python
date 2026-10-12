@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -13,6 +13,7 @@ from ..types import UNSET, Unset
 if TYPE_CHECKING:
     from ..models.push_control_dto import PushControlDto
     from ..models.push_controls_metadata_response_dto import PushControlsMetadataResponseDto
+    from ..models.push_step_response_dto_provider_overrides_type_0 import PushStepResponseDtoProviderOverridesType0
     from ..models.push_step_response_dto_variables import PushStepResponseDtoVariables
     from ..models.step_issues_dto import StepIssuesDto
 
@@ -35,6 +36,12 @@ class PushStepResponseDto:
         workflow_id (str): Workflow identifier
         workflow_database_id (str): Workflow database identifier
         control_values (PushControlDto | Unset):
+        provider_overrides (None | PushStepResponseDtoProviderOverridesType0 | Unset): Per-provider content overrides
+            keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys
+            are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`). Example:
+            {'slack': {'text': '{{payload.title}}', 'blocks': [{'type': 'divider'}]}, 'whatsapp-business': {'type': 'text',
+            'text': {'body': '{{payload.title}}'}}, 'pagerduty': {'severity': 'warning', 'source': 'novu', 'summary':
+            '{{payload.title}}'}}.
         issues (StepIssuesDto | Unset):
         step_resolver_hash (str | Unset): Hash identifying the deployed Cloudflare Worker for this step
     """
@@ -50,11 +57,14 @@ class PushStepResponseDto:
     workflow_id: str
     workflow_database_id: str
     control_values: PushControlDto | Unset = UNSET
+    provider_overrides: None | PushStepResponseDtoProviderOverridesType0 | Unset = UNSET
     issues: StepIssuesDto | Unset = UNSET
     step_resolver_hash: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.push_step_response_dto_provider_overrides_type_0 import PushStepResponseDtoProviderOverridesType0
+
         controls = self.controls.to_dict()
 
         variables = self.variables.to_dict()
@@ -78,6 +88,14 @@ class PushStepResponseDto:
         control_values: dict[str, Any] | Unset = UNSET
         if not isinstance(self.control_values, Unset):
             control_values = self.control_values.to_dict()
+
+        provider_overrides: dict[str, Any] | None | Unset
+        if isinstance(self.provider_overrides, Unset):
+            provider_overrides = UNSET
+        elif isinstance(self.provider_overrides, PushStepResponseDtoProviderOverridesType0):
+            provider_overrides = self.provider_overrides.to_dict()
+        else:
+            provider_overrides = self.provider_overrides
 
         issues: dict[str, Any] | Unset = UNSET
         if not isinstance(self.issues, Unset):
@@ -103,6 +121,8 @@ class PushStepResponseDto:
         )
         if control_values is not UNSET:
             field_dict["controlValues"] = control_values
+        if provider_overrides is not UNSET:
+            field_dict["providerOverrides"] = provider_overrides
         if issues is not UNSET:
             field_dict["issues"] = issues
         if step_resolver_hash is not UNSET:
@@ -114,6 +134,7 @@ class PushStepResponseDto:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.push_control_dto import PushControlDto
         from ..models.push_controls_metadata_response_dto import PushControlsMetadataResponseDto
+        from ..models.push_step_response_dto_provider_overrides_type_0 import PushStepResponseDtoProviderOverridesType0
         from ..models.push_step_response_dto_variables import PushStepResponseDtoVariables
         from ..models.step_issues_dto import StepIssuesDto
 
@@ -145,6 +166,23 @@ class PushStepResponseDto:
         else:
             control_values = PushControlDto.from_dict(_control_values)
 
+        def _parse_provider_overrides(data: object) -> None | PushStepResponseDtoProviderOverridesType0 | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                provider_overrides_type_0 = PushStepResponseDtoProviderOverridesType0.from_dict(data)
+
+                return provider_overrides_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | PushStepResponseDtoProviderOverridesType0 | Unset, data)
+
+        provider_overrides = _parse_provider_overrides(d.pop("providerOverrides", UNSET))
+
         _issues = d.pop("issues", UNSET)
         issues: StepIssuesDto | Unset
         if isinstance(_issues, Unset):
@@ -166,6 +204,7 @@ class PushStepResponseDto:
             workflow_id=workflow_id,
             workflow_database_id=workflow_database_id,
             control_values=control_values,
+            provider_overrides=provider_overrides,
             issues=issues,
             step_resolver_hash=step_resolver_hash,
         )

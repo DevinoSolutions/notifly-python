@@ -8,6 +8,9 @@ from ...client import AuthenticatedClient, Client
 from ...models.channel_connections_controller_list_channel_connections_channel import (
     ChannelConnectionsControllerListChannelConnectionsChannel,
 )
+from ...models.channel_connections_controller_list_channel_connections_connection_mode import (
+    ChannelConnectionsControllerListChannelConnectionsConnectionMode,
+)
 from ...models.channel_connections_controller_list_channel_connections_order_direction import (
     ChannelConnectionsControllerListChannelConnectionsOrderDirection,
 )
@@ -27,6 +30,7 @@ def _get_kwargs(
     order_by: str | Unset = UNSET,
     include_cursor: bool | Unset = UNSET,
     subscriber_id: str | Unset = UNSET,
+    connection_mode: ChannelConnectionsControllerListChannelConnectionsConnectionMode | Unset = UNSET,
     channel: ChannelConnectionsControllerListChannelConnectionsChannel | Unset = UNSET,
     provider_id: ProvidersIdEnum | Unset = UNSET,
     integration_identifier: str | Unset = UNSET,
@@ -56,6 +60,12 @@ def _get_kwargs(
     params["includeCursor"] = include_cursor
 
     params["subscriberId"] = subscriber_id
+
+    json_connection_mode: str | Unset = UNSET
+    if not isinstance(connection_mode, Unset):
+        json_connection_mode = connection_mode.value
+
+    params["connectionMode"] = json_connection_mode
 
     json_channel: str | Unset = UNSET
     if not isinstance(channel, Unset):
@@ -187,6 +197,7 @@ def sync_detailed(
     order_by: str | Unset = UNSET,
     include_cursor: bool | Unset = UNSET,
     subscriber_id: str | Unset = UNSET,
+    connection_mode: ChannelConnectionsControllerListChannelConnectionsConnectionMode | Unset = UNSET,
     channel: ChannelConnectionsControllerListChannelConnectionsChannel | Unset = UNSET,
     provider_id: ProvidersIdEnum | Unset = UNSET,
     integration_identifier: str | Unset = UNSET,
@@ -206,6 +217,8 @@ def sync_detailed(
         order_by (str | Unset):
         include_cursor (bool | Unset):
         subscriber_id (str | Unset):
+        connection_mode (ChannelConnectionsControllerListChannelConnectionsConnectionMode |
+            Unset):
         channel (ChannelConnectionsControllerListChannelConnectionsChannel | Unset):
         provider_id (ProvidersIdEnum | Unset): Provider ID of the job
         integration_identifier (str | Unset):
@@ -228,6 +241,7 @@ def sync_detailed(
         order_by=order_by,
         include_cursor=include_cursor,
         subscriber_id=subscriber_id,
+        connection_mode=connection_mode,
         channel=channel,
         provider_id=provider_id,
         integration_identifier=integration_identifier,
@@ -252,6 +266,7 @@ def sync(
     order_by: str | Unset = UNSET,
     include_cursor: bool | Unset = UNSET,
     subscriber_id: str | Unset = UNSET,
+    connection_mode: ChannelConnectionsControllerListChannelConnectionsConnectionMode | Unset = UNSET,
     channel: ChannelConnectionsControllerListChannelConnectionsChannel | Unset = UNSET,
     provider_id: ProvidersIdEnum | Unset = UNSET,
     integration_identifier: str | Unset = UNSET,
@@ -271,6 +286,8 @@ def sync(
         order_by (str | Unset):
         include_cursor (bool | Unset):
         subscriber_id (str | Unset):
+        connection_mode (ChannelConnectionsControllerListChannelConnectionsConnectionMode |
+            Unset):
         channel (ChannelConnectionsControllerListChannelConnectionsChannel | Unset):
         provider_id (ProvidersIdEnum | Unset): Provider ID of the job
         integration_identifier (str | Unset):
@@ -294,6 +311,7 @@ def sync(
         order_by=order_by,
         include_cursor=include_cursor,
         subscriber_id=subscriber_id,
+        connection_mode=connection_mode,
         channel=channel,
         provider_id=provider_id,
         integration_identifier=integration_identifier,
@@ -312,6 +330,7 @@ async def asyncio_detailed(
     order_by: str | Unset = UNSET,
     include_cursor: bool | Unset = UNSET,
     subscriber_id: str | Unset = UNSET,
+    connection_mode: ChannelConnectionsControllerListChannelConnectionsConnectionMode | Unset = UNSET,
     channel: ChannelConnectionsControllerListChannelConnectionsChannel | Unset = UNSET,
     provider_id: ProvidersIdEnum | Unset = UNSET,
     integration_identifier: str | Unset = UNSET,
@@ -331,6 +350,8 @@ async def asyncio_detailed(
         order_by (str | Unset):
         include_cursor (bool | Unset):
         subscriber_id (str | Unset):
+        connection_mode (ChannelConnectionsControllerListChannelConnectionsConnectionMode |
+            Unset):
         channel (ChannelConnectionsControllerListChannelConnectionsChannel | Unset):
         provider_id (ProvidersIdEnum | Unset): Provider ID of the job
         integration_identifier (str | Unset):
@@ -353,6 +374,7 @@ async def asyncio_detailed(
         order_by=order_by,
         include_cursor=include_cursor,
         subscriber_id=subscriber_id,
+        connection_mode=connection_mode,
         channel=channel,
         provider_id=provider_id,
         integration_identifier=integration_identifier,
@@ -375,6 +397,7 @@ async def asyncio(
     order_by: str | Unset = UNSET,
     include_cursor: bool | Unset = UNSET,
     subscriber_id: str | Unset = UNSET,
+    connection_mode: ChannelConnectionsControllerListChannelConnectionsConnectionMode | Unset = UNSET,
     channel: ChannelConnectionsControllerListChannelConnectionsChannel | Unset = UNSET,
     provider_id: ProvidersIdEnum | Unset = UNSET,
     integration_identifier: str | Unset = UNSET,
@@ -394,6 +417,8 @@ async def asyncio(
         order_by (str | Unset):
         include_cursor (bool | Unset):
         subscriber_id (str | Unset):
+        connection_mode (ChannelConnectionsControllerListChannelConnectionsConnectionMode |
+            Unset):
         channel (ChannelConnectionsControllerListChannelConnectionsChannel | Unset):
         provider_id (ProvidersIdEnum | Unset): Provider ID of the job
         integration_identifier (str | Unset):
@@ -418,6 +443,7 @@ async def asyncio(
             order_by=order_by,
             include_cursor=include_cursor,
             subscriber_id=subscriber_id,
+            connection_mode=connection_mode,
             channel=channel,
             provider_id=provider_id,
             integration_identifier=integration_identifier,

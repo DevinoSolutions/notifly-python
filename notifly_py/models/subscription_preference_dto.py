@@ -23,8 +23,9 @@ class SubscriptionPreferenceDto:
         subscription_id (str): The unique identifier of the subscription Example: 64f5e95d3d7946d80d0cb679.
         enabled (bool): Whether the preference is enabled Example: True.
         workflow (None | Unset | WorkflowDto): Workflow information if this is a template-level preference
-        condition (SubscriptionPreferenceDtoCondition | Unset): Optional condition using JSON Logic rules Example:
-            {'and': [{'===': [{'var': 'tier'}, 'premium']}]}.
+        condition (SubscriptionPreferenceDtoCondition | Unset): Optional JSON Logic condition evaluated against the
+            trigger payload at fan-out time (for example, `{ "var": "payload.tier" }`) Example: {'and': [{'===': [{'var':
+            'payload.tier'}, 'premium']}]}.
     """
 
     subscription_id: str

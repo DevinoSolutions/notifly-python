@@ -1,10 +1,16 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.update_topic_request_dto_data_type_0 import UpdateTopicRequestDtoDataType0
+
 
 T = TypeVar("T", bound="UpdateTopicRequestDto")
 
@@ -13,32 +19,66 @@ T = TypeVar("T", bound="UpdateTopicRequestDto")
 class UpdateTopicRequestDto:
     """
     Attributes:
-        name (str): The display name for the topic Example: Updated Topic Name.
+        name (str | Unset): The display name for the topic Example: Updated Topic Name.
+        data (None | Unset | UpdateTopicRequestDtoDataType0): Additional custom data associated with the topic. Flat
+            key-value pairs of scalars (string, number, boolean, string[]). Maximum size: 64KB. Pass null to clear. Example:
+            {'category': 'product', 'priority': 1}.
     """
 
-    name: str
+    name: str | Unset = UNSET
+    data: None | Unset | UpdateTopicRequestDtoDataType0 = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.update_topic_request_dto_data_type_0 import UpdateTopicRequestDtoDataType0
+
         name = self.name
+
+        data: dict[str, Any] | None | Unset
+        if isinstance(self.data, Unset):
+            data = UNSET
+        elif isinstance(self.data, UpdateTopicRequestDtoDataType0):
+            data = self.data.to_dict()
+        else:
+            data = self.data
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "name": name,
-            }
-        )
+        field_dict.update({})
+        if name is not UNSET:
+            field_dict["name"] = name
+        if data is not UNSET:
+            field_dict["data"] = data
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.update_topic_request_dto_data_type_0 import UpdateTopicRequestDtoDataType0
+
         d = dict(src_dict)
-        name = d.pop("name")
+        name = d.pop("name", UNSET)
+
+        def _parse_data(data: object) -> None | Unset | UpdateTopicRequestDtoDataType0:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, dict):
+                    raise TypeError()
+                data_type_0 = UpdateTopicRequestDtoDataType0.from_dict(data)
+
+                return data_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(None | Unset | UpdateTopicRequestDtoDataType0, data)
+
+        data = _parse_data(d.pop("data", UNSET))
 
         update_topic_request_dto = cls(
             name=name,
+            data=data,
         )
 
         update_topic_request_dto.additional_properties = d

@@ -22,8 +22,10 @@ class GroupPreferenceFilterDto:
     Attributes:
         filter_ (GroupPreferenceFilterDetailsDto):
         enabled (bool | Unset): Whether the preference is enabled. Used when condition is not provided. Example: True.
-        condition (GroupPreferenceFilterDtoCondition | Unset): Optional condition using JSON Logic rules Example:
-            {'and': [{'===': [{'var': 'tier'}, 'premium']}]}.
+        condition (GroupPreferenceFilterDtoCondition | Unset): Optional JSON Logic condition evaluated at fan-out time
+            against trigger payload, subscriber profile, actor, and context (for example, `{ "var": "payload.tier" }`, `{
+            "var": "subscriber.data.plan" }`, or `{ "var": "actor.data.role" }`) Example: {'and': [{'===': [{'var':
+            'payload.tier'}, 'premium']}]}.
     """
 
     filter_: GroupPreferenceFilterDetailsDto

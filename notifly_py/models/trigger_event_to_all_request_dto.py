@@ -30,6 +30,9 @@ class TriggerEventToAllRequestDto:
                   For In-App channel, payload data are also available in <Inbox /> Example: {'comment_id': 'string', 'post':
             {'text': 'string'}}.
         overrides (TriggerOverrides | Unset):
+        agent_id (None | str | Unset): Override the workflow-assigned agent for this trigger using the public agent
+            identifier. Omit to use the workflow default; pass null to disable agent routing for this execution. Example:
+            support-agent.
         transaction_id (str | Unset): A unique identifier for this transaction, we will generated a UUID if not
             provided.
         actor (str | SubscriberPayloadDto | Unset): It is used to display the Avatar of the provided actor's subscriber
@@ -45,6 +48,7 @@ class TriggerEventToAllRequestDto:
     name: str
     payload: TriggerEventToAllRequestDtoPayload
     overrides: TriggerOverrides | Unset = UNSET
+    agent_id: None | str | Unset = UNSET
     transaction_id: str | Unset = UNSET
     actor: str | SubscriberPayloadDto | Unset = UNSET
     tenant: str | TenantPayloadDto | Unset = UNSET
@@ -62,6 +66,12 @@ class TriggerEventToAllRequestDto:
         overrides: dict[str, Any] | Unset = UNSET
         if not isinstance(self.overrides, Unset):
             overrides = self.overrides.to_dict()
+
+        agent_id: None | str | Unset
+        if isinstance(self.agent_id, Unset):
+            agent_id = UNSET
+        else:
+            agent_id = self.agent_id
 
         transaction_id = self.transaction_id
 
@@ -95,6 +105,8 @@ class TriggerEventToAllRequestDto:
         )
         if overrides is not UNSET:
             field_dict["overrides"] = overrides
+        if agent_id is not UNSET:
+            field_dict["agentId"] = agent_id
         if transaction_id is not UNSET:
             field_dict["transactionId"] = transaction_id
         if actor is not UNSET:
@@ -125,6 +137,15 @@ class TriggerEventToAllRequestDto:
             overrides = UNSET
         else:
             overrides = TriggerOverrides.from_dict(_overrides)
+
+        def _parse_agent_id(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        agent_id = _parse_agent_id(d.pop("agentId", UNSET))
 
         transaction_id = d.pop("transactionId", UNSET)
 
@@ -169,6 +190,7 @@ class TriggerEventToAllRequestDto:
             name=name,
             payload=payload,
             overrides=overrides,
+            agent_id=agent_id,
             transaction_id=transaction_id,
             actor=actor,
             tenant=tenant,
