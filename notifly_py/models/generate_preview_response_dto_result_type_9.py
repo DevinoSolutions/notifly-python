@@ -10,7 +10,10 @@ from ..models.generate_preview_response_dto_result_type_9_type import GeneratePr
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.digest_regular_output import DigestRegularOutput
+    from ..models.generate_preview_response_dto_result_type_9_preview import (
+        GeneratePreviewResponseDtoResultType9Preview,
+    )
+    from ..models.preview_error_dto import PreviewErrorDto
 
 
 T = TypeVar("T", bound="GeneratePreviewResponseDtoResultType9")
@@ -21,11 +24,13 @@ class GeneratePreviewResponseDtoResultType9:
     """
     Attributes:
         type_ (GeneratePreviewResponseDtoResultType9Type | Unset):
-        preview (DigestRegularOutput | Unset):
+        preview (GeneratePreviewResponseDtoResultType9Preview | Unset):
+        error (PreviewErrorDto | Unset):
     """
 
     type_: GeneratePreviewResponseDtoResultType9Type | Unset = UNSET
-    preview: DigestRegularOutput | Unset = UNSET
+    preview: GeneratePreviewResponseDtoResultType9Preview | Unset = UNSET
+    error: PreviewErrorDto | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -37,6 +42,10 @@ class GeneratePreviewResponseDtoResultType9:
         if not isinstance(self.preview, Unset):
             preview = self.preview.to_dict()
 
+        error: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.error, Unset):
+            error = self.error.to_dict()
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -44,12 +53,17 @@ class GeneratePreviewResponseDtoResultType9:
             field_dict["type"] = type_
         if preview is not UNSET:
             field_dict["preview"] = preview
+        if error is not UNSET:
+            field_dict["error"] = error
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.digest_regular_output import DigestRegularOutput
+        from ..models.generate_preview_response_dto_result_type_9_preview import (
+            GeneratePreviewResponseDtoResultType9Preview,
+        )
+        from ..models.preview_error_dto import PreviewErrorDto
 
         d = dict(src_dict)
         _type_ = d.pop("type", UNSET)
@@ -60,15 +74,23 @@ class GeneratePreviewResponseDtoResultType9:
             type_ = GeneratePreviewResponseDtoResultType9Type(_type_)
 
         _preview = d.pop("preview", UNSET)
-        preview: DigestRegularOutput | Unset
+        preview: GeneratePreviewResponseDtoResultType9Preview | Unset
         if isinstance(_preview, Unset):
             preview = UNSET
         else:
-            preview = DigestRegularOutput.from_dict(_preview)
+            preview = GeneratePreviewResponseDtoResultType9Preview.from_dict(_preview)
+
+        _error = d.pop("error", UNSET)
+        error: PreviewErrorDto | Unset
+        if isinstance(_error, Unset):
+            error = UNSET
+        else:
+            error = PreviewErrorDto.from_dict(_error)
 
         generate_preview_response_dto_result_type_9 = cls(
             type_=type_,
             preview=preview,
+            error=error,
         )
 
         generate_preview_response_dto_result_type_9.additional_properties = d

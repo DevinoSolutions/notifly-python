@@ -19,9 +19,9 @@ class AgentBehaviorDto:
         acknowledge_on_received (bool | Unset): Acknowledge incoming messages. On platforms that support a native typing
             indicator (e.g. Slack, WhatsApp, Microsoft Teams, Telegram), shows a "Typing…" indicator while the agent
             processes the message. On platforms that do not (e.g. Email), reacts with an "eyes" emoji to the first inbound
-            message in a thread. Default: true Default: True.
+            message in a thread. Default: true
         reaction_on_resolved (None | str | Unset): Cross-platform emoji name for resolved conversations (e.g. "check",
-            "star"). Set to null to disable. Default: "check" Default: 'check'.
+            "star"). Set to null to disable. Default: "check"
         subscriber_access (AgentBehaviorDtoSubscriberAccess | Unset): Controls whether the agent accepts inbound
             messages from senders not yet linked to a subscriber, across all channels. "open" on managed agents auto-creates
             a lightweight subscriber so the agent can reply; on custom-code / self-hosted agents, the turn is forwarded to
@@ -30,8 +30,8 @@ class AgentBehaviorDto:
             "open"; self-hosted create defaults to "restricted".
     """
 
-    acknowledge_on_received: bool | Unset = True
-    reaction_on_resolved: None | str | Unset = "check"
+    acknowledge_on_received: bool | Unset = UNSET
+    reaction_on_resolved: None | str | Unset = UNSET
     subscriber_access: AgentBehaviorDtoSubscriberAccess | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 

@@ -158,10 +158,7 @@ CASES = [
         "/v1/agents/support-bot",
         200,
         {"data": AGENT},
-        request_body={
-            "name": "Support bot v2",
-            "behavior": {"acknowledgeOnReceived": True, "reactionOnResolved": "star"},
-        },
+        request_body={"name": "Support bot v2", "behavior": {"reactionOnResolved": "star"}},
         parsed_type=AgentResponseDto,
     ),
     Case(
@@ -395,6 +392,30 @@ def test_models_round_trip_through_from_dict_and_to_dict(model: Any, payload: di
     parsed = model.from_dict(payload)
 
     assert parsed.to_dict() == payload
+
+
+def test_a_partial_behavior_update_sends_only_the_fields_that_were_set() -> None:
+    """The API ``$set``s just the behavior fields present in the body, so a resent default would overwrite
+    the stored value (``acknowledgeOnReceived`` / ``reactionOnResolved`` default to ``True`` / ``"check"``
+    server-side and are not sent unless the caller sets them)."""
+    request = UpdateAgentRequestDto(
+        behavior=AgentBehaviorDto(subscriber_access=AgentBehaviorDtoSubscriberAccess.RESTRICTED)
+    )
+
+    assert request.to_dict() == {"behavior": {"subscriberAccess": "restricted"}}
+    assert AgentBehaviorDto().to_dict() == {}
+
+
+def test_an_explicit_none_reaction_still_sends_null_to_turn_the_reaction_off() -> None:
+    request = UpdateAgentRequestDto(behavior=AgentBehaviorDto(reaction_on_resolved=None))
+
+    assert request.to_dict() == {"behavior": {"reactionOnResolved": None}}
+
+
+def test_a_behavior_default_is_not_baked_into_a_freshly_parsed_response() -> None:
+    parsed = AgentBehaviorDto.from_dict({"subscriberAccess": "open"})
+
+    assert parsed.to_dict() == {"subscriberAccess": "open"}
 
 
 def test_a_null_reaction_on_resolved_survives_the_round_trip_instead_of_becoming_the_default() -> None:

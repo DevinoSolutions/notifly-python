@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class GeneratePreviewResponseDtoResultType9Type(str, Enum):
-    DIGEST = "digest"
+    TOOL = "tool"
 
     def __str__(self) -> str:
         return str(self.value)

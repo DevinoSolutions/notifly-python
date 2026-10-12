@@ -6,11 +6,11 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="GeneratePreviewResponseDtoResultType7Preview")
+T = TypeVar("T", bound="GeneratePreviewResponseDtoResultType9Preview")
 
 
 @_attrs_define
-class GeneratePreviewResponseDtoResultType7Preview:
+class GeneratePreviewResponseDtoResultType9Preview:
     """ """
 
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -25,10 +25,10 @@ class GeneratePreviewResponseDtoResultType7Preview:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        generate_preview_response_dto_result_type_7_preview = cls()
+        generate_preview_response_dto_result_type_9_preview = cls()
 
-        generate_preview_response_dto_result_type_7_preview.additional_properties = d
-        return generate_preview_response_dto_result_type_7_preview
+        generate_preview_response_dto_result_type_9_preview.additional_properties = d
+        return generate_preview_response_dto_result_type_9_preview
 
     @property
     def additional_keys(self) -> list[str]:

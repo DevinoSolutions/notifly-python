@@ -86,11 +86,11 @@ class CreateWorkflowDto:
         from ..models.delay_step_upsert_dto import DelayStepUpsertDto
         from ..models.digest_step_upsert_dto import DigestStepUpsertDto
         from ..models.email_step_upsert_dto import EmailStepUpsertDto
+        from ..models.http_request_step_upsert_dto import HttpRequestStepUpsertDto
         from ..models.in_app_step_upsert_dto import InAppStepUpsertDto
         from ..models.push_step_upsert_dto import PushStepUpsertDto
         from ..models.sms_step_upsert_dto import SmsStepUpsertDto
         from ..models.throttle_step_upsert_dto import ThrottleStepUpsertDto
-        from ..models.tool_step_upsert_dto import ToolStepUpsertDto
         from ..models.workflow_agent_config_dto import WorkflowAgentConfigDto
 
         name = self.name
@@ -116,9 +116,9 @@ class CreateWorkflowDto:
                 steps_item = steps_item_data.to_dict()
             elif isinstance(steps_item_data, ThrottleStepUpsertDto):
                 steps_item = steps_item_data.to_dict()
-            elif isinstance(steps_item_data, ToolStepUpsertDto):
-                steps_item = steps_item_data.to_dict()
             elif isinstance(steps_item_data, CustomStepUpsertDto):
+                steps_item = steps_item_data.to_dict()
+            elif isinstance(steps_item_data, HttpRequestStepUpsertDto):
                 steps_item = steps_item_data.to_dict()
             else:
                 steps_item = steps_item_data.to_dict()
@@ -305,7 +305,7 @@ class CreateWorkflowDto:
                 try:
                     if not isinstance(data, dict):
                         raise TypeError()
-                    steps_item_type_8 = ToolStepUpsertDto.from_dict(data)
+                    steps_item_type_8 = CustomStepUpsertDto.from_dict(data)
 
                     return steps_item_type_8
                 except (TypeError, ValueError, AttributeError, KeyError):
@@ -313,14 +313,14 @@ class CreateWorkflowDto:
                 try:
                     if not isinstance(data, dict):
                         raise TypeError()
-                    steps_item_type_9 = CustomStepUpsertDto.from_dict(data)
+                    steps_item_type_9 = HttpRequestStepUpsertDto.from_dict(data)
 
                     return steps_item_type_9
                 except (TypeError, ValueError, AttributeError, KeyError):
                     pass
                 if not isinstance(data, dict):
                     raise TypeError()
-                steps_item_type_10 = HttpRequestStepUpsertDto.from_dict(data)
+                steps_item_type_10 = ToolStepUpsertDto.from_dict(data)
 
                 return steps_item_type_10
 

@@ -470,11 +470,11 @@ from .generate_preview_response_dto_result_type_5_type import GeneratePreviewRes
 from .generate_preview_response_dto_result_type_6 import GeneratePreviewResponseDtoResultType6
 from .generate_preview_response_dto_result_type_6_type import GeneratePreviewResponseDtoResultType6Type
 from .generate_preview_response_dto_result_type_7 import GeneratePreviewResponseDtoResultType7
-from .generate_preview_response_dto_result_type_7_preview import GeneratePreviewResponseDtoResultType7Preview
 from .generate_preview_response_dto_result_type_7_type import GeneratePreviewResponseDtoResultType7Type
 from .generate_preview_response_dto_result_type_8 import GeneratePreviewResponseDtoResultType8
 from .generate_preview_response_dto_result_type_8_type import GeneratePreviewResponseDtoResultType8Type
 from .generate_preview_response_dto_result_type_9 import GeneratePreviewResponseDtoResultType9
+from .generate_preview_response_dto_result_type_9_preview import GeneratePreviewResponseDtoResultType9Preview
 from .generate_preview_response_dto_result_type_9_type import GeneratePreviewResponseDtoResultType9Type
 from .generate_preview_response_dto_schema_type_0 import GeneratePreviewResponseDtoSchemaType0
 from .get_channel_connection_response_dto import GetChannelConnectionResponseDto
@@ -1427,11 +1427,11 @@ __all__ = (
     "GeneratePreviewResponseDtoResultType6",
     "GeneratePreviewResponseDtoResultType6Type",
     "GeneratePreviewResponseDtoResultType7",
-    "GeneratePreviewResponseDtoResultType7Preview",
     "GeneratePreviewResponseDtoResultType7Type",
     "GeneratePreviewResponseDtoResultType8",
     "GeneratePreviewResponseDtoResultType8Type",
     "GeneratePreviewResponseDtoResultType9",
+    "GeneratePreviewResponseDtoResultType9Preview",
     "GeneratePreviewResponseDtoResultType9Type",
     "GeneratePreviewResponseDtoSchemaType0",
     "GetChannelConnectionResponseDto",
